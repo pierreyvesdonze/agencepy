@@ -1,12 +1,41 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<!--***************************HEAD****************************-->
+
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {% block stylesheets %}
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
+    {% endblock %}
+
+    <title>
+        {% block title %}
+            Beck
+        {% endblock %}
+    </title>
+</head>
+
+<body>
+
+    {# Loading animation #}
+    <div id="loader" class="center"></div>
+
+    {% block body %}
+    {% endblock %}
+
+
+    {% block footer %}
+    <!--***************************NAV FOOTER****************************-->
+
+    {% endblock %}
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+</body>
+
 </html>
