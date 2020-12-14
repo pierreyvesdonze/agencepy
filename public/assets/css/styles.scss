@@ -82,22 +82,25 @@ SECTION black-background
 TEAM SECTION
 //////////////////////////////////////
 */
+
 .collapse-team {
     height: 0;
     opacity: 0;
     visibility: hidden;
-  }
+    justify-content: space-between;
+}
+
+
   
 .active-team {
+    flex-wrap: wrap;
+    justify-content: center;
     margin-top: 2em;
     height: auto;
     opacity: 1;
     transition: ease-in-out .3s;
 }
-.team-container {
-    display: flex;
-    justify-content: space-between;
-}
+
 .flex-team {
     display: flex;
     flex-direction: column;
