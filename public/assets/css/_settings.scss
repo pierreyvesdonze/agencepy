@@ -4,29 +4,12 @@ COLORS
 ***********************************
 */
 :root {
-  --blue-background: linear-gradient(90deg, #cbd6ec 0%, #dee8ff 100%);
-  --form-background: linear-gradient(90deg, rgb(14, 14, 15) 0%, rgb(49, 49, 49) 100%);
-  --primary-color: #b3b3b3;;
-  --secondary-color: #1b1b1b ;
-  --main-color: #151414;
+  --primary-color: #000000;;
+  --secondary-color: #ffffff ;
   --title-color: #002140;
-  --font-color: #222830;
-  --contrast-main-color: #feddea;
-  --contrast-main-color-2: #9ba7b2;
-  --contrast-main-color-3: #f7fbff;
-  --tertiary-color: white;
-  --orange-icon-color:  #ff785b;
-  --link-button-color:  #cccccc;
-  --header-button-color:  #2e2e2e;
-  --progress-color: #74ad06;
-  --available-color : green;
-  --unavailable-color : red;
-}
-
-html, body {
-  overflow: hidden;
-  width: 100%;
-  height: 100vh;
+  --font-color-white: #cecece;
+  --font-color-dark: #3b3b3b;
+  --span-color: #e7b203;
 }
 
 
@@ -36,6 +19,20 @@ GENERAL
 ***********************************
 */
 
+html, body {
+  //overflow: hidden;
+  width: 100%;
+  height: 100vh;
+}
+
+.flex {
+  display: flex;
+}
+
+section * {
+  text-align: center;
+}
+
 .center-div {
   width: 70%;
   margin: auto;
@@ -44,16 +41,6 @@ GENERAL
 .main-title {
   margin-top: .5em;
   text-align: center;
-}
-
-.active {
-  display: block;
-  transition: 0.5s;
-}
-
-.hide {
-  display: none;
-  transition: 0.5s;
 }
 
 .hidden {
@@ -71,12 +58,8 @@ GENERAL
 }
 
 a {
-  color: var(--primary-color);
   margin: 0;
   text-decoration: none;
-  &:hover {
-    color: var(--orange-icon-color)
-  }
 }
 
 label {
@@ -85,6 +68,10 @@ label {
 
 .center-element {
   text-align: center;
+}
+
+span {
+  color: var(--span-color);
 }
 
 .hr {
@@ -101,18 +88,18 @@ label {
   );
 }
 
-.scrollable-auto {
-  padding: 1em 2em;
-  height: auto;
-  margin-bottom: 1em;
-}
-
 .hr-white{
   border: 0;
   height: 1px;
   width: 400px;
   background: #333;
-  background-image: linear-gradient(to right, #ccc, rgb(255, 255, 255), #ccc);
+  background-image: linear-gradient(to right,  rgb(22, 22, 22), rgb(255, 255, 255),rgb(22, 22, 22));
+}
+
+.scrollable-auto {
+  padding: 1em 2em;
+  height: auto;
+  margin-bottom: 1em;
 }
 
 
@@ -122,18 +109,17 @@ FONTS & ICONS
 ***********************************
 */
 * {
-  font-family: "Cinzel", serif;
+  font-family: 'Raleway', sans-serif;
 }
 
-p, span {
-  color: var(--primary-color);
+p, span, ul li, li {
+  letter-spacing: .2rem !important;
 }
 
-h1, h2 ,h3, h4, h5, h6 {
-  color: var(--primary-color) !important;
-  font-weight: bold !important;
+.market-message ul li {
+  font-weight: 200;
+  font-size: 6em important;
 }
-
 
 .fa,
 .fas {
@@ -142,19 +128,6 @@ h1, h2 ,h3, h4, h5, h6 {
   &:hover{
     color: var(--orange-icon-color);
   }
-}
-
-.orange-icon {
-  color: var(--orange-icon-color) !important;
-}
-
-
-.nav-top-container i, .footer a i {
-  color: var(--link-button-color);
-}
-
-.fa-check:hover {
-  color: rgb(38, 197, 38);
 }
 
 /*
@@ -182,311 +155,4 @@ INPUTS
 
 input:focus {
   outline: none;
-}
-
-$hue: 220;
-$light: hsl($hue - 90,90%,85%);
-$base: hsl($hue - 20,10%,70%);
-// $mid: hsl($hue + 20,40%,30%);
-$mid: rgb(43, 43, 61);
-$dark: hsl($hue + 40,100%,10%);
-
-.search-input,
-input:not([type="checkbox"]),
-textarea,
-select,
-option, 
-.custom-file-input
-{
-  background: $mid !important;
-  border-radius: 2rem !important;
-  appearance: none;
-  color: wheat !important;
-  text-align: center;
-              //dark rim
-  box-shadow: -0.05rem -0.05rem 0.08rem rgba($dark,0.6),
-              //light rim
-              0.05rem 0.05rem 0.1rem rgba($light,1),
-              //inner dark
-              inset 0.5rem 0.5rem 2rem rgba($dark,0.5),
-              //inner dark fine
-              inset 0.1rem 0.1rem 0.2rem rgba($dark,0.75),
-              //inner light
-              inset -0.5rem -0.5rem 4rem rgba($light,0.5);
-    &::placeholder {
-        color: var(--tertiary-color);
-    }
-}
-
-textarea, input {
-    background: #3e4c5c;
-}
-
-select:focus {
-    outline: none;
-}
-
-/*
-***********************************
-CONTAINERS
-***********************************
-*/
-.container {
-  padding: 7em;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-/*
-***********************************
-FLASH MESSAGES
-***********************************
-*/
-
-.flash-container {
-  z-index: 2;
-  position: fixed;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 100%;
-}
-
-.alert {
-  -webkit-box-shadow: 8px 8px 7px -2px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 8px 8px 7px -2px rgba(0, 0, 0, 0.75);
-  box-shadow: 8px 8px 7px -2px rgba(0, 0, 0, 0.75);
-  align-self: center;
-  background-color: var(--primary-color);
-  color: var(--secondary-color);
-  border: none;
-  outline: none;
-  text-align: center;
-  opacity: 0.8;
-  font-size: 1.3em;
-  padding: 2%;
-  border-radius: 9px;
-}
-
-.alert::after {
-  opacity: 0;
-  transition: ease;
-}
-
-.close {
-  color: rgb(255, 0, 0) !important;
-  text-shadow: 0 1px 0 #000 !important;
-  opacity: 1;
-  background: none;
-  border: none;
-  font-size: 2em;
-}
-
-.close:focus {
-  outline: none;
-}
-
-.close:hover {
-  color: green !important;
-}
-
-
-/*
-***********************************
-BUTTONS 
-***********************************
-*/
-
-.button-save {
-  background:var(--link-button-color);
-  border: none;
-  border-radius: 10px;
-  outline: none;
-  cursor: pointer;
-  text-align: center;
-  color: var(--font-color);
-  box-shadow: 0px 2px 12px -4px #3a1b14da;
-  transform: scale(1);
-  transition: .2s ease-in-out;
-  &:hover {
-    background-color: var(--orange-icon-color);
-    transform: scale(1.2);
-    box-shadow: 8px 8px 21px -4px var(--orange-icon-color);
-  }
-  &:focus {
-    outline: none;
-  }
-}
-
-.mg-left {
-  margin-left: 2em;
-}
-
-.fake-button {
-  padding-left: 8px;
-  padding-right: 8px;
-  background-color :var(--link-button-color);
-  color: var(--tertiary-color);
-  border-radius: 10px;
-}
-
-.button-icon {
-  background: none;
-  outline: none;
-  border: none;
-  &:focus{
-    background-color: var(--main-color) !important;
-  }
-}
-
-.btn-link:focus {
-  text-decoration: none !important;
-}
-
-/*
-***********************************
-TABLES
-***********************************
-*/
-
-table {
-  margin: auto !important;
-}
-
-tr td {
-  color: var(--primary-color);
-}
-
-/*
-*************************
-LOADING ANIMATION
-*************************
-*/
-
-#loader {
-  border: 12px solid #f3f3f3;
-  border-radius: 50%;
-  border-top: 12px solid #444444;
-  background-color: #f5f5f5;
-  width: 70px;
-  height: 70px;
-  animation: spin 1s linear infinite;
-  z-index: 1000;
-  box-shadow: inset 0px 0px 10px 3px rgba(0, 0, 0, 0.75);
-}
-
-@keyframes spin {
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-.center {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-}
-
-/*
-***********************************
-BOOSTRAP
-***********************************
-*/
-.card {
-  background-color: var(--secondary-color) !important;
-  border: none;
-  padding-right: 0 !important;
-}
-
-.card-title-view {
-  margin-left: 3.75rem;
-  margin-top: 1em;
-}
-
-.card-body {
-  padding: 0 !important;
-  padding: 0 !important;
-}
-
-.card-img {
-  text-align: center;
-  margin-bottom: 2em;
-}
-
-.navbar-light {
-  background-color: var(--tertiary-color) !important;
-  border-radius: 40px 40px 0 0;
-}
-
-.nav-pills .nav-link.active{
-  background-color: var(--orange-icon-color) !important;
-}
-
-.jumbotron {
-  background: var(--main-color) !important;
-}
-
-
-
-
-
-/*
-***********************************
-MEDIA QUERIES
-***********************************
-*/
-
-// Very small screens
-$breakpoint-xs: 300px;
-
-// Small tablets and large smartphones (landscape view)
-$breakpoint-sm: 576px;
-
-// Small tablets (portrait view)
-$breakpoint-md: 768px;
-
-// Tablets and small desktops
-$breakpoint-lg: 992px;
-
-// Large tablets and desktops
-$breakpoint-xl: 1280px;
-
-// Extra large devices
-@mixin xl {
-  @media (min-width: #{$breakpoint-xl}) {
-    @content;
-  }
-}
-
-// Large devices
-@mixin lg {
-  @media (min-width: #{$breakpoint-lg}) and (max-width: #{$breakpoint-xl}) {
-    @content;
-  }
-}
-
-// Medium devices
-@mixin md {
-  @media (min-width: #{$breakpoint-md}) and (max-width: #{$breakpoint-lg}) {
-    @content;
-  }
-}
-
-// Small devices
-@mixin sm {
-  @media (min-width: #{$breakpoint-sm}) and (max-width: #{$breakpoint-md}) {
-    @content;
-  }
-}
-
-// XSmall devices
-@mixin xs {
-  @media (min-width: #{$breakpoint-xs}) and (max-width: #{$breakpoint-sm}) {
-    @content;
-  }
 }

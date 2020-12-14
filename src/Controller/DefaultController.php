@@ -13,9 +13,7 @@ class DefaultController extends AbstractController
      */
     public function homepage()
     {
-        $user = $this->getUser();
         return $this->render('main/homepage.html.twig', [
-            'user' => $user
         ]);
     }
 }
