@@ -1,0 +1,206 @@
+/*
+***********************************
+COLORS
+***********************************
+*/
+:root {
+  --primary-color: #000000;
+  --secondary-color: #ffffff;
+  --title-color: #002140;
+  --font-color-white: #cecece;
+  --font-color-dark: #3b3b3b;
+  --span-color: #e7b203;
+  --link-color: #1EAEDB;
+}
+
+/*
+***********************************
+GENERAL
+***********************************
+*/
+
+*:focus {
+  outline: none;
+}
+
+html,
+body {
+  //overflow: hidden;
+  width: 100%;
+  height: 100vh;
+}
+
+.flex {
+  display: flex;
+}
+
+section * {
+  text-align: center;
+}
+
+.center-div {
+  width: 70%;
+  margin: auto;
+}
+
+.main-title {
+  margin-top: 0.5em;
+  text-align: center;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.visible {
+  visibility: visible;
+}
+
+.hide-height {
+  transform: scaleY(0);
+  height: 0;
+  transition: 0.3s;
+}
+
+a {
+  margin: 0;
+  text-decoration: none;
+}
+
+label {
+  color: var(--primary-color);
+}
+
+.center-element {
+  text-align: center;
+}
+
+span {
+  color: var(--span-color);
+}
+
+.hr {
+  height: 1px;
+  border: 0;
+  width: 90%;
+  margin: 20px auto;
+  background: rgb(29, 29, 29);
+  background: radial-gradient(circle, rgb(8, 8, 8) 0%, rgba(219, 219, 219, 0.144) 50%, rgba(209, 209, 209, 0) 100%);
+}
+
+.hr-white {
+  border: 0;
+  height: 1px;
+  width: 90%;
+  background: #333;
+  background-image: linear-gradient(to right, rgb(22, 22, 22), rgb(255, 255, 255), rgb(22, 22, 22));
+}
+
+.scrollable-auto {
+  padding: 1em 2em;
+  height: auto;
+  margin-bottom: 1em;
+}
+
+/*
+***********************************
+FONTS & ICONS
+***********************************
+*/
+* {
+  font-family: "Raleway", sans-serif;
+}
+
+p,
+span,
+ul li,
+li {
+  letter-spacing: 0.2rem !important;
+}
+
+.market-message ul li {
+  font-weight: 200;
+  font-size: 6em important;
+}
+
+.fa,
+.fas {
+  color: var(--link-button-color);
+  margin-right: 10px;
+  &:hover {
+    color: var(--orange-icon-color);
+  }
+}
+
+/*
+***********************************
+LISTS
+***********************************
+*/
+ul li,
+li {
+  list-style-type: none !important;
+}
+
+.available {
+  color: var(--available-color);
+}
+
+.unvailable {
+  color: var(--unavailable-color);
+}
+
+
+/*
+***********************************
+FLASH MESSAGES
+***********************************
+*/
+
+.flash-container {
+  top: 120px;
+  z-index: 2;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.alert {
+  -webkit-box-shadow: 8px 8px 7px -2px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 8px 8px 7px -2px rgba(0, 0, 0, 0.75);
+  box-shadow: 8px 8px 7px -2px rgba(0, 0, 0, 0.75);
+  align-self: center;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  border: none;
+  outline: none;
+  text-align: center;
+  opacity: 0.8;
+  font-size: 1.3em;
+  padding: 7%;
+  border-radius: 9px;
+}
+
+.alert::after {
+  opacity: 0;
+  transition: ease;
+}
+
+.close {
+  color: rgb(255, 0, 0) !important;
+  text-shadow: 0 1px 0 #000 !important;
+  opacity: 1;
+  background: none;
+  border: none;
+  font-size: 4em;
+}
+
+.close:focus {
+  outline: none;
+}
+
+.close:hover {
+  color: green !important;
+}
