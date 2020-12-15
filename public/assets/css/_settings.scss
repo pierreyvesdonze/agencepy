@@ -4,14 +4,14 @@ COLORS
 ***********************************
 */
 :root {
-  --primary-color: #000000;;
-  --secondary-color: #ffffff ;
+  --primary-color: #000000;
+  --secondary-color: #ffffff;
   --title-color: #002140;
   --font-color-white: #cecece;
   --font-color-dark: #3b3b3b;
   --span-color: #e7b203;
+  --link-color: #1EAEDB;
 }
-
 
 /*
 ***********************************
@@ -19,7 +19,12 @@ GENERAL
 ***********************************
 */
 
-html, body {
+*:focus {
+  outline: none;
+}
+
+html,
+body {
   //overflow: hidden;
   width: 100%;
   height: 100vh;
@@ -39,7 +44,7 @@ section * {
 }
 
 .main-title {
-  margin-top: .5em;
+  margin-top: 0.5em;
   text-align: center;
 }
 
@@ -52,7 +57,7 @@ section * {
 }
 
 .hide-height {
-  transform:scaleY(0);
+  transform: scaleY(0);
   height: 0;
   transition: 0.3s;
 }
@@ -80,20 +85,15 @@ span {
   width: 90%;
   margin: 20px auto;
   background: rgb(29, 29, 29);
-  background: radial-gradient(
-    circle,
-    rgb(8, 8, 8) 0%,
-    rgba(219, 219, 219, 0.144) 50%,
-    rgba(209, 209, 209, 0) 100%
-  );
+  background: radial-gradient(circle, rgb(8, 8, 8) 0%, rgba(219, 219, 219, 0.144) 50%, rgba(209, 209, 209, 0) 100%);
 }
 
-.hr-white{
+.hr-white {
   border: 0;
   height: 1px;
-  width: 400px;
+  width: 90%;
   background: #333;
-  background-image: linear-gradient(to right,  rgb(22, 22, 22), rgb(255, 255, 255),rgb(22, 22, 22));
+  background-image: linear-gradient(to right, rgb(22, 22, 22), rgb(255, 255, 255), rgb(22, 22, 22));
 }
 
 .scrollable-auto {
@@ -102,18 +102,20 @@ span {
   margin-bottom: 1em;
 }
 
-
 /*
 ***********************************
 FONTS & ICONS
 ***********************************
 */
 * {
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
 }
 
-p, span, ul li, li {
-  letter-spacing: .2rem !important;
+p,
+span,
+ul li,
+li {
+  letter-spacing: 0.2rem !important;
 }
 
 .market-message ul li {
@@ -125,7 +127,7 @@ p, span, ul li, li {
 .fas {
   color: var(--link-button-color);
   margin-right: 10px;
-  &:hover{
+  &:hover {
     color: var(--orange-icon-color);
   }
 }
@@ -135,7 +137,8 @@ p, span, ul li, li {
 LISTS
 ***********************************
 */
-ul li, li {
+ul li,
+li {
   list-style-type: none !important;
 }
 
@@ -147,12 +150,57 @@ ul li, li {
   color: var(--unavailable-color);
 }
 
+
 /*
 ***********************************
-INPUTS
+FLASH MESSAGES
 ***********************************
 */
 
-input:focus {
+.flash-container {
+  top: 120px;
+  z-index: 2;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.alert {
+  -webkit-box-shadow: 8px 8px 7px -2px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 8px 8px 7px -2px rgba(0, 0, 0, 0.75);
+  box-shadow: 8px 8px 7px -2px rgba(0, 0, 0, 0.75);
+  align-self: center;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  border: none;
   outline: none;
+  text-align: center;
+  opacity: 0.8;
+  font-size: 1.3em;
+  padding: 7%;
+  border-radius: 9px;
+}
+
+.alert::after {
+  opacity: 0;
+  transition: ease;
+}
+
+.close {
+  color: rgb(255, 0, 0) !important;
+  text-shadow: 0 1px 0 #000 !important;
+  opacity: 1;
+  background: none;
+  border: none;
+  font-size: 4em;
+}
+
+.close:focus {
+  outline: none;
+}
+
+.close:hover {
+  color: green !important;
 }

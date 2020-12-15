@@ -13,6 +13,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/css/normalize.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/skeleton.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/themify-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
     {% endblock %}
 
@@ -24,6 +25,17 @@
 </head>
 
 <body>
+    {# Flash messages #}
+    <div class="flash-container">
+        {% for label, messages in app.flashes %}
+        {% for message in messages %}
+        <button class="close" data-dismiss="alert">&times;</button>
+        <div class="alert alert-{{ label }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endfor %}
+    </div>
 
     {# Loading animation #}
     <div id="loader" class="center"></div>
@@ -37,11 +49,10 @@
 
     {% endblock %}
 
-    <script
-    src="https://code.jquery.com/jquery-3.5.1.slim.js"
-    integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM="
-    crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+    <script src="{{ asset('../node_modules/animejs/lib/anime.min.js') }}"></script>
     <script src="{{ asset('assets/js/app.js') }}"></script>
 </body>
 
