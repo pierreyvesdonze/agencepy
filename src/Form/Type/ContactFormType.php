@@ -41,7 +41,7 @@ class ContactFormType extends AbstractType
                 'required' => true
             ])
             ->add('type', ChoiceType::class, [
-                'label' => 'Vous êtes : ',
+                'label' => '* Vous êtes : ',
                 'attr' => [
                     'class' => 'u-full-width'
                 ],

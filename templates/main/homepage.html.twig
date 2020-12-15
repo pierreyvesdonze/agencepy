@@ -79,7 +79,7 @@
             Nous proposons une solution internet, une identité visuelle qui correspondent à votre image et un panel d'outils adaptés à vos besoins !
             Mais surtout nous proposons des produits...
         </p>
-        <a href="#surMesureContainer" class="surMesure ti-arrow-down icon-custom"></a>
+        <a href="#surMesureContainer" class="surMesure ti-hand-point-down icon-custom"></a>
 
         <div id="surMesureContainer" class="collapse-mesure flex">
             <h2 class="surMesureTitle">Sur mesure</h2>
@@ -145,7 +145,7 @@
     <div class="container">
         <h2 class="subtitle">Nous contacter</h2>
         <hr class="hr-white">
-        {{ form(form) }}
+        {{ form(form, {'attr': {'class':'main-contact-form' }}) }}
     </div>
 </section>
 {% endblock  %}

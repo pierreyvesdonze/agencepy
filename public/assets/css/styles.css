@@ -456,7 +456,15 @@ NOS REALISATIONS
 FORM
 //////////////////////////////////////
 */
+.main-contact-form div div label {
+  text-align: left;
+}
+
 form label {
   color: var(--span-color);
+}
+
+#contact_form_Envoyer {
+  color: var(--link-color);
 }
 /*# sourceMappingURL=styles.css.map */
