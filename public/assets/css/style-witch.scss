@@ -1,0 +1,58 @@
+@import "./settings";
+
+/**
+//////////////////////////////////////
+HEADER
+//////////////////////////////////////
+*/
+
+.witch-header {
+    height: 300px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    background-color: var(--primary-color);
+}
+
+.witch-main-title {
+    color: var(--secondary-color) !important;
+}
+
+.grid-witch {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.shadow {
+    position: absolute;
+    opacity: .2;
+}
+
+.small {
+    width: 18px;
+    height: 18px;
+}
+
+.square, .circle {
+    pointer-events: none;
+    position: relative;
+    width: 28px;
+    height: 28px;
+    margin: 1px;
+    background-color: red;
+    font-size: 14px;
+}
+
+/**
+//////////////////////////////////////
+MAIN
+//////////////////////////////////////
+*/
+.full-black {
+    width: 100%;
+    height: auto;
+    background-color: var(--primary-color);
+}
