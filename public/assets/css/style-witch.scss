@@ -61,14 +61,6 @@ HEADER
 .square {
     color: var(--secondary-color);
     font-weight: 100;
-    // @include sm {
-    //     width: 17px;
-    //     height: 17px;
-    // }
-    // @include xs {
-    //     width: 14px;
-    //     height: 14px;
-    // }
 }
 
 .witch-pink {
@@ -95,42 +87,47 @@ PINK WITCH
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover
+    background-size: cover;
 }
 
 .pink-witch-bg {
-    background: url('../images/witch-background.jpg');
+    background: url("../images/witch-background.jpg");
     width: 100%;
-    min-height: 100%;
 }
 
 .yellow-witch-bg {
-    background-image: url('../images/witch-background2.jpg');
+    background-image: url("../images/witch-background2.jpg");
+}
+
+.pink-witch-bg,
+.yellow-witch-bg {
     width: 100%;
     min-height: 100%;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .caption-witch {
     position: absolute;
     left: 46%;
-    top: 50%;
+    top: 40%;
     text-align: center;
     padding: 1em;
     font-size: 1.2em;
-    background-color: var(--witch-pink);
-    transition: ease-in .2s;
+    transition: ease-in 0.2s;
+    background-color: var(--secondary-color);
     &:hover {
-        background-color: var(--witch-yellow);
         .wich-witch {
-            color: var(--primary-color);
-            transition: ease-in .2s;
+            text-shadow: 4px 4px 2px #3f3001;
+            transition: ease-in 0.2s;
         }
     }
 }
 
 .wich-witch {
-    color: var(--secondary-color);
-    text-shadow: 4px 4px 2px #3f3001;
+    color: var(--primary-color);
 }
 
 /**
@@ -148,10 +145,45 @@ PARFUM RESUME
     padding: 2em;
 }
 
+.left-witch-resume {
+    justify-content: center;
+}
+
 .right-witch-resume {
     text-align: justify;
+    padding: 2em;
+}
+
+.parfum-resume .flex {
+    margin: auto;
+    @include sm {
+        flex-direction: column;
+    }
+    @include xs {
+        flex-direction: column;
+    }
 }
 
 .witch-bottle {
-    width: 70%;
+    width: 160px;
+}
+
+.em-witch {
+    text-align: center;
+    font-weight: 200;
+    font-size: 2em;
+}
+
+.flex #pink-witch-buy {
+    background-color: var(--witch-pink);
+    color: var(--secondary-color);
+    text-shadow: 2px 2px 3px #43084e;
+    margin: auto;
+}
+
+.flex #yellow-witch-buy {
+    background-color: var(--witch-yellow);
+    color: var(--secondary-color);
+    text-shadow: 2px 2px 3px #3f3001;
+    margin: auto;
 }
