@@ -16,43 +16,142 @@ HEADER
     background-color: var(--primary-color);
 }
 
-.witch-main-title {
-    color: var(--secondary-color) !important;
-}
-
 .grid-witch {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
 }
 
-.shadow {
-    position: absolute;
-    opacity: .2;
-}
-
 .small {
-    width: 18px;
-    height: 18px;
+    width: 40px;
+    height: 40px;
+    @include sm {
+        width: 14px;
+        height: 14px;
+    }
+    @include xs {
+        width: 10px;
+        height: 10px;
+    }
 }
 
-.square, .circle {
+.square,
+.witch-pink {
     pointer-events: none;
     position: relative;
-    width: 28px;
-    height: 28px;
-    margin: 1px;
-    background-color: red;
-    font-size: 14px;
+    width: 50px;
+    height: 50px;
+    margin: 2px;
+    background-color: var(--primary-color);
+    font-size: 3em;
+    @include sm {
+        width: 17px;
+        height: 17px;
+        font-size: 1em;
+        margin-bottom: 1em;
+    }
+    @include xs {
+        width: 14px;
+        height: 14px;
+        font-size: 1em;
+        margin-bottom: 1em;
+    }
+}
+
+.square {
+    color: var(--secondary-color);
+    font-weight: 100;
+    // @include sm {
+    //     width: 17px;
+    //     height: 17px;
+    // }
+    // @include xs {
+    //     width: 14px;
+    //     height: 14px;
+    // }
+}
+
+.witch-pink {
+    color: var(--witch-pink) !important;
+    font-weight: 200;
+    @include sm {
+        width: 17px;
+        height: 17px;
+    }
+    @include xs {
+        width: 14px;
+        height: 14px;
+    }
 }
 
 /**
 //////////////////////////////////////
-MAIN
+PINK WITCH
 //////////////////////////////////////
 */
-.full-black {
+.parallax-section {
+    position: relative;
+    opacity: 0.65;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover
+}
+
+.pink-witch-bg {
+    background: url('../images/witch-background.jpg');
     width: 100%;
-    height: auto;
-    background-color: var(--primary-color);
+    min-height: 100%;
+}
+
+.yellow-witch-bg {
+    background-image: url('../images/witch-background2.jpg');
+    width: 100%;
+    min-height: 100%;
+}
+
+.caption-witch {
+    position: absolute;
+    left: 46%;
+    top: 50%;
+    text-align: center;
+    padding: 1em;
+    font-size: 1.2em;
+    background-color: var(--witch-pink);
+    transition: ease-in .2s;
+    &:hover {
+        background-color: var(--witch-yellow);
+        .wich-witch {
+            color: var(--primary-color);
+            transition: ease-in .2s;
+        }
+    }
+}
+
+.wich-witch {
+    color: var(--secondary-color);
+    text-shadow: 4px 4px 2px #3f3001;
+}
+
+/**
+//////////////////////////////////////
+PARFUM RESUME
+//////////////////////////////////////
+*/
+
+.parfum-resume h3 {
+    text-align: center;
+}
+
+.parfum-resume {
+    justify-content: center;
+    padding: 2em;
+}
+
+.right-witch-resume {
+    text-align: justify;
+}
+
+.witch-bottle {
+    width: 70%;
 }

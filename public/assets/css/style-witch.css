@@ -11,6 +11,8 @@ COLORS
   --font-color-dark: #3b3b3b;
   --span-color: #e7b203;
   --link-color: #1EAEDB;
+  --witch-pink: #cd5c6e;
+  --witch-yellow: #c5ac48;
 }
 
 /*
@@ -217,6 +219,11 @@ FLASH MESSAGES
   color: green !important;
 }
 
+/*
+***********************************
+MEDIA QUERIES
+***********************************
+*/
 /**
 //////////////////////////////////////
 HEADER
@@ -239,10 +246,6 @@ HEADER
   background-color: var(--primary-color);
 }
 
-.witch-main-title {
-  color: var(--secondary-color) !important;
-}
-
 .grid-witch {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -254,34 +257,154 @@ HEADER
       flex-wrap: wrap;
 }
 
-.shadow {
-  position: absolute;
-  opacity: .2;
-}
-
 .small {
-  width: 18px;
-  height: 18px;
+  width: 40px;
+  height: 40px;
 }
 
-.square, .circle {
+@media (min-width: 576px) and (max-width: 768px) {
+  .small {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+@media (min-width: 300px) and (max-width: 576px) {
+  .small {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+.square,
+.witch-pink {
   pointer-events: none;
   position: relative;
-  width: 28px;
-  height: 28px;
-  margin: 1px;
-  background-color: red;
-  font-size: 14px;
+  width: 50px;
+  height: 50px;
+  margin: 2px;
+  background-color: var(--primary-color);
+  font-size: 3em;
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+  .square,
+  .witch-pink {
+    width: 17px;
+    height: 17px;
+    font-size: 1em;
+    margin-bottom: 1em;
+  }
+}
+
+@media (min-width: 300px) and (max-width: 576px) {
+  .square,
+  .witch-pink {
+    width: 14px;
+    height: 14px;
+    font-size: 1em;
+    margin-bottom: 1em;
+  }
+}
+
+.square {
+  color: var(--secondary-color);
+  font-weight: 100;
+}
+
+.witch-pink {
+  color: var(--witch-pink) !important;
+  font-weight: 200;
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+  .witch-pink {
+    width: 17px;
+    height: 17px;
+  }
+}
+
+@media (min-width: 300px) and (max-width: 576px) {
+  .witch-pink {
+    width: 14px;
+    height: 14px;
+  }
 }
 
 /**
 //////////////////////////////////////
-MAIN
+PINK WITCH
 //////////////////////////////////////
 */
-.full-black {
+.parallax-section {
+  position: relative;
+  opacity: 0.65;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.pink-witch-bg {
+  background: url("../images/witch-background.jpg");
   width: 100%;
-  height: auto;
-  background-color: var(--primary-color);
+  min-height: 100%;
+}
+
+.yellow-witch-bg {
+  background-image: url("../images/witch-background2.jpg");
+  width: 100%;
+  min-height: 100%;
+}
+
+.caption-witch {
+  position: absolute;
+  left: 46%;
+  top: 50%;
+  text-align: center;
+  padding: 1em;
+  font-size: 1.2em;
+  background-color: var(--witch-pink);
+  -webkit-transition: ease-in .2s;
+  transition: ease-in .2s;
+}
+
+.caption-witch:hover {
+  background-color: var(--witch-yellow);
+}
+
+.caption-witch:hover .wich-witch {
+  color: var(--primary-color);
+  -webkit-transition: ease-in .2s;
+  transition: ease-in .2s;
+}
+
+.wich-witch {
+  color: var(--secondary-color);
+  text-shadow: 4px 4px 2px #3f3001;
+}
+
+/**
+//////////////////////////////////////
+PARFUM RESUME
+//////////////////////////////////////
+*/
+.parfum-resume h3 {
+  text-align: center;
+}
+
+.parfum-resume {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 2em;
+}
+
+.right-witch-resume {
+  text-align: justify;
+}
+
+.witch-bottle {
+  width: 70%;
 }
 /*# sourceMappingURL=style-witch.css.map */

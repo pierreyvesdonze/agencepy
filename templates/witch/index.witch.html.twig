@@ -5,11 +5,6 @@
 {% block body %}
 
 <header class="witch-header wrapper">
-    {# <h1 class="witch-main-title">W</h1>
-    <h1 class="witch-main-title">I</h1>
-    <h1 class="witch-main-title">T</h1><h1 class="witch-main-title">C</h1>
-    <h1 class="witch-main-title">H</h1> #}
-    Let yourself be bewitched by the witch
     <div class="grid-witch">
         <div class="small square el" style="transform: scale(1);">L</div>
         <div class="small square el" style="transform: scale(1);">E</div>
@@ -46,90 +41,56 @@
         <div class="small square el" style="transform: scale(1);">H</div>
         <div class="small square el" style="transform: scale(1);">E</div>
         <div class="small square el" style="transform: scale(1);"></div>
-        <div class="small square el" style="transform: scale(1);">W</div>
-        <div class="small square el" style="transform: scale(1);">I</div>
-        <div class="small square el" style="transform: scale(1);">T</div>
-        <div class="small square el" style="transform: scale(1);">C</div>
-        <div class="small square el" style="transform: scale(1);">H</div>
+        <div class="small el witch-pink" style="transform: scale(1);">W</div>
+        <div class="small el witch-pink" style="transform: scale(1);">I</div>
+        <div class="small el witch-pink" style="transform: scale(1);">T</div>
+        <div class="small el witch-pink" style="transform: scale(1);">C</div>
+        <div class="small el witch-pink" style="transform: scale(1);">H</div>
     </div>
-    {# <div class="grid-witch shadow">
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-        <div class="small square"></div>
-      </div> #}
 </header>
 
-<section class="full-black">
-    <img src="{{ '../assets/images/witch-background.jpg' }}" />
+<section class="pink-witch-bg parallax-section">
+    <div class="caption-witch collapsible">
+        <a href="#pinkWitchResume">
+            <span class="wich-witch">PINK WITCH</span>
+        </a>
+    </div>
 </section>
+
+<div class="parfum-resume">
+    <div class="flex">
+        <div class="right-witch-resume flex"><img src="{{ '../assets/images/witch-pink.png' }}" class="witch-bottle" />
+        </div>
+        <div class="left-resume" id="pinkWitchResume">
+            <h3>Pink Witch</h3>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur et laborum unde placeat, voluptatum quae
+            accusantium molestias doloribus architecto! Aperiam nam facere vitae quos atque nulla voluptatibus beatae!
+            Magni, aliquam.
+        </div>
+    </div>
+</div>
+
+<section class="yellow-witch-bg parallax-section">
+    <div class="caption-witch collapsible">
+        <a href="#yellowWitchResume">
+            <span class="wich-witch">YELLOW WITCH</span>
+        </a>
+    </div>
+</section>
+
+<div class="parfum-resume">
+    <div class="flex">
+        <div class="right-witch-resume flex"><img src="{{ '../assets/images/witch-yellow.png' }}"
+                class="witch-bottle" />
+        </div>
+        <div class="left-resume" id="yellowWitchResume">
+            <h3>Pink Witch</h3>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur et laborum unde placeat, voluptatum quae
+            accusantium molestias doloribus architecto! Aperiam nam facere vitae quos atque nulla voluptatibus beatae!
+            Magni, aliquam.
+        </div>
+    </div>
+</div>
+
 
 {% endblock %}
