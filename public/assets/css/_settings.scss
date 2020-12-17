@@ -9,7 +9,7 @@ COLORS
   --title-color: #002140;
   --font-color-white: #cecece;
   --font-color-dark: #3b3b3b;
-  --span-color: #e7b203;
+  --main-span-color: #e7b203;
   --link-color: #1EAEDB;
   --witch-pink: #cd5c6e;
   --witch-yellow: #c5ac48;
@@ -75,10 +75,6 @@ label {
 
 .center-element {
   text-align: center;
-}
-
-span {
-  color: var(--span-color);
 }
 
 .hr {

@@ -112,7 +112,7 @@ PINK WITCH
 .caption-witch {
     position: absolute;
     left: 46%;
-    top: 40%;
+    top: 30%;
     text-align: center;
     padding: 1em;
     font-size: 1.2em;
@@ -123,6 +123,12 @@ PINK WITCH
             text-shadow: 4px 4px 2px #3f3001;
             transition: ease-in 0.2s;
         }
+    }
+    @include sm {
+        left: calc(53/2);
+    }
+    @include xs {
+        left: calc(53%/2);
     }
 }
 
@@ -176,14 +182,24 @@ PARFUM RESUME
 
 .flex #pink-witch-buy {
     background-color: var(--witch-pink);
-    color: var(--secondary-color);
     text-shadow: 2px 2px 3px #43084e;
     margin: auto;
 }
 
+
+
 .flex #yellow-witch-buy {
     background-color: var(--witch-yellow);
-    color: var(--secondary-color);
+   
     text-shadow: 2px 2px 3px #3f3001;
     margin: auto;
+}
+
+.flex #pink-witch-buy span, .flex #yellow-witch-buy span {
+    padding: 1em;
+    vertical-align: sub;
+}
+
+.flex #pink-witch-buy a, .flex #yellow-witch-buy a {
+    color: var(--primary-color);
 }

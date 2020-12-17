@@ -15,4 +15,13 @@ class WitchController extends AbstractController
     {
         return $this->render('witch/index.witch.html.twig', []);
     }
+
+     /**
+     * @Route("/witch/shop", name="witch_shop")
+     */
+    public function witchShop() 
+    {
+
+        return $this->render('witch/shop.witch.html.twig', []);
+    }
 }

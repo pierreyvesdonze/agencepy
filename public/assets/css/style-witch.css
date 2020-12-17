@@ -9,7 +9,7 @@ COLORS
   --title-color: #002140;
   --font-color-white: #cecece;
   --font-color-dark: #3b3b3b;
-  --span-color: #e7b203;
+  --main-span-color: #e7b203;
   --link-color: #1EAEDB;
   --witch-pink: #cd5c6e;
   --witch-yellow: #c5ac48;
@@ -77,10 +77,6 @@ label {
 
 .center-element {
   text-align: center;
-}
-
-span {
-  color: var(--span-color);
 }
 
 .hr {
@@ -367,7 +363,7 @@ PINK WITCH
 .caption-witch {
   position: absolute;
   left: 46%;
-  top: 40%;
+  top: 30%;
   text-align: center;
   padding: 1em;
   font-size: 1.2em;
@@ -380,6 +376,18 @@ PINK WITCH
   text-shadow: 4px 4px 2px #3f3001;
   -webkit-transition: ease-in 0.2s;
   transition: ease-in 0.2s;
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+  .caption-witch {
+    left: calc(53/2);
+  }
+}
+
+@media (min-width: 300px) and (max-width: 576px) {
+  .caption-witch {
+    left: calc(53%/2);
+  }
 }
 
 .wich-witch {
@@ -447,15 +455,22 @@ PARFUM RESUME
 
 .flex #pink-witch-buy {
   background-color: var(--witch-pink);
-  color: var(--secondary-color);
   text-shadow: 2px 2px 3px #43084e;
   margin: auto;
 }
 
 .flex #yellow-witch-buy {
   background-color: var(--witch-yellow);
-  color: var(--secondary-color);
   text-shadow: 2px 2px 3px #3f3001;
   margin: auto;
+}
+
+.flex #pink-witch-buy span, .flex #yellow-witch-buy span {
+  padding: 1em;
+  vertical-align: sub;
+}
+
+.flex #pink-witch-buy a, .flex #yellow-witch-buy a {
+  color: var(--primary-color);
 }
 /*# sourceMappingURL=style-witch.css.map */
