@@ -19,32 +19,17 @@ class WitchProductRepository extends ServiceEntityRepository
         parent::__construct($registry, WitchProduct::class);
     }
 
-    // /**
-    //  * @return WitchProduct[] Returns an array of WitchProduct objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return Witch[] Returns an array of Witch objects
+     */
+    public function findProductByName($value)
     {
-        return $this->createQueryBuilder('w')
-            ->andWhere('w.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('w.id', 'ASC')
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.name LIKE :val')
+            ->setParameter('val', '%' . $value . '%')
+            ->orderBy('r.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?WitchProduct
-    {
-        return $this->createQueryBuilder('w')
-            ->andWhere('w.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

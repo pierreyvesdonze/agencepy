@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\WitchProductRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -23,19 +25,25 @@ class WitchProduct
     private $name;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255)
      */
-    private $price;
+    private $imgPath;
 
     /**
-     * @ORM\Column(type="string", length=10)
+     * @ORM\ManyToOne(targetEntity=WitchCategory::class, inversedBy="witchProducts")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $size;
+    private $witchCategory;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\OneToMany(targetEntity=WitchFormat::class, mappedBy="witchProduct")
      */
-    private $stock;
+    private $witchFormats;
+
+    public function __construct()
+    {
+        $this->witchFormats = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -54,42 +62,6 @@ class WitchProduct
         return $this;
     }
 
-    public function getPrice(): ?int
-    {
-        return $this->price;
-    }
-
-    public function setPrice(int $price): self
-    {
-        $this->price = $price;
-
-        return $this;
-    }
-
-    public function getSize(): ?string
-    {
-        return $this->size;
-    }
-
-    public function setSize(string $size): self
-    {
-        $this->size = $size;
-
-        return $this;
-    }
-
-    public function getStock(): ?int
-    {
-        return $this->stock;
-    }
-
-    public function setStock(int $stock): self
-    {
-        $this->stock = $stock;
-
-        return $this;
-    }
-
     public function getAvailability(): ?string
     {
         return $this->availability;
@@ -98,6 +70,60 @@ class WitchProduct
     public function setAvailability(string $availability): self
     {
         $this->availability = $availability;
+
+        return $this;
+    }
+
+    public function getImgPath(): ?string
+    {
+        return $this->imgPath;
+    }
+
+    public function setImgPath(string $imgPath): self
+    {
+        $this->imgPath = $imgPath;
+
+        return $this;
+    }
+
+    public function getWitchCategory(): ?WitchCategory
+    {
+        return $this->witchCategory;
+    }
+
+    public function setWitchCategory(?WitchCategory $witchCategory): self
+    {
+        $this->witchCategory = $witchCategory;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|WitchFormat[]
+     */
+    public function getWitchFormats(): Collection
+    {
+        return $this->witchFormats;
+    }
+
+    public function addWitchFormat(WitchFormat $witchFormat): self
+    {
+        if (!$this->witchFormats->contains($witchFormat)) {
+            $this->witchFormats[] = $witchFormat;
+            $witchFormat->setWitchProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWitchFormat(WitchFormat $witchFormat): self
+    {
+        if ($this->witchFormats->removeElement($witchFormat)) {
+            // set the owning side to null (unless already changed)
+            if ($witchFormat->getWitchProduct() === $this) {
+                $witchFormat->setWitchProduct(null);
+            }
+        }
 
         return $this;
     }

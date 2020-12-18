@@ -103,6 +103,32 @@ var app = {
     app.close.remove();
   },
 
+  /**
+	 *SEARCH
+	 */
+	search: function (e) {
+		e.preventDefault();
+		let userInput = $('.search-input').val();
+		console.log('input : ' + userInput);
+		$.ajax(
+			{
+				url: Routing.generate('searchApi'),
+				method: "POST",
+				dataType: "json",
+				data: JSON.stringify(userInput),
+			}).done(function (response) {
+				if (null !== response) {
+					console.log('ok : ' + JSON.stringify(response));
+				} else {
+					console.log('Problème');
+				}
+			}).fail(function (jqXHR, textStatus, error) {
+				console.log(jqXHR);
+				console.log(textStatus);
+				console.log(error);
+			});
+	},
+
 }
 
 // App Loading

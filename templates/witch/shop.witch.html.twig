@@ -4,4 +4,30 @@
 
 {% block body %}
 
+<section class="witch-products flex">
+    {% for product in products %}
+    <div class="container-witch-product-pink flex">
+        <div class="left-witch-product">
+            <img src="{{ product.imgPath }}" alt="">
+        </div>
+        <div class="right-witch-product">
+            <h3>{{ product.name }}</h3>
+            <hr class="hr">
+            {% dump(product) %}
+            <label for="format-select">Choose a pet:</label>
+            <form method="post" action="{{ path('witch_shop') }}">
+                <select name="format-select">
+                    {% for format in product.witchFormats %}
+                    <option value="first">{{ format }} ml - {{ format.price }} €</option>
+                    {% endfor %}
+                </select>
+                <input type="submit" value="Submit the form" />
+            </form>
+        </div>
+    </div>
+    <div class="container-witch-product-yellow flex">
+    </div>
+    {% endfor %}
+</section>
+
 {% endblock %}

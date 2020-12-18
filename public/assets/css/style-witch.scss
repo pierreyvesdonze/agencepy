@@ -186,8 +186,6 @@ PARFUM RESUME
     margin: auto;
 }
 
-
-
 .flex #yellow-witch-buy {
     background-color: var(--witch-yellow);
    
@@ -202,4 +200,57 @@ PARFUM RESUME
 
 .flex #pink-witch-buy a, .flex #yellow-witch-buy a {
     color: var(--primary-color);
+}
+
+
+
+/*
+***********************************
+SHOP SEARCH BAR / NAV
+***********************************
+*/
+
+.witch-shop-nav {
+    justify-content: space-between;
+    padding: 2em;
+}
+
+.search-input {
+    width: 11rem;
+}
+
+.main-button-search {
+display: none;
+}
+
+.search form {
+    display: flex;
+}
+
+.right-nav-menu-witch {
+    display: flex !important;
+    justify-content: space-between;
+    width: 90px;
+}
+
+
+/**
+//////////////////////////////////////
+S H O P
+//////////////////////////////////////
+*/
+.witch-products {
+    flex-direction: column;
+}
+
+.left-witch-product, .right-witch-product {
+    width: 50%;
+}
+
+.container-witch-product-pink {
+
+}
+
+.container-witch-product-yellow {
+
 }

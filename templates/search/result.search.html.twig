@@ -1,0 +1,12 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Liste de produits trouvés{% endblock %}
+
+{% block body %}
+<main>
+  {% for product in products %}
+    {{ product.name }}
+  {% endfor %}
+
+</main>
+{% endblock %}
