@@ -2,7 +2,11 @@
     <div class="search">
         {{ render(controller('App\\Controller\\SearchController::searchBarAction')) }}
     </div>
-    <div class="witch-title-nav flex"><h1>W I T CH</h1></div>
+    <div class="witch-title-nav flex">
+        <a href="{{ path('homepage') }}">
+            <h1>W I T CH</h1>
+        </a>
+    </div>
     <div class="right-nav-menu-witch">
         <span class="ti-user"></span>
         <span class="ti-shopping-cart"></span>

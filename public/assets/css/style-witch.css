@@ -515,6 +515,10 @@ SHOP SEARCH BAR / NAV
 S H O P
 //////////////////////////////////////
 */
+.witch-title-nav a {
+  color: var(--primary-color) !important;
+}
+
 .witch-products {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -524,5 +528,24 @@ S H O P
 
 .left-witch-product, .right-witch-product {
   width: 50%;
+  margin: auto;
+}
+
+.right-witch-product {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-top: 1px solid var(--primary-color);
+  border-right: 1px solid var(--primary-color);
+  border-bottom: 1px solid var(--primary-color);
+  margin-right: 50px;
+}
+
+.container-witch-product img {
+  width: 30%;
 }
 /*# sourceMappingURL=style-witch.css.map */

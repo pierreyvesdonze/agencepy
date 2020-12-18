@@ -239,18 +239,29 @@ display: none;
 S H O P
 //////////////////////////////////////
 */
+
+.witch-title-nav a {
+    color: var(--primary-color) !important;
+}
+
 .witch-products {
     flex-direction: column;
 }
 
 .left-witch-product, .right-witch-product {
     width: 50%;
+    margin: auto;
 }
 
-.container-witch-product-pink {
-
+.right-witch-product {
+    flex-direction: column;
+    justify-content: center;
+    border-top: 1px solid var(--primary-color);
+    border-right: 1px solid var(--primary-color);
+    border-bottom: 1px solid var(--primary-color);
+    margin-right: 50px;
 }
 
-.container-witch-product-yellow {
-
+.container-witch-product img {
+    width: 30%;
 }

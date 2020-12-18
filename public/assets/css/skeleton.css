@@ -151,6 +151,16 @@ h6 { font-size: 1.5rem; line-height: 1.6;  letter-spacing: 0; }
   h6 { font-size: 1.5rem; }
 }
 
+/* Larger smartphones */
+@media (max-width: 550px) {
+  h1 { font-size: 2rem; }
+  h2 { font-size: 2rem; }
+  h3 { font-size: 2rem; }
+  h4 { font-size: 2rem; }
+  h5 { font-size: 2rem; }
+  h6 { font-size: 2rem; }
+}
+
 p {
   margin-top: 0; }
 
