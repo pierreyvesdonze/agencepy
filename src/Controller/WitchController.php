@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\WitchCategory;
 use App\Form\Type\WitchFormatType;
+use App\Repository\WitchFormatRepository;
 use App\Repository\WitchProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -38,14 +39,26 @@ class WitchController extends AbstractController
      * @Route("/witch/shop/buy", name="witch_shop_buy", methods={"GET","POST"}, options={"expose"=true})
      */
     public function witchShopBuy(
-        WitchProductRepository $witchProductRepository,
+        WitchFormatRepository $witchFormatRepository,
         Request $request
     ): JsonResponse {
         if ($request->isMethod('POST')) {
-            $shopRequest = json_decode($request->getContent());
-            // $test = split('-', $shopRequest);
+            $shopRequest = $request->getContent();
+            $witchProductId = explode('-', $shopRequest);
+          
+            $witchProduct = $witchFormatRepository->findOneBy([
+                'id' => $witchProductId
+            ]);
 
-            return new JsonResponse($shopRequest);
+            $session = $request->getSession();
+            $articlesArray = $session->get('newArticle');
+            if ($articlesArray == null){
+              $articlesArray = [];
+            }
+            $articlesArray[] = $witchProduct;
+            $session->set('newArticle', $articlesArray);
+
+            return new JsonResponse($witchProduct);
         }
     }
 }

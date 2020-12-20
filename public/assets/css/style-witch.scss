@@ -252,9 +252,12 @@ S H O P
     width: 50%;
 }
 
-
 .left-witch-product {
     margin: auto;
+}
+
+.container-witch-product img {
+    width: 30%;
 }
 
 .right-witch-product {
@@ -267,10 +270,9 @@ S H O P
     padding: 2em;
 }
 
-.right-witch-product * {
+
+.witch-buy-form {
+    flex-direction: column;
     margin: auto;
 }
 
-.container-witch-product img {
-    width: 30%;
-}

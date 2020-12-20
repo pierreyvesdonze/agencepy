@@ -15,6 +15,7 @@ $('.buy-witch').on('click', function(e) {
 
     let userSelectFrom = $(this).closest('form');
     let selectedProduct = userSelectFrom.find('select').val();
+    console.log(selectedProduct)
 
     $.ajax(
         {
@@ -24,7 +25,7 @@ $('.buy-witch').on('click', function(e) {
             data: JSON.stringify(selectedProduct),
         }).done(function (response) {
             if (null !== response) {
-                console.log('ok : ' + JSON.stringify(response));
+                console.log('ok : ' + response);
             } else {
                 console.log('Problème');
             }

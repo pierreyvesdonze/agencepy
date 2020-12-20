@@ -16,11 +16,11 @@
         <div class="right-witch-product flex">
             <h3>{{ product.name }}</h3>
             <hr class="hr">
-            <form class="witch-buy-form" data-category='{{ product.witchCategory.name }}'>
-                <label for="format-select">Choisissez un format :</label>
+            <form class="witch-buy-form flex">
+                <label for="format-select">Choisissez un format</label>
                 <select name="format-select" class="witch-format-select">
                     {% for format in product.witchFormats %}
-                    <option value="{{ product.name }}-{{ format.size }}-{{ format.price }}">{{ format }} ml -
+                    <option value="{{ product.witchCategory.id }}-{{ format.size }}-{{ format.price }}">{{ format }} ml -
                         {{ format.price }} €
                     </option>
                     {% endfor %}

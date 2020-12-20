@@ -534,6 +534,10 @@ S H O P
   margin: auto;
 }
 
+.container-witch-product img {
+  width: 30%;
+}
+
 .right-witch-product {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -549,11 +553,11 @@ S H O P
   padding: 2em;
 }
 
-.right-witch-product * {
+.witch-buy-form {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   margin: auto;
-}
-
-.container-witch-product img {
-  width: 30%;
 }
 /*# sourceMappingURL=style-witch.css.map */
