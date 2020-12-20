@@ -69,6 +69,10 @@ a {
   text-decoration: none;
 }
 
+.no-color-link {
+  color: inherit !important;
+}
+
 label {
   color: var(--primary-color);
 }

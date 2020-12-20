@@ -2,14 +2,13 @@
 
 namespace App\Controller;
 
-use App\Entity\WitchCategory;
-use App\Form\Type\WitchFormatType;
 use App\Repository\WitchFormatRepository;
 use App\Repository\WitchProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 
 class WitchController extends AbstractController
@@ -40,25 +39,30 @@ class WitchController extends AbstractController
      */
     public function witchShopBuy(
         WitchFormatRepository $witchFormatRepository,
-        Request $request
+        Request $request,
+        Session $session
     ): JsonResponse {
         if ($request->isMethod('POST')) {
             $shopRequest = $request->getContent();
-            $witchProductId = explode('-', $shopRequest);
-          
+            $witchProducts = explode('-', $shopRequest);
+            $witchProductId = $witchProducts[0];
+
             $witchProduct = $witchFormatRepository->findOneBy([
                 'id' => $witchProductId
             ]);
 
-            $session = $request->getSession();
+
+            // Session option
+            // $session = $request->getSession();
             $articlesArray = $session->get('newArticle');
             if ($articlesArray == null){
               $articlesArray = [];
             }
             $articlesArray[] = $witchProduct;
-            $session->set('newArticle', $articlesArray);
+            // $session->set('newArticle', $articlesArray);
+            $session->set('newArticle', $witchProduct);
 
-            return new JsonResponse($witchProduct);
+            return new JsonResponse('ok');
         }
     }
 }

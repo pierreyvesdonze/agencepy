@@ -25,7 +25,7 @@ $('.buy-witch').on('click', function(e) {
             data: JSON.stringify(selectedProduct),
         }).done(function (response) {
             if (null !== response) {
-                console.log('ok : ' + response);
+                console.log('ok : ' + JSON.stringify(response));
             } else {
                 console.log('Problème');
             }
