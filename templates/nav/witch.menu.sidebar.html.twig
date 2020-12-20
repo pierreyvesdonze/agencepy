@@ -8,10 +8,23 @@
         </a>
     </div>
     <div class="right-nav-menu-witch">
-        <span class="ti-user"></span>
+
+        {% if app.user %}
+        <a href="{{ path('app_logout') }}" class="logged-in">
+            <span class="ti-user"></span>
+        </a>
+
+        {% else %}
+
+        <a href="{{ path('app_login') }}" class="no-color-link">
+            <span class="ti-user"></span>
+        </a>
+
+        {% endif %}
+
         <a href="{{ path('witch_cart') }}" class="no-color-link">
-        <span class="ti-shopping-cart">
-        </span>
-    </a>
+            <span class="ti-shopping-cart">
+            </span>
+        </a>
     </div>
 </nav>

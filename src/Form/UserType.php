@@ -55,18 +55,6 @@ class UserType extends AbstractType
                 ]
             ]
         );
-
-        $builder->add('brochure', FileType::class, [
-
-            'label'         => 'Ajoute un avatar si tu veux (1Mo max)',
-            'mapped'        => false,
-            'required'      => false,
-            'constraints'   => [
-                /*new File([
-                    'maxSize' => '1024k'
-                ])*/
-            ],
-        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
