@@ -6,6 +6,7 @@ use App\Entity\WitchCategory;
 use App\Form\Type\WitchFormatType;
 use App\Repository\WitchProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -24,24 +25,27 @@ class WitchController extends AbstractController
      * @Route("/witch/shop", name="witch_shop", methods={"GET","POST"})
      */
     public function witchShop(
-        WitchProductRepository $witchProductRepository,
-        Request $request
+        WitchProductRepository $witchProductRepository
     ) {
         $products = $witchProductRepository->findAll();
-
-        if (isset($_POST)) {
-            $session = $request->getSession();
-            $articlesArray = $session->get('newArticle');
-            if ($articlesArray == null){
-              $articlesArray = [];
-            }
-            $articlesArray[] = $_POST;
-            $session->set('newArticle', $articlesArray);
-            dump($session);
-        }
 
         return $this->render('witch/shop.witch.html.twig', [
             'products' => $products,
         ]);
+    }
+
+    /**
+     * @Route("/witch/shop/buy", name="witch_shop_buy", methods={"GET","POST"}, options={"expose"=true})
+     */
+    public function witchShopBuy(
+        WitchProductRepository $witchProductRepository,
+        Request $request
+    ): JsonResponse {
+        if ($request->isMethod('POST')) {
+            $shopRequest = json_decode($request->getContent());
+            // $test = split('-', $shopRequest);
+
+            return new JsonResponse($shopRequest);
+        }
     }
 }

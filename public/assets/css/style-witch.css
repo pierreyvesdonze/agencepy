@@ -528,6 +528,9 @@ S H O P
 
 .left-witch-product, .right-witch-product {
   width: 50%;
+}
+
+.left-witch-product {
   margin: auto;
 }
 
@@ -543,6 +546,11 @@ S H O P
   border-right: 1px solid var(--primary-color);
   border-bottom: 1px solid var(--primary-color);
   margin-right: 50px;
+  padding: 2em;
+}
+
+.right-witch-product * {
+  margin: auto;
 }
 
 .container-witch-product img {
