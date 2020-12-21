@@ -71,6 +71,9 @@ a {
 
 .no-color-link {
   color: inherit !important;
+  &:hover {
+    color: var(--link-color)
+  }
 }
 
 .logged-in {
@@ -156,6 +159,25 @@ li {
   color: var(--unavailable-color);
 }
 
+.collapse {
+  flex-wrap: wrap;
+  height: 0;
+  opacity: 0;
+  visibility: hidden;
+  justify-content: space-between;
+  transition: ease-in-out 0.3s;
+}
+
+.active {
+  flex-wrap: wrap;
+  justify-content: center;
+  height: auto;
+  opacity: 1;
+  transition: ease-in-out 0.3s;
+  &:focus {
+      outline: none;
+  }
+}
 
 /*
 ***********************************
@@ -200,7 +222,7 @@ FLASH MESSAGES / CUSTOM ALERT
   opacity: 1;
   background: none;
   border: none;
-  font-size: 4em;
+  font-size: 2em;
 }
 
 .close:focus {
@@ -212,6 +234,8 @@ FLASH MESSAGES / CUSTOM ALERT
 }
 
 .custom-alert {
+  padding: 1em;
+  font-size: 1.1em;
   color: var(--secondary-color);
   text-align: center;
   position: absolute;

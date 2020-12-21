@@ -102,25 +102,6 @@ TEAM SECTION
 //////////////////////////////////////
 */
 
-.collapse {
-    flex-wrap: wrap;
-    height: 0;
-    opacity: 0;
-    visibility: hidden;
-    justify-content: space-between;
-}
-
-.active {
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 2em;
-    height: auto;
-    opacity: 1;
-    transition: ease-in-out 0.3s;
-    &:focus {
-        outline: none;
-    }
-}
 
 .flex-team {
     display: flex;

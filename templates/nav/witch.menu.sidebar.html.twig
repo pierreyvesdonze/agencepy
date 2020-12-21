@@ -10,7 +10,7 @@
     <div class="right-nav-menu-witch">
 
         {% if app.user %}
-        <a href="{{ path('app_logout') }}" class="logged-in">
+        <a href="{{ path('app_logout') }}" class="logged-in"  onclick="return confirm('Souhaitez-vous vous déconnecter ?')">
             <span class="ti-user"></span>
         </a>
 

@@ -43,7 +43,7 @@ class WitchController extends AbstractController
         if (null == $user) {
             $customMessage = $this->translator->trans('login.cart_need_login');
         } else {
-            $customMessage = 'null';
+            $customMessage = $this->translator->trans('cart.added');
         }
 
         return $this->render('witch/shop.witch.html.twig', [

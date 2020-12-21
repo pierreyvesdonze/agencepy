@@ -91,6 +91,9 @@ var app = {
         break;
       case target = "/agencepy/public/witch/shop":
         $('#custom-modal-alert').toggleClass('active').toggleClass('collapse');
+        setTimeout(function () {
+          $('#custom-modal-alert').toggleClass('collapse').toggleClass('active');
+        }, 6000);
         break;
     }
   },
