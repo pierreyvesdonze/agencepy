@@ -75,6 +75,10 @@ a {
   color: inherit !important;
 }
 
+.logged-in {
+  color: green !important;
+}
+
 label {
   color: var(--primary-color);
 }
@@ -159,7 +163,7 @@ li {
 
 /*
 ***********************************
-FLASH MESSAGES
+FLASH MESSAGES / CUSTOM ALERT
 ***********************************
 */
 .flash-container {
@@ -217,6 +221,15 @@ FLASH MESSAGES
 
 .close:hover {
   color: green !important;
+}
+
+.custom-alert {
+  color: var(--secondary-color);
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  height: auto;
+  background-color: var(--primary-color);
 }
 
 /*

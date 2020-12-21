@@ -74,14 +74,25 @@ var app = {
    * *****************************
    */
 
-  collapsible: function () {
+  collapsible: function (e) {
 
-    $('#collapseOne').toggleClass('active-team').toggleClass('collapse-team');
+    let target = window.location.pathname;
+    console.log(target);
 
-    anime({
-      targets: '.flex-team',
-      rotate: '1turn'
-    });
+    switch (target) {
+      case target = "/agencepy/public/":
+        $('#collapseOne').toggleClass('active').toggleClass('collapse');
+
+        anime({
+          targets: '.flex-team',
+          rotate: '1turn'
+        });
+
+        break;
+      case target = "/agencepy/public/witch/shop":
+        $('#custom-modal-alert').toggleClass('active').toggleClass('collapse');
+        break;
+    }
   },
 
   surMesure: function () {
@@ -104,29 +115,29 @@ var app = {
   },
 
   /**
-	 *SEARCH
-	 */
-	search: function (e) {
-		e.preventDefault();
-		let userInput = $('.search-input').val();
-		console.log('input : ' + userInput);
-		$.ajax(
-			{
-				url: Routing.generate('searchApi'),
-				method: "POST",
-				dataType: "json",
-				data: JSON.stringify(userInput),
-			}).done(function (response) {
-				if (null !== response) {
-					console.log('ok : ' + JSON.stringify(response));
-				} else {
-					console.log('Problème');
-				}
-			}).fail(function (jqXHR, textStatus, error) {
-				console.log(jqXHR);
-				console.log(textStatus);
-				console.log(error);
-			});
+   *SEARCH
+   */
+  search: function (e) {
+    e.preventDefault();
+    let userInput = $('.search-input').val();
+    console.log('input : ' + userInput);
+    $.ajax(
+      {
+        url: Routing.generate('searchApi'),
+        method: "POST",
+        dataType: "json",
+        data: JSON.stringify(userInput),
+      }).done(function (response) {
+        if (null !== response) {
+          console.log('ok : ' + JSON.stringify(response));
+        } else {
+          console.log('Problème');
+        }
+      }).fail(function (jqXHR, textStatus, error) {
+        console.log(jqXHR);
+        console.log(textStatus);
+        console.log(error);
+      });
   },
 }
 

@@ -26,7 +26,12 @@
                     {% endfor %}
                 </select>
                 <br>
-                <button type="button" class="buy-witch">Commander</button>
+           
+                <button type="button" class="buy-witch {% if not app.user %} collapsible{% endif %}">
+                    <a href="#custom-modal-alert">
+                        Commander
+                    </a>
+                </button>
             </form>
         </div>
     </div>

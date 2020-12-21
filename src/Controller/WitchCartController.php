@@ -14,10 +14,7 @@ class WitchCartController extends AbstractController
      */
     public function tempCart(Request $request): Response
     {
-
         $tempArticles = $request->getSession()->get('newArticle');
-        dump($tempArticles);
-        dump($request->getSession());
 
         return $this->render('cart/temp.cart.html.twig', [
             

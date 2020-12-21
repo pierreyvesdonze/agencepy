@@ -8,11 +8,20 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class WitchController extends AbstractController
 {
+    private $translator;
+
+    public function __construct(
+        TranslatorInterface $translator
+        )
+    {
+        $this->translator = $translator;
+    }
+
     /**
      * @Route("/witch/home", name="witch_home")
      */
@@ -25,12 +34,21 @@ class WitchController extends AbstractController
      * @Route("/witch/shop", name="witch_shop", methods={"GET","POST"})
      */
     public function witchShop(
-        WitchProductRepository $witchProductRepository
+        WitchProductRepository $witchProductRepository,
+        Request $request
     ) {
         $products = $witchProductRepository->findAll();
+        $user = $this->getUser();
+
+        if (null == $user) {
+            $customMessage = $this->translator->trans('login.cart_need_login');
+        } else {
+            $customMessage = 'null';
+        }
 
         return $this->render('witch/shop.witch.html.twig', [
             'products' => $products,
+            'customMessage' => $customMessage
         ]);
     }
 
@@ -39,8 +57,8 @@ class WitchController extends AbstractController
      */
     public function witchShopBuy(
         WitchFormatRepository $witchFormatRepository,
-        Request $request,
-        Session $session
+        Request $request
+
     ): JsonResponse {
         if ($request->isMethod('POST')) {
             $shopRequest = $request->getContent();
@@ -54,15 +72,15 @@ class WitchController extends AbstractController
 
             // Session option
             // $session = $request->getSession();
-            $articlesArray = $session->get('newArticle');
-            if ($articlesArray == null){
-              $articlesArray = [];
-            }
-            $articlesArray[] = $witchProduct;
+            // $articlesArray = $session->get('newArticle');
+            // if ($articlesArray == null){
+            //   $articlesArray = [];
+            // }
+            // $articlesArray[] = $witchProduct;
             // $session->set('newArticle', $articlesArray);
-            $session->set('newArticle', $witchProduct);
+       
 
-            return new JsonResponse('ok');
+            return new JsonResponse('oki');
         }
     }
 }

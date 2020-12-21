@@ -49,6 +49,24 @@ HEADER
     padding-top: 1em;
 }
 
+/*
+***********************************
+LOGIN / REGISTER
+***********************************
+*/
+
+.login-div {
+    width: 70%;
+    margin: 10% auto;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+}
+
+
 /**
 //////////////////////////////////////
 SECTION white-background
@@ -84,7 +102,7 @@ TEAM SECTION
 //////////////////////////////////////
 */
 
-.collapse-team {
+.collapse {
     flex-wrap: wrap;
     height: 0;
     opacity: 0;
@@ -92,7 +110,7 @@ TEAM SECTION
     justify-content: space-between;
 }
 
-.active-team {
+.active {
     flex-wrap: wrap;
     justify-content: center;
     margin-top: 2em;
