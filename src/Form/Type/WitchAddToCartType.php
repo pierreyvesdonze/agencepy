@@ -7,7 +7,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class WitchFormatType extends AbstractType
+class WitchAddToCartType extends AbstractType
 {
     /**
      * {@inheritdoc}

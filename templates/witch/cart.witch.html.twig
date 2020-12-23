@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Witch Cart{% endblock %}
+
+{% block body %}
+
+{% for article in cart %}
+
+{{ article }}
+    
+{% endfor %}
+
+{{ dump(cart) }}
+
+{% endblock %}

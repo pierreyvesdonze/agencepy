@@ -294,6 +294,37 @@ HEADER
   background-color: var(--primary-color);
 }
 
+.witch-dropdown-button {
+  border: none;
+  cursor: pointer;
+}
+
+.witch-dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  -webkit-box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.witch-dropdown-content a {
+  color: var(--primary-color);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.witch-dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.witch-dropdown-user:hover .witch-dropdown-content {
+  display: block;
+}
+
 .grid-witch {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -432,13 +463,13 @@ PINK WITCH
 
 @media (min-width: 576px) and (max-width: 768px) {
   .caption-witch {
-    left: calc(53/2);
+    left: calc(53 / 2);
   }
 }
 
 @media (min-width: 300px) and (max-width: 576px) {
   .caption-witch {
-    left: calc(53%/2);
+    left: calc(53% / 2);
   }
 }
 
@@ -517,12 +548,14 @@ PARFUM RESUME
   margin: auto;
 }
 
-.flex #pink-witch-buy span, .flex #yellow-witch-buy span {
+.flex #pink-witch-buy span,
+.flex #yellow-witch-buy span {
   padding: 1em;
   vertical-align: sub;
 }
 
-.flex #pink-witch-buy a, .flex #yellow-witch-buy a {
+.flex #pink-witch-buy a,
+.flex #yellow-witch-buy a {
   color: var(--primary-color);
 }
 
@@ -572,13 +605,13 @@ S H O P
 }
 
 .witch-products {
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
-.left-witch-product, .right-witch-product {
+.left-witch-product,
+.right-witch-product {
   width: 50%;
 }
 
@@ -587,7 +620,7 @@ S H O P
 }
 
 .container-witch-product img {
-  width: 30%;
+  width: 100%;
 }
 
 .right-witch-product {

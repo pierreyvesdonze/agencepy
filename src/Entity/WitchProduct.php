@@ -40,6 +40,11 @@ class WitchProduct
      */
     private $witchFormats;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $productImgPath;
+
     public function __construct()
     {
         $this->witchFormats = new ArrayCollection();
@@ -124,6 +129,18 @@ class WitchProduct
                 $witchFormat->setWitchProduct(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getProductImgPath(): ?string
+    {
+        return $this->productImgPath;
+    }
+
+    public function setProductImgPath(?string $productImgPath): self
+    {
+        $this->productImgPath = $productImgPath;
 
         return $this;
     }

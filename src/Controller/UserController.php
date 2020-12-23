@@ -35,7 +35,7 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $plainPassword = $form->get('plain_password')->getData();
+            $plainPassword = $form->get('password')->getData();
             $encodedPassword = $encoder->encodePassword($user, $plainPassword);
 
             $user->setPassword($encodedPassword);
@@ -47,7 +47,7 @@ class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Vous êtes enregistré. Vous pouvez maintenant vous connecter.');
+            $this->addFlash('success', 'Vous êtes enregistré. Vous pouvez désormais vous connecter.');
 
             return $this->redirectToRoute('app_login');
         }

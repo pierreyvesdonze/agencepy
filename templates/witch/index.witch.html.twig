@@ -49,8 +49,57 @@
     </div>
 </header>
 
-<section class="pink-witch-bg parallax-section">
-    {# <img src="{{ asset('assets/images/witch-background.jpg') }}" #}
+{#*******************************************
+PRODUCTS
+*******************************************#}
+
+{% for product in witchProducts %}
+    {% if product.id == 1 %}
+        {% set productColor = 'pink' %}
+        {% else %}
+        {% set productColor = 'yellow' %}
+        {% endif %}
+
+<section class="{{ productColor }}-witch-bg parallax-section">
+    <div class="caption-witch collapsible">
+        <a href="#{{ productColor }}WitchResume">
+            <span class="wich-witch">{{ product.name }}</span>
+        </a>
+    </div>
+</section>
+
+<div class="parfum-resume">
+    <div class="flex">
+        <div class="left-witch-resume flex"><img src="{{ product.imgPath }}" alt="{{ product.name }}" class="witch-bottle" />
+        </div>
+        <div class="left-witch-resume flex">
+        </div>
+        <div class="right-witch-resume" id="{{ productColor }}WitchResume">
+            <h3>{{ productColor }} Witch</h3>
+            <p>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsam nam hic, totam dignissimos libero eius
+                vel harum perferendis repellat ab? Voluptate quod vel nobis mollitia voluptas illo perspiciatis,
+                repellendus laudantium.
+            </p>
+            <em class="em-witch">"Be Bewitched"</em>
+            <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti ducimus blanditiis doloribus dolorem,
+                obcaecati nesciunt mollitia asperiores maiores laborum sunt accusamus aut dolore dolores magni voluptate
+                tenetur iure veniam accusantium.
+            </p>
+        </div>
+    </div>
+    <div class="flex">
+        <button id="{{ productColor }}-witch-buy">
+            <a href="{{ path('witch_shop_product', {'id':product.id } ) }}">
+                <span class="ti-bag"> Buy Now</span>
+            </a>
+        </button>
+    </div>
+</div>
+{% endfor %}
+
+{# <section class="pink-witch-bg parallax-section">
     <div class="caption-witch collapsible">
         <a href="#pinkWitchResume">
             <span class="wich-witch">PINK WITCH</span>
@@ -115,11 +164,11 @@
     </div>
     <div class="flex">
         <button id="yellow-witch-buy">
-            {# <a href="{{ path('witch_shop') }}">
+            <a href="{{ path('witch_shop', {'attr': {'id':2 }} ) }}">
                 <span class="ti-bag"> Buy Now</span>
-            </a> #}
+            </a>
         </button>
     </div>
-</div>
+</div> #}
 
 {% endblock %}

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\WitchFormatRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -37,6 +39,16 @@ class WitchFormat
      * @ORM\JoinColumn(nullable=false)
      */
     private $witchProduct;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Cart::class, mappedBy="articles")
+     */
+    private $carts;
+
+    public function __construct()
+    {
+        $this->carts = new ArrayCollection();
+    }
 
     public function __toString()
     {
@@ -92,6 +104,33 @@ class WitchFormat
     public function setWitchProduct(?WitchProduct $witchProduct): self
     {
         $this->witchProduct = $witchProduct;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Cart[]
+     */
+    public function getCarts(): Collection
+    {
+        return $this->carts;
+    }
+
+    public function addCart(Cart $cart): self
+    {
+        if (!$this->carts->contains($cart)) {
+            $this->carts[] = $cart;
+            $cart->addArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCart(Cart $cart): self
+    {
+        if ($this->carts->removeElement($cart)) {
+            $cart->removeArticle($this);
+        }
 
         return $this;
     }

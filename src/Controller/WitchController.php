@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Cart;
+use App\Entity\WitchProduct;
+use App\Form\Type\WitchAddToCartType;
 use App\Repository\WitchFormatRepository;
 use App\Repository\WitchProductRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,29 +18,43 @@ class WitchController extends AbstractController
 {
     private $translator;
 
+
     public function __construct(
-        TranslatorInterface $translator
-        )
-    {
+        TranslatorInterface $translator,
+        EntityManagerInterface $em
+    ) {
         $this->translator = $translator;
+        $this->em = $em;
     }
 
     /**
      * @Route("/witch/home", name="witch_home")
      */
-    public function witchHome(): Response
+    public function witchHome(
+        WitchProductRepository $witchProductRepository
+    ): Response
     {
-        return $this->render('witch/index.witch.html.twig', []);
+        $witchProducts = $witchProductRepository->findAll();
+
+        return $this->render('witch/index.witch.html.twig', [
+            "witchProducts" => $witchProducts
+        ]);
     }
 
     /**
-     * @Route("/witch/shop", name="witch_shop", methods={"GET","POST"})
+     * @Route("/witch/shop/product{id}", name="witch_shop_product", methods={"GET","POST"}, requirements={"id"="\d+"})
+     * 
      */
-    public function witchShop(
+    public function witchShopProduct(
         WitchProductRepository $witchProductRepository,
-        Request $request
+        WitchFormatRepository $witchFormatRepository,
+        Request $request,
+        WitchProduct $witchProduct
     ) {
-        $products = $witchProductRepository->findAll();
+        $product = $witchProductRepository->findOneBy([
+            'id' => $witchProduct->getId()
+        ]);
+
         $user = $this->getUser();
 
         if (null == $user) {
@@ -46,41 +63,47 @@ class WitchController extends AbstractController
             $customMessage = $this->translator->trans('cart.added');
         }
 
-        return $this->render('witch/shop.witch.html.twig', [
-            'products' => $products,
-            'customMessage' => $customMessage
-        ]);
-    }
+        $form = $this->createForm(WitchAddToCartType::class);
 
-    /**
-     * @Route("/witch/shop/buy", name="witch_shop_buy", methods={"GET","POST"}, options={"expose"=true})
-     */
-    public function witchShopBuy(
-        WitchFormatRepository $witchFormatRepository,
-        Request $request
+        $form->handleRequest($request);
 
-    ): JsonResponse {
-        if ($request->isMethod('POST')) {
-            $shopRequest = $request->getContent();
-            $witchProducts = explode('-', $shopRequest);
-            $witchProductId = $witchProducts[0];
-
-            $witchProduct = $witchFormatRepository->findOneBy([
-                'id' => $witchProductId
-            ]);
-
-
-            // Session option
-            // $session = $request->getSession();
-            // $articlesArray = $session->get('newArticle');
-            // if ($articlesArray == null){
-            //   $articlesArray = [];
-            // }
-            // $articlesArray[] = $witchProduct;
-            // $session->set('newArticle', $articlesArray);
-       
-
-            return new JsonResponse('oki');
+        if ($form->isSubmitted() && $form->isValid()) {
+            if (null === $user->getCart()) {
+                $userCart = new Cart;
+                $userCart->setIsValid(false);
+                $user->setCart($userCart);
+                $this->em->persist($userCart);
+            } else {
+                $userCart = $user->getCart();
+            }
         }
+
+        // if (isset($_POST)) {
+        //     if (null === $user->getCart()) {
+        //         $userCart = new Cart;
+        //         $userCart->setIsValid(false);
+        //         $user->setCart($userCart);
+        //         $this->em->persist($userCart);
+        //     } else {
+        //         $userCart = $user->getCart();
+        //     }
+        //     foreach ($_POST as $key => $value) {
+        //         $witchProduct = explode('-', $value);
+        //         $witchProductId = $witchProduct[0];
+        //         dd($witchProductId);
+        //         $newWitchProduct = $witchFormatRepository->findOneBy([
+        //             'id' => $witchProductId
+        //         ]);
+        //         $userCart->addArticle($newWitchProduct);
+        //         $this->em->persist($userCart);
+        //         $this->em->flush();
+        //     }
+        // }
+
+        return $this->render('witch/shop.witch.html.twig', [
+            'product' => $product,
+            'customMessage' => $customMessage,
+            // 'form' => $form->createView()
+        ]);
     }
 }

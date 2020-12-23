@@ -7,7 +7,7 @@
 <!--***************************NAV****************************-->
 {% include "nav/witch.menu.sidebar.html.twig" %}
 
-<section class="witch-products flex">
+{# <section class="witch-products flex">
     {% for key, product in products %}
     <div class="container-witch-product flex">
         <div class="left-witch-product">
@@ -16,18 +16,19 @@
         <div class="right-witch-product flex">
             <h3>{{ product.name }}</h3>
             <hr class="hr">
-            <form class="witch-buy-form flex">
+            <form class="witch-buy-form flex" method="POST">
                 <label for="format-select">Choisissez un format</label>
                 <select name="format-select" class="witch-format-select">
                     {% for format in product.witchFormats %}
-                    <option value="{{ product.witchCategory.id }}-{{ format.size }}-{{ format.price }}">{{ format }} ml -
+                    <option value="{{ product.witchCategory.id }}-{{ format.size }}-{{ format.price }}">{{ format }} ml
+                        -
                         {{ format.price }} €
                     </option>
                     {% endfor %}
                 </select>
                 <br>
-           
-                <button type="button" class="buy-witch collapsible">
+
+                <button type="submit" class="buy-witch collapsible">
                     <a href="#custom-modal-alert">
                         Commander
                     </a>
@@ -39,6 +40,36 @@
     <hr class="hr">
     <br>
     {% endfor %}
+</section> #}
+
+<section class="witch-products flex">
+    <div class="container-witch-product flex">
+        <div class="left-witch-product">
+            <img src="{{ asset('assets/images/' ~ product.productImgPath ~ '.png') }}" alt="{{ product.name }}" class="witch-bottle" />
+        </div>
+    </div>
+    <div class="right-witch-product flex">
+        <h3>{{ product.name }}</h3>
+        <hr class="hr">
+        <form class="witch-buy-form flex" method="POST">
+            <label for="format-select">Choisissez un format</label>
+            <select name="format-select" class="witch-format-select">
+                {% for format in product.witchFormats %}
+                <option value="{{ product.witchCategory.id }}-{{ format.size }}-{{ format.price }}">{{ format }} ml -
+                    {{ format.price }} €
+                </option>
+                {% endfor %}
+            </select>
+            <br>
+
+            <button type="submit" class="buy-witch collapsible">
+                <a href="#custom-modal-alert">
+                    Commander
+                </a>
+            </button>
+        </form>
+    </div>
+    </div>
 </section>
 
 {% endblock %}

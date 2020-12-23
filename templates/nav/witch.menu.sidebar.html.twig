@@ -3,24 +3,25 @@
         {{ render(controller('App\\Controller\\SearchController::searchBarAction')) }}
     </div>
     <div class="witch-title-nav flex">
-        <a href="{{ path('homepage') }}">
+        <a href="{{ path('witch_home') }}">
             <h1>W I T CH</h1>
         </a>
     </div>
     <div class="right-nav-menu-witch">
-
-        {% if app.user %}
-        <a href="{{ path('app_logout') }}" class="logged-in"  onclick="return confirm('Souhaitez-vous vous déconnecter ?')">
-            <span class="ti-user"></span>
-        </a>
-
-        {% else %}
-
-        <a href="{{ path('app_login') }}" class="no-color-link">
-            <span class="ti-user"></span>
-        </a>
-
-        {% endif %}
+        <div class="witch-dropdown-user">
+            <button class="ti-user witch-dropdown-button {% if app.user %}logged-in{% endif %}"></button>
+            <div class="witch-dropdown-content">
+                {% if app.user %}
+                <a href="#">Mon compte</a>
+                <a href="#">Mes commandes</a>
+                <a href="{{ path('app_logout') }}"
+                    onclick="return confirm('Souhaitez-vous vous déconnecter ?')">Déconnexion</a>
+                {% else %}
+                <a href="{{ path('app_login') }}" class="no-color-link">Connexion</span>
+                </a>
+                {% endif %}
+            </div>
+        </div>
 
         <a href="{{ path('witch_cart') }}" class="no-color-link">
             <span class="ti-shopping-cart">
