@@ -3,3 +3,6 @@ login:
 
 cart:
   added: Votre article a bien été ajouté au panier !
+  
+stock:
+  has_stock: Stock

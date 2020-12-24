@@ -42,32 +42,43 @@
     {% endfor %}
 </section> #}
 
-<section class="witch-products flex">
+<section class="witch-products flex el">
     <div class="container-witch-product flex">
         <div class="left-witch-product">
-            <img src="{{ asset('assets/images/' ~ product.productImgPath ~ '.png') }}" alt="{{ product.name }}" class="witch-bottle" />
+            <img src="{{ asset('assets/images/' ~ product.productImgPath ~ '.png') }}" alt="{{ product.name }}"
+                class="witch-bottle" />
         </div>
     </div>
-    <div class="right-witch-product flex">
+    <div class="right-witch-product flex el">
         <h3>{{ product.name }}</h3>
         <hr class="hr">
         <form class="witch-buy-form flex" method="POST">
             <label for="format-select">Choisissez un format</label>
             <select name="format-select" class="witch-format-select">
-                {% for format in product.witchFormats %}
-                <option value="{{ product.witchCategory.id }}-{{ format.size }}-{{ format.price }}">{{ format }} ml -
+                {% for key, format in product.witchFormats %}
+                <option class="option-stock" data-stock="{{ format.stock }}" value="{{ product.witchCategory.id }}-{{ format.size }}-{{ format.price }}-{{ format.stock }}">
+                    {{ format }} ml -
                     {{ format.price }} €
                 </option>
                 {% endfor %}
             </select>
             <br>
+            <b>{{ 'stock.has_stock'|trans }}</b>
+            <div class="stock-status-container flex">
+                <span id="stock-status" class="stock-status">
 
+                </span>
+            </div>
+            <br>
             <button type="submit" class="buy-witch collapsible">
                 <a href="#custom-modal-alert">
-                    Commander
+                    <span class="ti-shopping-cart">Commander</span>
+                    
                 </a>
             </button>
         </form>
+
+        {# {{ form(form) }} #}
     </div>
     </div>
 </section>

@@ -272,8 +272,18 @@ S H O P
     color: var(--primary-color) !important;
 }
 
+.left-witch-product {
+    position: relative;
+}
+
+.right-witch-product {
+    position: relative;
+    left: -250px;
+}
+
 .witch-products {
    justify-content: center;
+ 
 }
 
 .left-witch-product,
@@ -301,5 +311,28 @@ S H O P
 
 .witch-buy-form {
     flex-direction: column;
+    text-align: center;
+    width: 50%;
+    margin: 0 25%;
+}
+
+//STOCKS
+#stock-status {
     margin: auto;
+    text-align: center;
+}
+
+.low-stock::after {
+    color: rgb(241, 122, 78);
+    content: 'Derniers exemplaires';
+}
+
+.empty-stock::after {
+    color: rgb(255, 0, 0);
+    content: 'Rupture de stock';
+}
+
+.full-stock::after {
+    color: rgb(137, 175, 0);
+    content: 'Disponible';
 }

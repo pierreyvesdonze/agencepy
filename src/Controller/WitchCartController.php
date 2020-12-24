@@ -79,4 +79,16 @@ class WitchCartController extends AbstractController
             'cart' => $cart
         ]);
     }
+
+    /**
+     * @Route("/witch/shop/stock", name="witch_shop_stock", methods={"GET","POST"}, options={"expose"=true})
+     */
+    public function witchShopStock(
+        WitchFormatRepository $witchFormatRepository,
+        Request $request
+
+    ): JsonResponse {
+
+        return new JsonResponse('oki');
+    }
 }

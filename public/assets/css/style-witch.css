@@ -604,6 +604,15 @@ S H O P
   color: var(--primary-color) !important;
 }
 
+.left-witch-product {
+  position: relative;
+}
+
+.right-witch-product {
+  position: relative;
+  left: -250px;
+}
+
 .witch-products {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
@@ -643,6 +652,28 @@ S H O P
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  text-align: center;
+  width: 50%;
+  margin: 0 25%;
+}
+
+#stock-status {
   margin: auto;
+  text-align: center;
+}
+
+.low-stock::after {
+  color: #f17a4e;
+  content: 'Derniers exemplaires';
+}
+
+.empty-stock::after {
+  color: red;
+  content: 'Rupture de stock';
+}
+
+.full-stock::after {
+  color: #89af00;
+  content: 'Disponible';
 }
 /*# sourceMappingURL=style-witch.css.map */
