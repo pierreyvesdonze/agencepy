@@ -34,11 +34,23 @@ class WitchController extends AbstractController
      */
     public function witchHome(
         WitchProductRepository $witchProductRepository
-    ): Response
-    {
+    ): Response {
         $witchProducts = $witchProductRepository->findAll();
 
         return $this->render('witch/index.witch.html.twig', [
+            "witchProducts" => $witchProducts
+        ]);
+    }
+
+    /**
+     * @Route("/witch/shop", name="witch_shop")
+     */
+    public function witchShop(
+        WitchProductRepository $witchProductRepository
+    ): Response {
+        $witchProducts = $witchProductRepository->findAll();
+
+        return $this->render('witch/shop.witch.html.twig', [
             "witchProducts" => $witchProducts
         ]);
     }
@@ -107,7 +119,7 @@ class WitchController extends AbstractController
 
 
 
-        return $this->render('witch/shop.witch.html.twig', [
+        return $this->render('witch/product.witch.html.twig', [
             'product' => $product,
             'customMessage' => $customMessage,
             // 'form' => $form->createView()

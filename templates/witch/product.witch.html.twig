@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Shop Witch{% endblock %}
+
+{% block body %}
+
+<!--***************************NAV****************************-->
+{% include "nav/witch.menu.sidebar.html.twig" %}
+
+<section class="witch-products flex el">
+    <div class="container-witch-product flex">
+        <div class="left-witch-product">
+            <img src="{{ asset('assets/images/' ~ product.productImgPath ~ '.png') }}" alt="{{ product.name }}"
+                class="witch-bottle" />
+        </div>
+    </div>
+    <div class="right-witch-product flex el">
+        <h3>{{ product.name }}</h3>
+        <hr class="hr">
+        <form class="witch-buy-form flex" method="POST">
+            <label for="format-select">Choisissez un format</label>
+            <select name="format-select" class="witch-format-select">
+                {% for key, format in product.witchFormats %}
+                <option class="option-stock" data-stock="{{ format.stock }}"
+                    value="{{ product.witchCategory.id }}-{{ format.size }}-{{ format.price }}-{{ format.stock }}">
+                    {{ format }} ml -
+                    {{ format.price }} €
+                </option>
+                {% endfor %}
+            </select>
+            <br>
+            <b>{{ 'stock.has_stock'|trans }}</b>
+            <div class="stock-status-container flex">
+                <span id="stock-status" class="stock-status">
+
+                </span>
+            </div>
+            <br>
+            {# <button type="button" class="buy-witch collapsible">
+                <a href="#custom-modal-alert" class="no-color-link ti-shopping-cart add-to-cart collapsible">
+                </a>
+            </button> #}
+        </form>
+
+        <section class="svg-container buy-witch">
+            <h5>Ajouter au panier</h5>
+            <a href="#custom-modal-alert" class="add-to-cart collapsible">
+
+            <svg class="circle-witch-add-to-cart" xmlns="http://www.w3.org/2000/svg">
+                <g>
+                    <ellipse class="background-witch-add-to-cart" ry="60" rx="60" cy="62.5" cx="62.5"
+                        stroke-width="2" />
+                    <ellipse class="foreground-witch-add-to-cart" ry="60" rx="60" cy="62.5" cx="62.5"
+                        stroke-width="2" />
+                    <line class="line-witch-add-to-cart line1" x1="52" y1="62" x2="74" y2="62" />
+                    <line class="line-witch-add-to-cart line2-witch-add-to-cart" x1="52" y1="62" x2="74" y2="62" />
+                </g>
+            </svg>
+        </a>
+        </section>
+
+
+
+
+
+        {# {{ form(form) }} #}
+    </div>
+    </div>
+</section>
+
+{% endblock %}

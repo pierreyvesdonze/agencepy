@@ -11,7 +11,7 @@ COLORS
   --font-color-dark: #3b3b3b;
   --main-span-color: #e7b203;
   --link-color: #1EAEDB;
-  --witch-pink: #cd5c6e;
+  --witch-pink: rgb(238, 42, 75);
   --witch-yellow: #c5ac48;
 }
 
@@ -536,27 +536,102 @@ PARFUM RESUME
   font-size: 2em;
 }
 
-.flex #pink-witch-buy {
-  background-color: var(--witch-pink);
-  text-shadow: 2px 2px 3px #43084e;
-  margin: auto;
+.buy-witch-product {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
 }
 
-.flex #yellow-witch-buy {
-  background-color: var(--witch-yellow);
-  text-shadow: 2px 2px 3px #3f3001;
-  margin: auto;
-}
-
-.flex #pink-witch-buy span,
-.flex #yellow-witch-buy span {
-  padding: 1em;
-  vertical-align: sub;
-}
-
-.flex #pink-witch-buy a,
-.flex #yellow-witch-buy a {
+.buy-witch-product a {
+  width: 100%;
+  max-width: 240px;
+  height: 54px;
+  font-size: 1.3rem;
+  font-weight: 900;
   color: var(--primary-color);
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  position: relative;
+  margin: 10px 0;
+}
+
+.buy-witch-product a:hover > p {
+  color: var(--secondary-color);
+}
+
+.buy-witch-product a:before {
+  right: 0;
+  left: initial;
+}
+
+.buy-witch-product a p {
+  margin: 0;
+  height: 54px;
+  line-height: 54px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-radius: 13px;
+  z-index: 1;
+  left: 0;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.buy-witch-product a p span.base-witch-buy {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  position: absolute;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  border: 1px solid var(--primary-color);
+}
+
+.buy-witch-product a p span.bg-witch-buy {
+  left: -5%;
+  position: absolute;
+  background: var(--primary-color);
+  width: 0;
+  height: 100%;
+  z-index: 3;
+  -webkit-transition: 0.3s ease-out all;
+  transition: 0.3s ease-out all;
+  -webkit-transform: skewX(-10deg);
+          transform: skewX(-10deg);
+}
+
+.buy-witch-product a p span.text-witch-buy {
+  z-index: 4;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.buy-witch-product a:hover {
+  color: var(--secondary-color);
+}
+
+.buy-witch-product a:hover span.bg-witch-buy {
+  width: 110%;
+}
+
+.buy-witch-product a:hover span.text-witch-buy:after {
+  background: var(--secondary-color);
 }
 
 /*
@@ -657,23 +732,91 @@ S H O P
   margin: 0 25%;
 }
 
+.add-to-cart {
+  font-size: 2em;
+}
+
 #stock-status {
   margin: auto;
   text-align: center;
 }
 
-.low-stock::after {
+.low-stock {
   color: #f17a4e;
-  content: 'Derniers exemplaires';
 }
 
-.empty-stock::after {
+.empty-stock {
   color: red;
-  content: 'Rupture de stock';
 }
 
-.full-stock::after {
+.full-stock {
   color: #89af00;
-  content: 'Disponible';
+}
+
+.circle-witch-add-to-cart {
+  height: 124px;
+  width: 124px;
+}
+
+.circle-witch-add-to-cart .background-witch-add-to-cart {
+  fill: transparent;
+  stroke: #1abc9c;
+  -webkit-transition: all 200ms ease;
+  transition: all 200ms ease;
+}
+
+.circle-witch-add-to-cart .foreground-witch-add-to-cart {
+  fill: transparent;
+  stroke-dasharray: 377;
+  stroke-dashoffset: 377;
+  stroke: #ee3769;
+  -webkit-transform-origin: 50% 50%;
+          transform-origin: 50% 50%;
+  -webkit-transform: rotate(-270deg);
+          transform: rotate(-270deg);
+  -webkit-transition: all 800ms ease;
+  transition: all 800ms ease;
+}
+
+.circle-witch-add-to-cart .line-witch-add-to-cart {
+  stroke-width: 2;
+  stroke: #1abc9c;
+  -webkit-transform-origin: 50% 50%;
+          transform-origin: 50% 50%;
+  -webkit-transition: all 500ms ease;
+  transition: all 500ms ease;
+}
+
+.circle-witch-add-to-cart .line2-witch-add-to-cart {
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+}
+
+.circle-witch-add-to-cart:hover {
+  cursor: pointer;
+}
+
+.circle-witch-add-to-cart:hover .background-witch-add-to-cart {
+  stroke: transparent;
+}
+
+.circle-witch-add-to-cart:hover .foreground-witch-add-to-cart {
+  stroke-dashoffset: 0;
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+}
+
+.circle-witch-add-to-cart:hover .line-witch-add-to-cart {
+  stroke: #ee3769;
+}
+
+.circle-witch-add-to-cart:hover .line-witch-add-to-cart {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+
+.circle-witch-add-to-cart:hover .line2-witch-add-to-cart {
+  -webkit-transform: rotate(0);
+          transform: rotate(0);
 }
 /*# sourceMappingURL=style-witch.css.map */

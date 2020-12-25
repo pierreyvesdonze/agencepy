@@ -1,4 +1,4 @@
-var app = {
+var appWitch = {
 
     initWitch: function () {
 
@@ -10,7 +10,7 @@ var app = {
        * *****************************
        */
 
-        $('.witch-format-select').on('change', app.updateStock);
+        $('.witch-format-select').on('change', appWitch.updateStock);
 
 
         // MAIN TITLE WITCH ANIMATION
@@ -50,7 +50,6 @@ var app = {
 
     updateStock: function () {
 
-
         // const selectedProduct = $(this).find(':selected').val();
         var stockQuantity = $(this).find(':selected').data("stock");
 
@@ -58,14 +57,14 @@ var app = {
 
         if (stockQuantity == 0) {
             stockStatus.removeClass().addClass('empty-stock');
+            stockStatus.text("Rupture de stock");
         } else if (stockQuantity > 0 && stockQuantity <= 20) {
             stockStatus.removeClass().addClass('low-stock');
+            stockStatus.text("Plus que "+ stockQuantity +" exemplaires");
         } else {
             stockStatus.removeClass().addClass('full-stock');
+            stockStatus.text("Disponible")
         }
-
-        // console.log(stockQuantity);
-        console.log(stockQuantity);
     },
 
     // $('.buy-witch').on('click', function(e) {
@@ -100,8 +99,8 @@ var app = {
 // App Loading
 document.addEventListener(
     'DOMContentLoaded',
-    app.initWitch)
+    appWitch.initWitch)
 
 $(document).ready(function () {
-    app.updateStock()
+    appWitch.updateStock()
 })

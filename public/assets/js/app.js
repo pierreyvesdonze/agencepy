@@ -9,7 +9,8 @@ var app = {
      * L I S T E N E R S
      * *****************************
      */
-    $('.collapsible').on('click', app.collapsible);
+
+    $('.collapsible').click(app.collapsible);
     $('.surMesure').on('click', app.surMesure);
 
     //ALERT MODAL
@@ -78,6 +79,7 @@ var app = {
 
     let target = window.location.pathname;
     console.log(target);
+    console.log('allo ????')
 
     switch (target) {
       case target = "/agencepy/public/":
@@ -89,7 +91,7 @@ var app = {
         });
 
         break;
-      case target = "/agencepy/public/witch/shop":
+      case target = "/agencepy/public/witch/shop/product1":
         $('#custom-modal-alert').toggleClass('active').toggleClass('collapse');
         setTimeout(function () {
           $('#custom-modal-alert').toggleClass('collapse').toggleClass('active');

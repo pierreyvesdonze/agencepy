@@ -11,7 +11,7 @@ COLORS
   --font-color-dark: #3b3b3b;
   --main-span-color: #e7b203;
   --link-color: #1EAEDB;
-  --witch-pink: #cd5c6e;
+  --witch-pink: rgb(238, 42, 75);
   --witch-yellow: #c5ac48;
 }
 

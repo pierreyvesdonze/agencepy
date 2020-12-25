@@ -54,11 +54,11 @@ PRODUCTS
 *******************************************#}
 
 {% for product in witchProducts %}
-    {% if product.id == 1 %}
-        {% set productColor = 'pink' %}
-        {% else %}
-        {% set productColor = 'yellow' %}
-        {% endif %}
+{% if product.id == 1 %}
+{% set productColor = 'pink' %}
+{% else %}
+{% set productColor = 'yellow' %}
+{% endif %}
 
 <section class="{{ productColor }}-witch-bg parallax-section">
     <div class="caption-witch collapsible">
@@ -70,7 +70,8 @@ PRODUCTS
 
 <div class="parfum-resume">
     <div class="flex">
-        <div class="left-witch-resume flex"><img src="{{ product.imgPath }}" alt="{{ product.name }}" class="witch-bottle" />
+        <div class="left-witch-resume flex"><img src="{{ product.imgPath }}" alt="{{ product.name }}"
+                class="witch-bottle" />
         </div>
         <div class="left-witch-resume flex">
         </div>
@@ -89,13 +90,26 @@ PRODUCTS
             </p>
         </div>
     </div>
-    <div class="flex">
-        <button id="{{ productColor }}-witch-buy">
-            <a href="{{ path('witch_shop_product', {'id':product.id } ) }}">
-                <span class="ti-bag"> Buy Now</span>
-            </a>
-        </button>
+
+
+
+    {# <button id="{{ productColor }}-witch-buy">
+        <a href="{{ path('witch_shop_product', {'id':product.id } ) }}">
+            <span class="ti-bag"> Buy Now</span>
+        </a>
+    </button> #}
+
+
+    <div class="buy-witch-product">
+        <a href="{{ path('witch_shop_product', {'id':product.id } ) }}">
+            <p>
+                <span class="bg-witch-buy"></span>
+                <span class="base-witch-buy"></span>
+                <span class="text-witch-buy">Commander</span>
+            </p>
+        </a>
     </div>
+
 </div>
 {% endfor %}
 
