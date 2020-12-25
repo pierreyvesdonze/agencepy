@@ -35,11 +35,21 @@ var appWitch = {
                 easing: 'spring(1, 80, 10, 0)'
             });
 
+            // anime({
+            //     targets: '.witch-products  .left-witch-product',
+            //     rotate: 720 // -> '540deg'
+            // });
+
             anime({
-                targets: '.witch-products  .left-witch-product',
-                rotate: 720 // -> '540deg'
+                targets: '.witch-products .left-witch-product',
+                translateZ: 250,
+                direction: 'alternate',
+                loop: false,
+                easing: 'spring(1, 80, 10, 0)'
             });
+
         });
+
     },
 
     /**
@@ -60,7 +70,7 @@ var appWitch = {
             stockStatus.text("Rupture de stock");
         } else if (stockQuantity > 0 && stockQuantity <= 20) {
             stockStatus.removeClass().addClass('low-stock');
-            stockStatus.text("Plus que "+ stockQuantity +" exemplaires");
+            stockStatus.text("Plus que " + stockQuantity + " exemplaires");
         } else {
             stockStatus.removeClass().addClass('full-stock');
             stockStatus.text("Disponible")

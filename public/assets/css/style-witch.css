@@ -530,6 +530,18 @@ PARFUM RESUME
   width: 160px;
 }
 
+@media (min-width: 576px) and (max-width: 768px) {
+  .witch-bottle {
+    display: none;
+  }
+}
+
+@media (min-width: 300px) and (max-width: 576px) {
+  .witch-bottle {
+    display: none;
+  }
+}
+
 .em-witch {
   text-align: center;
   font-weight: 200;
@@ -703,10 +715,6 @@ S H O P
   margin: auto;
 }
 
-.container-witch-product img {
-  width: 100%;
-}
-
 .right-witch-product {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -720,6 +728,10 @@ S H O P
   border-bottom: 1px solid var(--primary-color);
   margin-right: 50px;
   padding: 2em;
+  background: -webkit-gradient(linear, left top, right top, from(rgba(101, 189, 171, 0)), to(#48ffd945));
+  background: linear-gradient(90deg, rgba(101, 189, 171, 0) 0%, #48ffd945 100%);
+  -webkit-box-shadow: inset -5px 0px 6px -4px #010202;
+          box-shadow: inset -5px 0px 6px -4px #010202;
 }
 
 .witch-buy-form {
@@ -728,6 +740,9 @@ S H O P
       -ms-flex-direction: column;
           flex-direction: column;
   text-align: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   width: 50%;
   margin: 0 25%;
 }
@@ -779,7 +794,7 @@ S H O P
 }
 
 .circle-witch-add-to-cart .line-witch-add-to-cart {
-  stroke-width: 2;
+  stroke-width: 3;
   stroke: #1abc9c;
   -webkit-transform-origin: 50% 50%;
           transform-origin: 50% 50%;
@@ -816,7 +831,7 @@ S H O P
 }
 
 .circle-witch-add-to-cart:hover .line2-witch-add-to-cart {
-  -webkit-transform: rotate(0);
-          transform: rotate(0);
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
 }
 /*# sourceMappingURL=style-witch.css.map */

@@ -56,7 +56,7 @@ class WitchController extends AbstractController
     }
 
     /**
-     * @Route("/witch/shop/product{id}", name="witch_shop_product", methods={"GET","POST"}, requirements={"id"="\d+"})
+     * @Route("/witch/shop/product/{id}", name="witch_shop_product", methods={"GET","POST"}, requirements={"id"="\d+"})
      * 
      */
     public function witchShopProduct(

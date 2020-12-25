@@ -201,6 +201,12 @@ PARFUM RESUME
 
 .witch-bottle {
     width: 160px;
+    @include sm {
+        display: none;
+    }
+    @include xs {
+        display: none;
+    }
 }
 
 .em-witch {
@@ -345,10 +351,6 @@ S H O P
     margin: auto;
 }
 
-.container-witch-product img {
-    width: 100%;
-}
-
 .right-witch-product {
     flex-direction: column;
     justify-content: center;
@@ -357,11 +359,14 @@ S H O P
     border-bottom: 1px solid var(--primary-color);
     margin-right: 50px;
     padding: 2em;
+    background: linear-gradient(90deg, rgba(101, 189, 171, 0) 0%, #48ffd945 100%);
+    box-shadow: inset -5px 0px 6px -4px #010202;
 }
 
 .witch-buy-form {
     flex-direction: column;
     text-align: center;
+    align-items: center;
     width: 50%;
     margin: 0 25%;
 }
@@ -388,6 +393,7 @@ S H O P
     color: rgb(137, 175, 0);
 }
 
+//Add to cart animation button
 .circle-witch-add-to-cart {
     height: 124px;
     width: 124px;
@@ -409,7 +415,7 @@ S H O P
     }
 
     .line-witch-add-to-cart {
-        stroke-width: 2;
+        stroke-width: 3;
         stroke: #1abc9c;
         transform-origin: 50% 50%;
         transition: all 500ms ease;
@@ -440,7 +446,7 @@ S H O P
         }
 
         .line2-witch-add-to-cart {
-            transform: rotate(0);
+            transform: rotate(90deg);
         }
     }
 }

@@ -4,6 +4,9 @@
 
 {% block body %}
 
+<!--***************************ROUTE****************************-->
+<input type="hidden" data-route="witch-home" class="hidden-route">
+
 <header class="witch-header wrapper">
     <div class="grid-witch">
         <div class="small square el" style="transform: scale(1);">L</div>
@@ -91,15 +94,6 @@ PRODUCTS
         </div>
     </div>
 
-
-
-    {# <button id="{{ productColor }}-witch-buy">
-        <a href="{{ path('witch_shop_product', {'id':product.id } ) }}">
-            <span class="ti-bag"> Buy Now</span>
-        </a>
-    </button> #}
-
-
     <div class="buy-witch-product">
         <a href="{{ path('witch_shop_product', {'id':product.id } ) }}">
             <p>
@@ -112,77 +106,5 @@ PRODUCTS
 
 </div>
 {% endfor %}
-
-{# <section class="pink-witch-bg parallax-section">
-    <div class="caption-witch collapsible">
-        <a href="#pinkWitchResume">
-            <span class="wich-witch">PINK WITCH</span>
-        </a>
-    </div>
-</section>
-
-<div class="parfum-resume">
-    <div class="flex">
-        <div class="left-witch-resume flex"><img src="{{ '../assets/images/witch-pink.png' }}" class="witch-bottle" />
-        </div>
-        <div class="right-witch-resume" id="pinkWitchResume">
-            <h3>Pink Witch</h3>
-            <p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsam nam hic, totam dignissimos libero eius
-                vel harum perferendis repellat ab? Voluptate quod vel nobis mollitia voluptas illo perspiciatis,
-                repellendus laudantium.
-            </p>
-            <em class="em-witch">"Be Bewitched"</em>
-            <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti ducimus blanditiis doloribus dolorem,
-                obcaecati nesciunt mollitia asperiores maiores laborum sunt accusamus aut dolore dolores magni voluptate
-                tenetur iure veniam accusantium.
-            </p>
-        </div>
-    </div>
-    <div class="flex">
-        <button id="pink-witch-buy">
-            <a href="{{ path('witch_shop')}}">
-                <span class="ti-bag"> Buy Now</span>
-            </a>
-        </button>
-    </div>
-</div>
-
-<section class="yellow-witch-bg parallax-section">
-    <div class="caption-witch collapsible">
-        <a href="#yellowWitchResume">
-            <span class="wich-witch">YELLOW WITCH</span>
-        </a>
-    </div>
-</section>
-
-<div class="parfum-resume">
-    <div class="flex">
-        <div class="left-witch-resume flex"><img src="{{ '../assets/images/witch-yellow.png' }}" class="witch-bottle" />
-        </div>
-        <div class="right-witch-resume" id="yellowWitchResume">
-            <h3>Yellow Witch</h3>
-            <p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsam nam hic, totam dignissimos libero eius
-                vel harum perferendis repellat ab? Voluptate quod vel nobis mollitia voluptas illo perspiciatis,
-                repellendus laudantium.
-            </p>
-            <em class="em-witch">"Be Bewitched"</em>
-            <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti ducimus blanditiis doloribus dolorem,
-                obcaecati nesciunt mollitia asperiores maiores laborum sunt accusamus aut dolore dolores magni voluptate
-                tenetur iure veniam accusantium.
-            </p>
-        </div>
-    </div>
-    <div class="flex">
-        <button id="yellow-witch-buy">
-            <a href="{{ path('witch_shop', {'attr': {'id':2 }} ) }}">
-                <span class="ti-bag"> Buy Now</span>
-            </a>
-        </button>
-    </div>
-</div> #}
 
 {% endblock %}

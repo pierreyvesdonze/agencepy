@@ -77,12 +77,12 @@ var app = {
 
   collapsible: function (e) {
 
-    let target = window.location.pathname;
+    // On va chercher par le biais de input hidden les routes correspondantes, pour ne pas avoir à redéfinir le comportement de collapsible()
+    let target = $('.hidden-route').data('route');
     console.log(target);
-    console.log('allo ????')
 
     switch (target) {
-      case target = "/agencepy/public/":
+      case target = "witch-home":
         $('#collapseOne').toggleClass('active').toggleClass('collapse');
 
         anime({
@@ -91,11 +91,11 @@ var app = {
         });
 
         break;
-      case target = "/agencepy/public/witch/shop/product1":
+      case target = "product-route" :
         $('#custom-modal-alert').toggleClass('active').toggleClass('collapse');
         setTimeout(function () {
           $('#custom-modal-alert').toggleClass('collapse').toggleClass('active');
-        }, 6000);
+        }, 3000);
         break;
     }
   },
