@@ -20,7 +20,7 @@ class Cart
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity=WitchFormat::class, inversedBy="carts")
+     * @ORM\ManyToMany(targetEntity=WitchFormat::class, inversedBy="carts", fetch="EAGER")
      */
     private $articles;
 

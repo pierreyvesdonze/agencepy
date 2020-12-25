@@ -40,7 +40,7 @@ class WitchProduct
      */
     private $witchFormats;
 
-    /**
+       /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $productImgPath;

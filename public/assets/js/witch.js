@@ -1,3 +1,8 @@
+// Mise à jour du statut des stocks au chargement
+$(document).ready(function () {
+    appWitch.updateStock()
+})
+
 var appWitch = {
 
     initWitch: function () {
@@ -11,6 +16,7 @@ var appWitch = {
        */
 
         $('.witch-format-select').on('change', appWitch.updateStock);
+        $('.buy-witch').on('click', appWitch.buyWitchProduct)
 
 
         // MAIN TITLE WITCH ANIMATION
@@ -35,11 +41,6 @@ var appWitch = {
                 easing: 'spring(1, 80, 10, 0)'
             });
 
-            // anime({
-            //     targets: '.witch-products  .left-witch-product',
-            //     rotate: 720 // -> '540deg'
-            // });
-
             anime({
                 targets: '.witch-products .left-witch-product',
                 translateZ: 250,
@@ -60,7 +61,6 @@ var appWitch = {
 
     updateStock: function () {
 
-        // const selectedProduct = $(this).find(':selected').val();
         var stockQuantity = $(this).find(':selected').data("stock");
 
         var stockStatus = $('#stock-status');
@@ -77,32 +77,34 @@ var appWitch = {
         }
     },
 
-    // $('.buy-witch').on('click', function(e) {
+    buyWitchProduct: function (e) {
 
-    //     e.preventDefault();
+        e.preventDefault();
 
-    //     let userSelectFrom = $(this).closest('form');
-    //     let selectedProduct = userSelectFrom.find('select').val();
-    //     console.log(selectedProduct)
+        let userSelectForm = $(".witch-format-select");
+        let selectedFormatId = userSelectForm.find(':selected').data("format");
 
-    //     $.ajax(
-    //         {
-    //             url: Routing.generate('witch_shop_buy'),
-    //             method: "POST",
-    //             dataType: "json",
-    //             data: JSON.stringify(selectedProduct),
-    //         }).done(function (response) {
-    //             if (null !== response) {
-    //                 console.log('ok : ' + JSON.stringify(response));
-    //             } else {
-    //                 console.log('Problème');
-    //             }
-    //         }).fail(function (jqXHR, textStatus, error) {
-    //             console.log(jqXHR);
-    //             console.log(textStatus);
-    //             console.log(error);
-    //         });
-    // })
+        console.log(selectedFormatId)
+
+        $.ajax(
+            {
+                url: Routing.generate('witch_shop_buy'),
+                method: "POST",
+                dataType: "json",
+                data: JSON.stringify(selectedFormatId),
+            }).done(function (response) {
+                if ('ok' !== response) {
+                    alert(response)
+                } else {
+                    console.log('Ok');
+                }
+            }).fail(function (jqXHR, textStatus, error) {
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(error);
+            });
+    }
+
 
 }
 
@@ -110,7 +112,3 @@ var appWitch = {
 document.addEventListener(
     'DOMContentLoaded',
     appWitch.initWitch)
-
-$(document).ready(function () {
-    appWitch.updateStock()
-})

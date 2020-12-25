@@ -6,3 +6,4 @@ cart:
   
 stock:
   has_stock: Stock
+  unavailable: Désolé cet article n'est plus disponible en stock

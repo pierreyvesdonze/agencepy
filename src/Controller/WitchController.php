@@ -62,15 +62,11 @@ class WitchController extends AbstractController
     public function witchShopProduct(
         WitchProductRepository $witchProductRepository,
         WitchFormatRepository $witchFormatRepository,
-        Request $request,
         WitchProduct $witchProduct
     ) {
         $product = $witchProductRepository->findOneBy([
             'id' => $witchProduct->getId()
         ]);
-        // $productFormat = $witchFormatRepository->findBy([
-        //     'witchProduct' => $product
-        // ]);
 
         $user = $this->getUser();
 
@@ -81,48 +77,9 @@ class WitchController extends AbstractController
             $customMessage = $this->translator->trans('cart.added');
         }
 
-        // $form = $this->createForm(WitchFormatType::class, $product);
-
-        // $form->handleRequest($request);
-
-        // if ($form->isSubmitted() && $form->isValid()) {
-        //     if (null === $user->getCart()) {
-        //         $userCart = new Cart;
-        //         $userCart->setIsValid(false);
-        //         $user->setCart($userCart);
-        //         $this->em->persist($userCart);
-        //     } else {
-        //         $userCart = $user->getCart();
-        //     }
-        // }
-
-        if (isset($_POST)) {
-            if (null === $user->getCart()) {
-                $userCart = new Cart;
-                $userCart->setIsValid(false);
-                $user->setCart($userCart);
-                $this->em->persist($userCart);
-            } else {
-                $userCart = $user->getCart();
-            }
-            foreach ($_POST as $key => $value) {
-                $witchProduct = explode('-', $value);
-                $witchProductId = $witchProduct[0];
-                $newWitchProduct = $witchFormatRepository->findOneBy([
-                    'id' => $witchProductId
-                ]);
-                $userCart->addArticle($newWitchProduct);
-                $this->em->persist($userCart);
-                $this->em->flush();
-            }
-        }
-
-
-
         return $this->render('witch/product.witch.html.twig', [
             'product' => $product,
             'customMessage' => $customMessage,
-            // 'form' => $form->createView()
         ]);
     }
 }

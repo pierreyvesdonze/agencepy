@@ -91,11 +91,19 @@ var app = {
         });
 
         break;
-      case target = "product-route" :
-        $('#custom-modal-alert').toggleClass('active').toggleClass('collapse');
-        setTimeout(function () {
-          $('#custom-modal-alert').toggleClass('collapse').toggleClass('active');
-        }, 3000);
+      case target = "product-route":
+
+        var stockQuantity = $('.witch-format-select').find(':selected').data("stock");
+
+        console.log(stockQuantity)
+
+        // On vérifie qu'il y a du stock
+        if (stockQuantity > 0) {
+          $('#custom-modal-alert').toggleClass('active').toggleClass('collapse');
+          setTimeout(function () {
+            $('#custom-modal-alert').toggleClass('collapse').toggleClass('active');
+          }, 3000);
+        }
         break;
     }
   },

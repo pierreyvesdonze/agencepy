@@ -33,37 +33,34 @@ class WitchCartController extends AbstractController
 
     ): JsonResponse {
 
+        $user = $this->getUser();
+
         if ($request->isMethod('POST')) {
+            if (null === $user->getCart()) {
+                $userCart = new Cart;
+                $userCart->setIsValid(false);
+                $user->setCart($userCart);
+                $this->em->persist($userCart);
+            } else {
+                $userCart = $user->getCart();
+            }
 
-            // if (null !== $this->getUser()) {
+            $witchProductId = $request->getContent();
 
-            //     /** @var \App\Entity\User $user */
-            //     $user = $this->getUser();
-            // }
+            $newWitchProduct = $witchFormatRepository->findOneBy([
+                'id' => $witchProductId
+            ]);
 
-            // if (null === $user->getCart()) {
-            //     $userCart = new Cart;
-            //     $userCart->setIsValid(false);
-            //     $user->setCart($userCart);
-            //     $this->em->persist($userCart);
-            // } else {
-            //     $userCart = $user->getCart();
-            // }
+            $message = 'null'; 
+            if ($newWitchProduct->getStock() > 0) {
+                $userCart->addArticle($newWitchProduct);
+                $this->em->persist($userCart);
+                $this->em->flush();
+            } else {
+                $message = $this->translator->trans('stock.unavailable');
+            }
 
-            // $shopRequest = $request->getContent();
-            // $witchProducts = explode('-', $shopRequest);
-            // $witchProductId = $witchProducts[0];
-
-            // $witchProduct = $witchFormatRepository->findOneBy([
-            //     'id' => $witchProductId
-            // ]);
-
-            // $userCart->addArticle($witchProduct);
-            // $this->em->flush();
-
-
-
-            return new JsonResponse('oki');
+            return new JsonResponse($message);
         }
     }
 
