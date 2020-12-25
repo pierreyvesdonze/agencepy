@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
 use App\Entity\Cart;
 use App\Repository\WitchFormatRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -51,10 +52,13 @@ class WitchCartController extends AbstractController
                 'id' => $witchProductId
             ]);
 
-            $message = 'null'; 
+            $message = 'ok'; 
             if ($newWitchProduct->getStock() > 0) {
-                $userCart->addArticle($newWitchProduct);
-                $this->em->persist($userCart);
+                $newArticle = new Article;
+                $newArticle->setCart($userCart);
+                $newArticle->setWitchFormatId($newWitchProduct->getId());
+                $userCart->addNewArticle($newArticle);
+                $this->em->persist($newArticle);
                 $this->em->flush();
             } else {
                 $message = $this->translator->trans('stock.unavailable');

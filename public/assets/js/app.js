@@ -95,8 +95,6 @@ var app = {
 
         var stockQuantity = $('.witch-format-select').find(':selected').data("stock");
 
-        console.log(stockQuantity)
-
         // On vérifie qu'il y a du stock
         if (stockQuantity > 0) {
           $('#custom-modal-alert').toggleClass('active').toggleClass('collapse');

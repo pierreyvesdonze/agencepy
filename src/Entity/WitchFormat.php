@@ -41,13 +41,13 @@ class WitchFormat
     private $witchProduct;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Cart::class, mappedBy="articles")
+     * @ORM\OneToMany(targetEntity=Article::class, mappedBy="witchFormat")
      */
-    private $carts;
+    private $articles;
 
     public function __construct()
     {
-        $this->carts = new ArrayCollection();
+        $this->articles = new ArrayCollection();
     }
 
     public function __toString()
@@ -109,27 +109,30 @@ class WitchFormat
     }
 
     /**
-     * @return Collection|Cart[]
+     * @return Collection|Article[]
      */
-    public function getCarts(): Collection
+    public function getArticles(): Collection
     {
-        return $this->carts;
+        return $this->articles;
     }
 
-    public function addCart(Cart $cart): self
+    public function addArticle(Article $article): self
     {
-        if (!$this->carts->contains($cart)) {
-            $this->carts[] = $cart;
-            $cart->addArticle($this);
+        if (!$this->articles->contains($article)) {
+            $this->articles[] = $article;
+            $article->setWitchFormat($this);
         }
 
         return $this;
     }
 
-    public function removeCart(Cart $cart): self
+    public function removeArticle(Article $article): self
     {
-        if ($this->carts->removeElement($cart)) {
-            $cart->removeArticle($this);
+        if ($this->articles->removeElement($article)) {
+            // set the owning side to null (unless already changed)
+            if ($article->getWitchFormat() === $this) {
+                $article->setWitchFormat(null);
+            }
         }
 
         return $this;

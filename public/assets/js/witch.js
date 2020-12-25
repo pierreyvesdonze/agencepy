@@ -94,9 +94,10 @@ var appWitch = {
                 data: JSON.stringify(selectedFormatId),
             }).done(function (response) {
                 if ('ok' !== response) {
+                    console.log(response)
                     alert(response)
                 } else {
-                    console.log('Ok');
+                    console.log('Ajouté au panier');
                 }
             }).fail(function (jqXHR, textStatus, error) {
                 console.log(jqXHR);

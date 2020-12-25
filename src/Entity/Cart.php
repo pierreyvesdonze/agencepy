@@ -20,11 +20,6 @@ class Cart
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity=WitchFormat::class, inversedBy="carts", fetch="EAGER")
-     */
-    private $articles;
-
-    /**
      * @ORM\Column(type="boolean")
      */
     private $isValid;
@@ -34,38 +29,20 @@ class Cart
      */
     private $user;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Article::class, mappedBy="cart", cascade={"persist", "remove"})
+     */
+    private $newArticles;
+
     public function __construct()
     {
-        $this->articles = new ArrayCollection();
+        $this->witchFormats = new ArrayCollection();
+        $this->newArticles = new ArrayCollection();
     }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    /**
-     * @return Collection|WitchFormat[]
-     */
-    public function getArticles(): Collection
-    {
-        return $this->articles;
-    }
-
-    public function addArticle(WitchFormat $article): self
-    {
-        if (!$this->articles->contains($article)) {
-            $this->articles[] = $article;
-        }
-
-        return $this;
-    }
-
-    public function removeArticle(WitchFormat $article): self
-    {
-        $this->articles->removeElement($article);
-
-        return $this;
     }
 
     public function isValid(): ?bool
@@ -88,6 +65,36 @@ class Cart
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Article[]
+     */
+    public function getNewArticles(): Collection
+    {
+        return $this->newArticles;
+    }
+
+    public function addNewArticle(Article $newArticle): self
+    {
+        if (!$this->newArticles->contains($newArticle)) {
+            $this->newArticles[] = $newArticle;
+            $newArticle->setCart($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNewArticle(Article $newArticle): self
+    {
+        if ($this->newArticles->removeElement($newArticle)) {
+            // set the owning side to null (unless already changed)
+            if ($newArticle->getCart() === $this) {
+                $newArticle->setCart(null);
+            }
+        }
 
         return $this;
     }
