@@ -22,9 +22,15 @@
                 {% endif %}
             </div>
         </div>
-        <div>
+        <div class="witch-cart-header-container">
             <a href="{{ path('witch_cart') }}" class="ti-shopping-cart no-color-link">
             </a>
         </div>
+        {% if app.user %}
+        <div class="user-witch-cart-quantity" data-quantity="{{ app.user.cart.getNewArticles|length }}">
+            <span class="witch-pastille-quantity">{{ app.user.cart.getNewArticles|length }}</span>
+        </div>
+        {% endif %}
     </div>
+
 </nav>

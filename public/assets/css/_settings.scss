@@ -160,6 +160,8 @@ li {
 }
 
 .collapse {
+  position: fixed;
+  z-index: 200;
   flex-wrap: wrap;
   height: 0;
   opacity: 0;

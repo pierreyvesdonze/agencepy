@@ -166,6 +166,8 @@ li {
 }
 
 .collapse {
+  position: fixed;
+  z-index: 200;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   height: 0;

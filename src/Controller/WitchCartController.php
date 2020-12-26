@@ -52,7 +52,7 @@ class WitchCartController extends AbstractController
                 'id' => $witchProductId
             ]);
 
-            $message = 'ok'; 
+            $message = null; 
             if ($newWitchProduct->getStock() > 0) {
                 $newArticle = new Article;
                 $newArticle->setCart($userCart);
@@ -60,6 +60,7 @@ class WitchCartController extends AbstractController
                 $userCart->addNewArticle($newArticle);
                 $this->em->persist($newArticle);
                 $this->em->flush();
+                $message = (int)count($userCart->getNewArticles());
             } else {
                 $message = $this->translator->trans('stock.unavailable');
             }
@@ -73,8 +74,8 @@ class WitchCartController extends AbstractController
      */
     public function witchCart(Request $request): Response
     {
-        $session = $request->getSession();
-        $cart = $session->get('newArticleArray');
+        $user = $this->getUser();
+        $cart = 'cart';
 
         return $this->render('witch/cart.witch.html.twig', [
             'cart' => $cart

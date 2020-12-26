@@ -1,6 +1,8 @@
 // Mise à jour du statut des stocks au chargement
 $(document).ready(function () {
     appWitch.updateStock()
+
+  
 })
 
 var appWitch = {
@@ -8,8 +10,11 @@ var appWitch = {
     initWitch: function () {
 
         console.log('initWitch');
-
-        /**
+        
+        appWitch.currentQuantity = $('.user-witch-cart-quantity').data('quantity');
+        appWitch.cartPastille = $('.witch-pastille-quantity');
+        
+        /**.
        * *****************************
        * L I S T E N E R S
        * *****************************
@@ -93,11 +98,14 @@ var appWitch = {
                 dataType: "json",
                 data: JSON.stringify(selectedFormatId),
             }).done(function (response) {
-                if ('ok' !== response) {
+                if ($.type(response) === "string") {
                     console.log(response)
+                    console.log(typeof(response))
                     alert(response)
                 } else {
                     console.log('Ajouté au panier');
+                    console.log(response);
+                    appWitch.cartPastille.text(response)
                 }
             }).fail(function (jqXHR, textStatus, error) {
                 console.log(jqXHR);

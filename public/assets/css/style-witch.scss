@@ -45,6 +45,10 @@ HEADER
     display: block;
 }
 
+/*
+A N I M A T I O N    T I T L E
+*/
+
 .grid-witch {
     display: flex;
     justify-content: center;
@@ -103,6 +107,34 @@ HEADER
         width: 14px;
         height: 14px;
     }
+}
+
+/*
+C A R T   &    Q U A N T I T Y
+*/
+
+.witch-cart-header-container {
+    position: absolute;
+    right: 20px;
+    z-index: 3;
+}
+
+.user-witch-cart-quantity {
+    z-index: 6;
+    position: relative;
+    top: -6px;
+    right: -20px;
+    background-color: red;
+    color: var(--secondary-color);
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    text-align: center;
+}
+
+.user-witch-cart-quantity::after {
+    top: -4px;
+    right: 4px;
 }
 
 /**
