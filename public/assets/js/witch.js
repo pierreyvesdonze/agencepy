@@ -1,8 +1,7 @@
 // Mise à jour du statut des stocks au chargement
 $(document).ready(function () {
-    appWitch.updateStock()
-
-  
+    let initSelectedStock = $('.witch-format-select :selected').data('stock');
+    appWitch.updateStock(initSelectedStock);
 })
 
 var appWitch = {
@@ -11,6 +10,7 @@ var appWitch = {
 
         console.log('initWitch');
         
+        // Maj du panier
         appWitch.currentQuantity = $('.user-witch-cart-quantity').data('quantity');
         appWitch.cartPastille = $('.witch-pastille-quantity');
         
@@ -64,13 +64,12 @@ var appWitch = {
    * *****************************
    */
 
-    updateStock: function () {
+    updateStock: function (initSelectedStock) {
 
         var stockQuantity = $(this).find(':selected').data("stock");
-
         var stockStatus = $('#stock-status');
 
-        if (stockQuantity == 0) {
+        if (stockQuantity == 0 || initSelectedStock == 0) {
             stockStatus.removeClass().addClass('empty-stock');
             stockStatus.text("Rupture de stock");
         } else if (stockQuantity > 0 && stockQuantity <= 20) {
