@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Cart;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\RoleRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,17 +20,21 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class UserController extends AbstractController
 {
 
-    public function index()
+    private $em;
+
+    public function __construct(EntityManagerInterface $em)
     {
-        $projectDir = $this->getParameter('kernel.project_dir');
-        $adminEmail = $this->getParameter('app.admin_email');
+        $this->em = $em;
     }
 
     /**
      * @Route("/register/new", name="new", methods={"GET","POST"})
      */
-    public function new(Request $request, UserPasswordEncoderInterface $encoder, RoleRepository $roleRepository): Response
-    {
+    public function new(
+        Request $request,
+        UserPasswordEncoderInterface $encoder,
+        RoleRepository $roleRepository
+    ): Response {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
@@ -39,13 +45,17 @@ class UserController extends AbstractController
             $encodedPassword = $encoder->encodePassword($user, $plainPassword);
 
             $user->setPassword($encodedPassword);
+            $cart = new Cart;
+            $cart->setIsValid(false);
+            $user->setCart($cart);
 
             $role = $roleRepository->findOneByRoleString('ROLE_USER');
             $user->setRole($role);
+            
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
+            $this->em->persist($user);
+            $this->em->persist($cart);
+            $this->em->flush();
 
             $this->addFlash('success', 'Vous êtes enregistré. Vous pouvez désormais vous connecter.');
 
@@ -75,7 +85,10 @@ class UserController extends AbstractController
     /**
      * @Route("/edit", name="user_edit_profile", methods={"GET","POST"})
      */
-    public function edit(Request $request): Response
+    public function edit(
+        Request $request,
+        UserPasswordEncoderInterface $encoder
+        ): Response
     {
         $user = $this->getUser();
         $form = $this->createForm(UserType::class, $user);
@@ -84,7 +97,12 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $this->getDoctrine()->getManager()->flush();
+            $plainPassword = $form->get('password')->getData();
+            $encodedPassword = $encoder->encodePassword($user, $plainPassword);
+
+            $user->setPassword($encodedPassword);
+
+            $this->em->flush();
 
             $this->addFlash('success', 'Vos informations ont bien été modifiées');
 
@@ -97,15 +115,15 @@ class UserController extends AbstractController
         ]);
     }
 
-        /**
+    /**
      * @Route("/delete/{id}", name="user_delete", methods={"DELETE"})
      */
     public function delete(Request $request, User $user): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($user);
-            $entityManager->flush();
+        if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
+
+            $this->em->remove($user);
+            $this->em-- > flush();
         }
 
         $this->addFlash('success', 'Votre compte a bien été supprimé');

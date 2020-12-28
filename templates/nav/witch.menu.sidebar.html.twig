@@ -26,7 +26,7 @@
             <a href="{{ path('witch_cart') }}" class="ti-shopping-cart no-color-link">
             </a>
         </div>
-        {% if app.user %}
+        {% if app.user and app.user is defined and app.user is not null %}
         <div class="user-witch-cart-quantity" data-quantity="{{ app.user.cart.getNewArticles|length }}">
             <span class="witch-pastille-quantity">{{ app.user.cart.getNewArticles|length }}</span>
         </div>
