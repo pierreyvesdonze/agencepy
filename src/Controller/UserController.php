@@ -45,6 +45,7 @@ class UserController extends AbstractController
             $encodedPassword = $encoder->encodePassword($user, $plainPassword);
 
             $user->setPassword($encodedPassword);
+
             $cart = new Cart;
             $cart->setIsValid(false);
             $user->setCart($cart);
@@ -52,7 +53,6 @@ class UserController extends AbstractController
             $role = $roleRepository->findOneByRoleString('ROLE_USER');
             $user->setRole($role);
             
-
             $this->em->persist($user);
             $this->em->persist($cart);
             $this->em->flush();
@@ -67,7 +67,6 @@ class UserController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
 
     /**
      * @Route("/myprofile", name="user_profile", methods={"GET"})

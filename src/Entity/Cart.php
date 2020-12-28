@@ -30,7 +30,7 @@ class Cart
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity=Article::class, mappedBy="cart", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity=Article::class, mappedBy="cart", cascade={"persist", "remove"}, fetch="EAGER")
      */
     private $newArticles;
 

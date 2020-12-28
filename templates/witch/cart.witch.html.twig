@@ -4,12 +4,10 @@
 
 {% block body %}
 
-{% for article in cart %}
+{% for article in articles %}
 
 {{ article }}
     
 {% endfor %}
-
-{{ dump(cart) }}
 
 {% endblock %}

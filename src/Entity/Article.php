@@ -30,10 +30,26 @@ class Article
      */
     private $witchFormatId;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $quantity;
+
+    /**
+     * @ORM\Column(type="string", length=25)
+     */
+    private $name;
+
     public function __construct()
     {
         $this->witchFormat = new ArrayCollection();
     }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
+
 
     public function getId(): ?int
     {
@@ -60,6 +76,30 @@ class Article
     public function setWitchFormatId(int $witchFormatId): self
     {
         $this->witchFormatId = $witchFormatId;
+
+        return $this;
+    }
+
+    public function getQuantity(): ?int
+    {
+        return $this->quantity;
+    }
+
+    public function setQuantity(int $quantity): self
+    {
+        $this->quantity = $quantity;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
 
         return $this;
     }

@@ -61,7 +61,6 @@ class WitchController extends AbstractController
      */
     public function witchShopProduct(
         WitchProductRepository $witchProductRepository,
-        WitchFormatRepository $witchFormatRepository,
         WitchProduct $witchProduct
     ) {
         $product = $witchProductRepository->findOneBy([

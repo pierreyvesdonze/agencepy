@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Entity\Cart;
+use App\Repository\ArticleRepository;
+use App\Repository\CartRepository;
 use App\Repository\WitchFormatRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -30,7 +32,8 @@ class WitchCartController extends AbstractController
      */
     public function witchShopBuy(
         WitchFormatRepository $witchFormatRepository,
-        Request $request
+        Request $request,
+        ArticleRepository $articleRepository
 
     ): JsonResponse {
 
@@ -48,19 +51,44 @@ class WitchCartController extends AbstractController
 
             $witchProductId = $request->getContent();
 
+            // On cherche le format du produit
             $newWitchProduct = $witchFormatRepository->findOneBy([
                 'id' => $witchProductId
             ]);
 
-            $message = null; 
+            $existingProduct = $articleRepository->findOneBy([
+                'witchFormatId' => $newWitchProduct->getId()
+            ]);
+
+            $message = null;
             if ($newWitchProduct->getStock() > 0) {
-                $newArticle = new Article;
-                $newArticle->setCart($userCart);
-                $newArticle->setWitchFormatId($newWitchProduct->getId());
-                $userCart->addNewArticle($newArticle);
-                $this->em->persist($newArticle);
-                $this->em->flush();
-                $message = (int)count($userCart->getNewArticles());
+
+                if ($existingProduct) {
+                    $existingProduct->setQuantity($existingProduct->getQuantity() + 1);
+                    $this->em->flush();
+                } else {
+                    $newArticle = new Article;
+                    $newArticle->setCart($userCart);
+                    $newArticle->setWitchFormatId($newWitchProduct->getId());
+                    $newArticle->setQuantity(1);
+                    $newArticle->setName($newWitchProduct->getWitchProduct()->getName());
+                    $userCart->addNewArticle($newArticle);
+                    $this->em->persist($newArticle);
+                    $this->em->flush();
+
+                    // Gestion de la pastille indiquant la quantité d'articles dans le panier
+                    $message = (int)count($userCart->getNewArticles());
+
+                    // // Gestion de la pastille indiquant la quantité d'articles dans le panier
+                    // $quantity = $userCart->getQuantity();
+                    // $totalArticlesArray = [];
+                    // foreach ($quantity as $key => $article) {
+                    //     $totalArticlesArray[$key] = $article;
+                    // }
+
+                    // // $message = array_sum($totalArticlesArray);
+                    // $message =  array_sum(array_column($totalArticlesArray, $key));
+                }
             } else {
                 $message = $this->translator->trans('stock.unavailable');
             }
@@ -72,13 +100,20 @@ class WitchCartController extends AbstractController
     /**
      * @Route("/witch/cart", name="witch_cart")
      */
-    public function witchCart(Request $request): Response
-    {
+    public function witchCart(
+        Request $request,
+        ArticleRepository $articleRepository
+    ): Response {
         $user = $this->getUser();
-        $cart = 'cart';
+        $cart = $user->getCart();
+
+        $articles = $articleRepository->findAllArticlesByCart($cart->getId());
+
+        dump($articles);
 
         return $this->render('witch/cart.witch.html.twig', [
-            'cart' => $cart
+            'cart' => $cart,
+            'articles' => $articles
         ]);
     }
 
