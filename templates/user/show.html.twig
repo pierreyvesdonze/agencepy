@@ -1,36 +1,54 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Profil perso
+{% block title %}Mon compte
 {% endblock %}
 
 {% block body %}
-	<div class="myprofile">
-		<div class="avatar-profile">
-			<img src="{{ asset('uploads/images/' ~ user.brochureFilename) }}" alt="avatar">
-		</div>
+<!--***************************NAV****************************-->
+{% include "nav/witch.menu.sidebar.html.twig" %}
 
-		<table class="table">
-			<tbody>
-				<tr>
-					<th>Pseudo</th>
-					<td>{{ user.username }}</td>
-				</tr>
-				<tr>
-					<th>Email</th>
-					<td>{{ user.email }}</td>
-				</tr>
-			</tbody>
-		</table>
+<div class="witch-user-div">
+	<h4>Mon compte</h4>
+	<hr class="hr">
+	<table class="table-user">
+		<tbody>
+			<tr>
+				<th>Pseudo</th>
+				<td>{{ user.username }}</td>
+			</tr>
+			<tr>
+				<th>Email</th>
+				<td>{{ user.email }}</td>
+			</tr>
+			<tr>
+				<th>Tél.</th>
+				<td>{{ user.phoneNumber }}</td>
+			</tr>
+			<tr>
+				<th>Rue/Avenue/Boulevard...</th>
+				<td>{{ user.streetAddress }}</td>
+			</tr>
+			<tr>
+				<th>Numéro de voie</th>
+				<td>{{ user.numberStreetAddress }}</td>
+			</tr>
+			<tr>
+				<th>Code Postal</th>
+				<td>{{ user.postalCode }}</td>
+			</tr>
+			<tr>
+				<th>Ville</th>
+				<td>{{ user.town }}</td>
+			</tr>
+		</tbody>
+	</table>
 
-		<hr class="hr">
+	<hr class="hr">
 
-		<div class="control">
-			<a href="{{ path('user_edit_profile') }}" class="button">
-				<img src="{{ asset('assets/images/settings.png') }}" alt="update">
+	<div class="flex center-div space-evenly">
+			<a href="{{ path('user_edit_profile') }}" class="button">Modifier
 			</a>
-
-			{{ include('user/_delete_form.html.twig') }}
-		</div>
-
+		{{ include('user/_delete_form.html.twig') }}
 	</div>
+</div>
 {% endblock %}

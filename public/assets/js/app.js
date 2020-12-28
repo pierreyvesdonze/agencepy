@@ -79,11 +79,11 @@ var app = {
 
     // On va chercher par le biais de input hidden les routes correspondantes, pour ne pas avoir à redéfinir le comportement de collapsible()
     let target = $('.hidden-route').data('route');
-    console.log(target);
 
     switch (target) {
       case target = "witch-home":
         $('#collapseOne').toggleClass('active').toggleClass('collapse');
+        console.log('home');
 
         anime({
           targets: '.flex-team',

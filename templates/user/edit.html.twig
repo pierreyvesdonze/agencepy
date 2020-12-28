@@ -4,16 +4,20 @@
 {% endblock %}
 
 {% block body %}
-	<div class="cards">
+<!--***************************NAV****************************-->
+{% include "nav/witch.menu.sidebar.html.twig" %}
+
+	<div class="witch-user-div edit">
 		<hr class="hr">
-		<h1>Éditer</h1>
+		<h2>Éditer</h2>
 		<div class="my-form-control">
 			{{ form_start(form) }}
 			{{ form_widget(form) }}
-			<div class="container-button">
+			<div class="button">
 				<button class="button-save">{{ button_label|default('Enregistrer') }}</button>
 			</div>
 			{{ form_end(form) }}
 		</div>
 	</div>
+	<hr class="hr">
 {% endblock %}

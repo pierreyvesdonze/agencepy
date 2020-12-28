@@ -88,8 +88,6 @@ var appWitch = {
         let userSelectForm = $(".witch-format-select");
         let selectedFormatId = userSelectForm.find(':selected').data("format");
 
-        console.log(selectedFormatId)
-
         $.ajax(
             {
                 url: Routing.generate('witch_shop_buy'),
@@ -99,7 +97,6 @@ var appWitch = {
             }).done(function (response) {
                 if ($.type(response) === "string") {
                     console.log(response)
-                    console.log(typeof(response))
                     alert(response)
                 } else {
                     console.log('Ajouté au panier');

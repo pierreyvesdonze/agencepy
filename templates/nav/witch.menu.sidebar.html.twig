@@ -12,7 +12,7 @@
             <button class="ti-user witch-dropdown-button {% if app.user %}logged-in{% endif %}"></button>
             <div class="witch-dropdown-content">
                 {% if app.user %}
-                <a href="#">Mon compte</a>
+                <a href="{{ path('user_profile') }}">Mon compte</a>
                 <a href="#">Mes commandes</a>
                 <a href="{{ path('app_logout') }}"
                     onclick="return confirm('Souhaitez-vous vous déconnecter ?')">Déconnexion</a>

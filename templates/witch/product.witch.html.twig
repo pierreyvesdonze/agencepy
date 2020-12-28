@@ -17,8 +17,8 @@
                 class="witch-bottle" />
         </div>
     </div>
-    <div class="right-witch-product flex el">
-        <h2>{{ product.witchCategory }}</h2>
+    <div class="right-witch-product {{ product.classSelector }} flex el">
+        <h2 class="witch-product-title">{{ product.witchCategory }}</h2>
         <hr class="hr">
         <form class="witch-buy-form flex" method="POST">
             <label for="format-select">Format</label>

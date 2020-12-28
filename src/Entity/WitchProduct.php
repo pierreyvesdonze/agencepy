@@ -45,6 +45,11 @@ class WitchProduct
      */
     private $productImgPath;
 
+    /**
+     * @ORM\Column(type="string", length=25)
+     */
+    private $classSelector;
+
     public function __construct()
     {
         $this->witchFormats = new ArrayCollection();
@@ -141,6 +146,18 @@ class WitchProduct
     public function setProductImgPath(?string $productImgPath): self
     {
         $this->productImgPath = $productImgPath;
+
+        return $this;
+    }
+
+    public function getClassSelector(): ?string
+    {
+        return $this->classSelector;
+    }
+
+    public function setClassSelector(string $classSelector): self
+    {
+        $this->classSelector = $classSelector;
 
         return $this;
     }

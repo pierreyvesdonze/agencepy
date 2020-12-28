@@ -86,6 +86,8 @@ class UserController extends AbstractController
 
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash('success', 'Vos informations ont bien été modifiées');
+
             return $this->redirectToRoute('user_profile');
         }
 
@@ -106,6 +108,8 @@ class UserController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('event_list');
+        $this->addFlash('success', 'Votre compte a bien été supprimé');
+
+        return $this->redirectToRoute('witch_home');
     }
 }

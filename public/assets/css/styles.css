@@ -45,6 +45,12 @@ section * {
   margin: auto;
 }
 
+.space-evenly {
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
 .main-title {
   margin-top: 0.5em;
   text-align: center;
@@ -348,6 +354,10 @@ LOGIN / REGISTER
       -ms-flex-direction: column;
           flex-direction: column;
   justify-self: center;
+}
+
+.table-user {
+  margin: auto;
 }
 
 /**
