@@ -1,7 +1,9 @@
-// Mise à jour du statut des stocks au chargement
+// Mise à jour des status stock & panier au chargement
 $(document).ready(function () {
     let initSelectedStock = $('.witch-format-select :selected').data('stock');
     appWitch.updateStock(initSelectedStock);
+
+    appWitch.updatePastille()
 })
 
 var appWitch = {
@@ -9,11 +11,11 @@ var appWitch = {
     initWitch: function () {
 
         console.log('initWitch');
-        
+
         // Maj du panier
         appWitch.currentQuantity = $('.user-witch-cart-quantity').data('quantity');
         appWitch.cartPastille = $('.witch-pastille-quantity');
-        
+
         /**.
        * *****************************
        * L I S T E N E R S
@@ -38,6 +40,7 @@ var appWitch = {
 
         // PRODUCT SHOP WITCH ANIMATION
         $(document).ready(function () {
+
             anime({
                 targets: '.witch-products .right-witch-product',
                 translateX: 250,
@@ -100,9 +103,25 @@ var appWitch = {
                     alert(response)
                 } else {
                     console.log('Ajouté au panier');
-                    console.log(response);
-                    appWitch.cartPastille.text(response)
+                    appWitch.updatePastille();
                 }
+            }).fail(function (jqXHR, textStatus, error) {
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(error);
+            });
+    },
+
+    updatePastille: function() {
+        $.ajax(
+            {
+                url: Routing.generate('witch_cart_pastille'),
+                method: "POST",
+                dataType: "json",
+                data: 'rien',
+            }).done(function (response) {
+                console.log(response)
+                appWitch.cartPastille.text(response)
             }).fail(function (jqXHR, textStatus, error) {
                 console.log(jqXHR);
                 console.log(textStatus);

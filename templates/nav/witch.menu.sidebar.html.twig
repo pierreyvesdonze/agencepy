@@ -27,19 +27,20 @@
             </a>
         </div>
         {% if app.user and app.user is defined and app.user is not null %}
+{# 
+        {% set newArticle = app.user.cart.getArticles %}
+        {% set quantity = [] %}
+        {% for key, article in newArticle %}
 
-        {# {% dump app.user.cart.getNewArticles %} #}
-        {# {% set quantity = [] %}
-        {% for key, article in app.user.cart.getNewArticles %}
-
-        {% quantity[] = article.quantity %}
+        {% set quantity = [article.quantity] %}
 
         {% endfor %}
-        {% dump(quantity) %} #}
+        {% dump(newArticle) %} 
+        {% dump(quantity) %}  #}
 
 
-        <div class="user-witch-cart-quantity" data-quantity="{{ app.user.cart.getNewArticles|length }}">
-            <span class="witch-pastille-quantity">{{ app.user.cart.getNewArticles|length }}</span>
+        <div class="user-witch-cart-quantity" data-quantity="{{ app.user.cart.getArticles|length }}">
+            <span class="witch-pastille-quantity"></span>
         </div>
         {% endif %}
     </div>

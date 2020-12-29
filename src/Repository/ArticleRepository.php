@@ -20,7 +20,7 @@ class ArticleRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return WitchFormat[] Returns an array of WitchFormat objects
+     * @return Article[] Returns an array of Article objects
      */
 
     public function findAllArticlesByCart($cart)
@@ -29,9 +29,29 @@ class ArticleRepository extends ServiceEntityRepository
             ->andWhere('a.cart = :val')
             ->setParameter('val', $cart)
             ->getQuery()
-            ->getResult();
+            ->getArrayResult();
     }
-    
+
+   public function countNbProducts($cart): int
+    {
+        $articles = $this->createQueryBuilder('a')
+        ->select('SUM(a.quantity) AS totalQuantity')
+        ->where('a.cart = :cart')
+        ->setParameter('cart', $cart)
+        ->getQuery()
+        ->getResult();
+
+    if (null !== $articles) {
+        if (null != $articles[0]['totalQuantity']) {
+            return $articles[0]['totalQuantity'];
+        }
+    }
+
+    return 0;
+
+    }
+
+
 
     /*
     public function findOneBySomeField($value): ?Article

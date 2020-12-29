@@ -4,10 +4,12 @@
 
 {% block body %}
 
-{% for article in articles %}
+<section class="witch-cart flex">
+    {% for article in cart.getArticles %}
 
-{{ article }}
-    
-{% endfor %}
+    {{ article.name }}
+        
+    {% endfor %}
+</section>
 
 {% endblock %}

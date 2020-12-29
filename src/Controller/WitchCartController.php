@@ -72,22 +72,13 @@ class WitchCartController extends AbstractController
                     $newArticle->setWitchFormatId($newWitchProduct->getId());
                     $newArticle->setQuantity(1);
                     $newArticle->setName($newWitchProduct->getWitchProduct()->getName());
-                    $userCart->addNewArticle($newArticle);
+                    $userCart->addArticle($newArticle);
                     $this->em->persist($newArticle);
                     $this->em->flush();
 
                     // Gestion de la pastille indiquant la quantité d'articles dans le panier
-                    $message = (int)count($userCart->getNewArticles());
-
-                    // // Gestion de la pastille indiquant la quantité d'articles dans le panier
-                    // $quantity = $userCart->getQuantity();
-                    // $totalArticlesArray = [];
-                    // foreach ($quantity as $key => $article) {
-                    //     $totalArticlesArray[$key] = $article;
-                    // }
-
-                    // // $message = array_sum($totalArticlesArray);
-                    // $message =  array_sum(array_column($totalArticlesArray, $key));
+                    // $message = (int)count($userCart->getNewArticles());
+                    $message = ('voir autre fonction');
                 }
             } else {
                 $message = $this->translator->trans('stock.unavailable');
@@ -95,6 +86,30 @@ class WitchCartController extends AbstractController
 
             return new JsonResponse($message);
         }
+    }
+
+    /**
+     * @Route("/witch/cart/pastille", name="witch_cart_pastille", methods={"GET","POST"}, options={"expose"=true})
+     */
+    public function updateCartPastille()
+    {
+        $user = $this->getUser();
+        $cartId = $user->getCart()->getId();
+
+        $cart = $this->getDoctrine()
+            ->getRepository(Cart::class)
+            ->find($cartId);
+
+        $articles = $cart->getArticles();
+       
+        $totalArticlesArray = [];
+        foreach ($articles as $key => $value) {
+            $totalArticlesArray[] = $value->getQuantity();
+        }
+
+        $message = (int)array_sum($totalArticlesArray);
+
+        return new JsonResponse($message);
     }
 
     /**
@@ -107,13 +122,8 @@ class WitchCartController extends AbstractController
         $user = $this->getUser();
         $cart = $user->getCart();
 
-        $articles = $articleRepository->findAllArticlesByCart($cart->getId());
-
-        dump($articles);
-
         return $this->render('witch/cart.witch.html.twig', [
             'cart' => $cart,
-            'articles' => $articles
         ]);
     }
 

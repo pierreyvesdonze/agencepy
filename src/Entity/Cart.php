@@ -32,17 +32,16 @@ class Cart
     /**
      * @ORM\OneToMany(targetEntity=Article::class, mappedBy="cart", cascade={"persist", "remove"}, fetch="EAGER")
      */
-    private $newArticles;
+    private $articles;
 
     public function __construct()
     {
-        $this->witchFormats = new ArrayCollection();
-        $this->newArticles = new ArrayCollection();
+        $this->articles = new ArrayCollection();
     }
 
     public function __toString()
     {
-        return $this->id;
+        return $this->user->getUsername();
     }
 
     public function getId(): ?int
@@ -77,27 +76,27 @@ class Cart
     /**
      * @return Collection|Article[]
      */
-    public function getNewArticles(): Collection
+    public function getArticles(): Collection
     {
-        return $this->newArticles;
+        return $this->articles;
     }
 
-    public function addNewArticle(Article $newArticle): self
+    public function addArticle(Article $article): self
     {
-        if (!$this->newArticles->contains($newArticle)) {
-            $this->newArticles[] = $newArticle;
-            $newArticle->setCart($this);
+        if (!$this->articles->contains($article)) {
+            $this->articles[] = $article;
+            $article->setCart($this);
         }
 
         return $this;
     }
 
-    public function removeNewArticle(Article $newArticle): self
+    public function removeArticle(Article $article): self
     {
-        if ($this->newArticles->removeElement($newArticle)) {
+        if ($this->articles->removeElement($article)) {
             // set the owning side to null (unless already changed)
-            if ($newArticle->getCart() === $this) {
-                $newArticle->setCart(null);
+            if ($article->getCart() === $this) {
+                $article->setCart(null);
             }
         }
 

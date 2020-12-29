@@ -20,7 +20,7 @@ class Article
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Cart::class, inversedBy="newArticles")
+     * @ORM\ManyToOne(targetEntity=Cart::class, inversedBy="articles", fetch="EAGER")
      * @ORM\JoinColumn(nullable=false)
      */
     private $cart;
