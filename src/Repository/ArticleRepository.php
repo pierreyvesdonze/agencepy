@@ -20,35 +20,36 @@ class ArticleRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return Article[] Returns an array of Article objects
+     * @return Article
      */
-
-    public function findAllArticlesByCart($cart)
+    public function findByFormatAndUserCart($cart, $witchFormat)
     {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.cart = :val')
-            ->setParameter('val', $cart)
+            ->where('a.cart = :valCart')
+            ->having('a.witchFormatId = :valFormatId')
+            ->setParameter('valCart', $cart)
+            ->setParameter('valFormatId', $witchFormat)
+            ->setMaxResults(1)
             ->getQuery()
-            ->getArrayResult();
+            ->getResult();
     }
 
-   public function countNbProducts($cart): int
+    public function countNbProducts($cart): int
     {
         $articles = $this->createQueryBuilder('a')
-        ->select('SUM(a.quantity) AS totalQuantity')
-        ->where('a.cart = :cart')
-        ->setParameter('cart', $cart)
-        ->getQuery()
-        ->getResult();
+            ->select('SUM(a.quantity) AS totalQuantity')
+            ->where('a.cart = :cart')
+            ->setParameter('cart', $cart)
+            ->getQuery()
+            ->getResult();
 
-    if (null !== $articles) {
-        if (null != $articles[0]['totalQuantity']) {
-            return $articles[0]['totalQuantity'];
+        if (null !== $articles) {
+            if (null != $articles[0]['totalQuantity']) {
+                return $articles[0]['totalQuantity'];
+            }
         }
-    }
 
-    return 0;
-
+        return 0;
     }
 
 

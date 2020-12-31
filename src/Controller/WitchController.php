@@ -2,12 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Cart;
 use App\Entity\WitchProduct;
-use App\Form\Type\WitchAddToCartType;
-use App\Form\Type\WitchFormatCollectionType;
-use App\Form\Type\WitchFormatType;
-use App\Repository\WitchFormatRepository;
 use App\Repository\WitchProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -61,7 +56,8 @@ class WitchController extends AbstractController
      */
     public function witchShopProduct(
         WitchProductRepository $witchProductRepository,
-        WitchProduct $witchProduct
+        WitchProduct $witchProduct,
+        Request $request
     ) {
         $product = $witchProductRepository->findOneBy([
             'id' => $witchProduct->getId()
@@ -69,7 +65,7 @@ class WitchController extends AbstractController
 
         $user = $this->getUser();
 
-        if (null == $user) {
+        if (null === $user) {
             $customMessage = $this->translator->trans('login.cart_need_login');
             return $this->redirectToRoute('app_login');
         } else {

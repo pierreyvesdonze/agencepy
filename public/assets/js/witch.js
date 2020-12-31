@@ -14,7 +14,9 @@ var appWitch = {
 
         // Maj du panier
         appWitch.currentQuantity = $('.user-witch-cart-quantity').data('quantity');
+
         appWitch.cartPastille = $('.witch-pastille-quantity');
+
 
         /**.
        * *****************************

@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Article;
 use App\Entity\Cart;
 use App\Repository\ArticleRepository;
-use App\Repository\CartRepository;
 use App\Repository\WitchFormatRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -37,17 +36,9 @@ class WitchCartController extends AbstractController
 
     ): JsonResponse {
 
-        $user = $this->getUser();
-
         if ($request->isMethod('POST')) {
-            if (null === $user->getCart()) {
-                $userCart = new Cart;
-                $userCart->setIsValid(false);
-                $user->setCart($userCart);
-                $this->em->persist($userCart);
-            } else {
-                $userCart = $user->getCart();
-            }
+            $user = $this->getUser();
+            $userCart = $user->getCart();
 
             $witchProductId = $request->getContent();
 
@@ -56,15 +47,17 @@ class WitchCartController extends AbstractController
                 'id' => $witchProductId
             ]);
 
-            $existingProduct = $articleRepository->findOneBy([
-                'witchFormatId' => $newWitchProduct->getId()
-            ]);
+            // On vérifie si le produit existe déjà dans le panier de l'utilisateur
+            $formatId = $newWitchProduct->getId();
+            $cartId = $userCart->getId();
+            $fetchExistingProduct = $articleRepository->findByFormatAndUserCart($cartId, $formatId);
 
             $message = null;
             if ($newWitchProduct->getStock() > 0) {
 
-                if ($existingProduct) {
-                    $existingProduct->setQuantity($existingProduct->getQuantity() + 1);
+                if ($fetchExistingProduct) {
+                    $article = $fetchExistingProduct[0];
+                    $article->setQuantity($article->getQuantity() + 1);
                     $this->em->flush();
                 } else {
                     $newArticle = new Article;
@@ -76,14 +69,12 @@ class WitchCartController extends AbstractController
                     $this->em->persist($newArticle);
                     $this->em->flush();
 
-                    // Gestion de la pastille indiquant la quantité d'articles dans le panier
-                    // $message = (int)count($userCart->getNewArticles());
-                    $message = ('voir autre fonction');
+                    // On fait un test sur la création d'un nouvel Article;
+                    $message = ('Nouvel article créé');
                 }
             } else {
                 $message = $this->translator->trans('stock.unavailable');
             }
-
             return new JsonResponse($message);
         }
     }
@@ -93,15 +84,11 @@ class WitchCartController extends AbstractController
      */
     public function updateCartPastille()
     {
-        $user = $this->getUser();
-        $cartId = $user->getCart()->getId();
-
-        $cart = $this->getDoctrine()
-            ->getRepository(Cart::class)
-            ->find($cartId);
-
+        $user     = $this->getUser();
+        $cartId   = $user->getCart()->getId();
+        $cart     = $this->getDoctrine()->getRepository(Cart::class)->find($cartId);
         $articles = $cart->getArticles();
-       
+
         $totalArticlesArray = [];
         foreach ($articles as $key => $value) {
             $totalArticlesArray[] = $value->getQuantity();
