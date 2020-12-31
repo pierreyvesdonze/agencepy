@@ -7,27 +7,73 @@
 <!--***************************NAV****************************-->
 {% include "nav/witch.menu.sidebar.html.twig" %}
 
-<div class="witch-user-div">
-    <h4>Mon panier</h4>
-    <hr class="hr">
-    <table class="table-user">
-        <tbody>
-            
-            {% for article in cart.getArticles %}
-            <tr>
-                <th>
-                    Article
+<section class="scrollable-auto">
+    <div class="witch-user-div">
+        <h4>Mon panier</h4>
+        <hr class="hr">
+        <table class="u-full-width">
+            <thead>
+                <tr>
+                    <th>Article</th>
+                    <th>Format</th>
+                    <th>Quantité</th>
+                    <th>Prix unitaire</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for article in cart.getArticles %}
+                <tr>
                     <td>
-                    {{ article.name }} - {{ article.witchFormat }} ml - {{ article.quantity }}
-                </td>
-                </th>
-            </tr>
-        </tbody>
+                        {{ article.name }}
+                    </td>
+                    <td>
+                        {{ article.articleSize }} ml
+                    </td>
+                    <td><span class="ti-minus minus-plus-red"></span>{{ article.quantity }}<span class="ti-plus minus-plus-green"></span></td>
+                    <td>{{ article.articlePrice }} €</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th>TOTAL</th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><b>{{ totalPrice }} €</b></td>
+                </tr>
+            </tfoot>
+        </table>
 
-        <section class="witch-cart flex">
 
 
-            {% endfor %}
-        </section>
 
-        {% endblock %}
+        <div class="buy-witch-product">
+            {# <a href="{{ path('witch_shop_product', {'id':product.id } ) }}"> #}
+                <a href="#">
+                    <p>
+                        <span class="bg-witch-buy"></span>
+                        <span class="base-witch-buy"></span>
+                        <span class="text-witch-buy">{{ 'cart.confirm'|trans }}</span>
+                    </p>
+                </a>
+        </div>
+        <div class="buy-witch-product">
+            <a href="{{ path('witch_home') }}">
+                <p>
+                    <span class="bg-witch-buy"></span>
+                    <span class="base-witch-buy"></span>
+                    <span class="text-witch-buy">{{ 'cart.continue'|trans }}</span>
+                </p>
+            </a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
