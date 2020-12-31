@@ -1,15 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Witch Cart{% endblock %}
+{% block title %}Mon panier
+{% endblock %}
 
 {% block body %}
+<!--***************************NAV****************************-->
+{% include "nav/witch.menu.sidebar.html.twig" %}
 
-<section class="witch-cart flex">
-    {% for article in cart.getArticles %}
+<div class="witch-user-div">
+    <h4>Mon panier</h4>
+    <hr class="hr">
+    <table class="table-user">
+        <tbody>
+            
+            {% for article in cart.getArticles %}
+            <tr>
+                <th>
+                    Article
+                    <td>
+                    {{ article.name }} - {{ article.witchFormat }} ml - {{ article.quantity }}
+                </td>
+                </th>
+            </tr>
+        </tbody>
 
-    {{ article.name }}
-        
-    {% endfor %}
-</section>
+        <section class="witch-cart flex">
 
-{% endblock %}
+
+            {% endfor %}
+        </section>
+
+        {% endblock %}

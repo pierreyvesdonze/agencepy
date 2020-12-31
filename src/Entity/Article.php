@@ -40,6 +40,16 @@ class Article
      */
     private $name;
 
+    /**
+     * @ORM\Column(type="string", length=20)
+     */
+    private $articleSize;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $articlePrice;
+
     public function __construct()
     {
         $this->witchFormat = new ArrayCollection();
@@ -100,6 +110,30 @@ class Article
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getArticleSize(): ?string
+    {
+        return $this->articleSize;
+    }
+
+    public function setArticleSize(string $articleSize): self
+    {
+        $this->articleSize = $articleSize;
+
+        return $this;
+    }
+
+    public function getArticlePrice(): ?int
+    {
+        return $this->articlePrice;
+    }
+
+    public function setArticlePrice(int $articlePrice): self
+    {
+        $this->articlePrice = $articlePrice;
 
         return $this;
     }

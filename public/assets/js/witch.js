@@ -100,7 +100,7 @@ var appWitch = {
                 dataType: "json",
                 data: JSON.stringify(selectedFormatId),
             }).done(function (response) {
-                if ($.type(response) === "string") {
+                if ($.type(response) === "string" && response != 'Nouvel article créé') {
                     console.log(response)
                     alert(response)
                 } else {

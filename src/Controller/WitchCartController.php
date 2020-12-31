@@ -43,6 +43,8 @@ class WitchCartController extends AbstractController
             $witchProductId = $request->getContent();
 
             // On cherche le format du produit
+            
+            /**@var WitchFormat $newWitchProduct */
             $newWitchProduct = $witchFormatRepository->findOneBy([
                 'id' => $witchProductId
             ]);
@@ -63,6 +65,8 @@ class WitchCartController extends AbstractController
                     $newArticle = new Article;
                     $newArticle->setCart($userCart);
                     $newArticle->setWitchFormatId($newWitchProduct->getId());
+                    $newArticle->setArticleSize($newWitchProduct->getSize());
+                    $newArticle->setArticlePrice($newWitchProduct->getPrice());
                     $newArticle->setQuantity(1);
                     $newArticle->setName($newWitchProduct->getWitchProduct()->getName());
                     $userCart->addArticle($newArticle);
@@ -106,8 +110,15 @@ class WitchCartController extends AbstractController
         Request $request,
         ArticleRepository $articleRepository
     ): Response {
-        $user = $this->getUser();
+        if (null !== $this->getUser()) {
+            $user = $this->getUser();
+        } else {
+            return $this->redirectToRoute('app_login');
+        }
+
+        /**@var Cart $cart */
         $cart = $user->getCart();
+        dump($cart->getArticles());
 
         return $this->render('witch/cart.witch.html.twig', [
             'cart' => $cart,
