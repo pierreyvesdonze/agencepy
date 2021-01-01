@@ -55,7 +55,11 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><b>{{ totalPrice }} €</b></td>
+                    <td>
+                        <input class="total-articles-price" data-total-price={{ totalPrice }} value="{{ totalPrice }}">
+                            {# {{ totalPrice }} #}
+                   €
+                    </td>
                 </tr>
             </tfoot>
         </table>

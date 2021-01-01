@@ -13,6 +13,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\Encoder\JsonEncode;
 
 class WitchCartController extends AbstractController
 {
@@ -155,14 +156,25 @@ class WitchCartController extends AbstractController
 	): JsonResponse {
 
 		if ($request->isMethod('POST')) {
-			$data = json_decode($request->getContent(), true);
-			$idFromAjax = $data['id'];
+			$data             = json_decode($request->getContent(), true);
+			$idFromAjax       = $data['id'];
 			$quantityFromAjax = $data['quantity'];
+			$type             = $data['type'];
+			$productPrice     = $data['productPrice'];
+			$currentTotal     = $data['currentTotal'];
 
 			/**@Article $articleToUpdate */
 			$articleToUpdate = $articleRepository->findOneBy([
 				'id' => $idFromAjax
 			]);
+
+			if ($type === 'increase') {
+				$newTotal = $currentTotal + $productPrice;
+			}
+
+			if ($type === 'decrease') {
+				$newTotal = $currentTotal - $productPrice;
+			}
 
 			if (0 === $quantityFromAjax) {
 
@@ -170,8 +182,15 @@ class WitchCartController extends AbstractController
 			}
 
 			$articleToUpdate->setQuantity($quantityFromAjax);
+			$this->em->persist($articleToUpdate);
 			$this->em->flush();
+
+			$response = json_encode([
+				'currentTotal' => $currentTotal,
+				'newTotal' => $newTotal
+			]);
 		}
+
 
 		return new JsonResponse('oki');
 	}
