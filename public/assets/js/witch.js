@@ -150,8 +150,6 @@ var appWitch = {
         // On calcule le nouveau total
         var newTotalCart = parseInt(currentTotalPrice) + productPrice;
 
-   
-
         var dataToSend = {
             'id': productId,
             'quantity': quantityValue,
@@ -169,22 +167,12 @@ var appWitch = {
                 data: JSON.stringify(dataToSend),
             }).done(function (response) {
 
-                // let parsedResponse = JSON.parse(response)
-                // let currentTotal = parsedResponse.currentTotal;
-                // let newTotal = parsedResponse.newTotal;
-
                 // Maj de la pastille
                 appWitch.updatePastille();
 
                 // Maj du total du panier
                 $('.total-articles-price').val(newTotalCart)
 
-                // anime({
-                //     targets: '.total-articles-price input',
-                //     value: [currentTotal, newTotal],
-                //     round: 1,
-                //     easing: 'easeInOutExpo'
-                // });
 
             }).fail(function (jqXHR, textStatus, error) {
                 console.log(jqXHR);
@@ -202,8 +190,8 @@ var appWitch = {
             quantityData = $(product),
             quantityValue = parseInt(quantityData.text()),
             productPrice = product.data('price'),
-            totalPriceData = $('.total-articles-price').data('total-price');
-            currentTotalPrice = $('.total-articles-price');
+            // totalPriceData = $('.total-articles-price').data('total-price');
+            currentTotalPrice = $('.total-articles-price').val();
 
 
         // On décrémente de un la valeur et si elle passe à 0 on alerte l'utilisateur
@@ -214,26 +202,31 @@ var appWitch = {
             let confirmDelete = confirm("Voulez-vous supprimer l'article de votre panier ?")
             if (confirmDelete != false) {
                 product.closest('.article-cartline').remove()
+                console.log(currentTotalPrice)
+                
+                if ($('.witch-pastille-quantity').text(0)) {
+                    console.log('pouet')
+                    window.location.reload()
+                }
+
             } else {
                 return false;
             }
         } else if (quantityValue === 0) {
-            currentTotalPrice.val(productPrice)
+            $('.total-articles-price').val(productPrice)
             product.closest('.article-cartline').remove()
         }
 
         quantityData.text(quantityValue)
        
         // On calcule le nouveau total
-        var newTotalCart = parseInt(currentTotalPrice.val()) - productPrice;
-
-   
+        var newTotalCart = parseInt(currentTotalPrice) - productPrice;
 
          var dataToSend = {
             'id': productId,
             'quantity': quantityValue,
-            'type': 'increase',
-            'currentTotal' : totalPriceData,
+            'type': 'decrease',
+            'currentTotal' : currentTotalPrice,
             'productPrice' : productPrice
         }
 
@@ -250,14 +243,7 @@ var appWitch = {
                 appWitch.updatePastille();
 
                 // Maj du total du panier
-                $('.total-articles-price').text(newTotalCart)
-
-                // anime({
-                //     targets: '.total-articles-price',
-                //     value: [$('.total-articles-price').val(), newTotalCart],
-                //     round: 1,
-                //     easing: 'easeInOutExpo'
-                // });
+                $('.total-articles-price').val(newTotalCart)
 
             }).fail(function (jqXHR, textStatus, error) {
                 console.log(jqXHR);

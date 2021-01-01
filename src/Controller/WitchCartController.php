@@ -123,6 +123,11 @@ class WitchCartController extends AbstractController
 		$arr = [];
 		foreach ($articles as $key => $article) {
 
+			if ($article->getQuantity() === 0) {
+				$this->em->remove($article);
+				$this->em->flush();
+			}
+
 			/**@var Article $article */
 			$arr[$key] = $article->getArticlePrice() * $article->getQuantity();
 		}
