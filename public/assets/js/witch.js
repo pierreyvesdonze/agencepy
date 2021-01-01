@@ -18,14 +18,15 @@ var appWitch = {
         appWitch.cartPastille = $('.witch-pastille-quantity');
 
 
-        /**.
+        /**
        * *****************************
        * L I S T E N E R S
        * *****************************
        */
 
         $('.witch-format-select').on('change', appWitch.updateStock);
-        $('.buy-witch').on('click', appWitch.buyWitchProduct)
+        $('.buy-witch').on('click', appWitch.buyWitchProduct);
+        $('.minus-plus-red').on('click', appWitch.decreaseQuantity);
 
 
         // MAIN TITLE WITCH ANIMATION
@@ -58,9 +59,7 @@ var appWitch = {
                 loop: false,
                 easing: 'spring(1, 80, 10, 0)'
             });
-
         });
-
     },
 
     /**
@@ -114,7 +113,7 @@ var appWitch = {
             });
     },
 
-    updatePastille: function() {
+    updatePastille: function () {
         $.ajax(
             {
                 url: Routing.generate('witch_cart_pastille'),
@@ -129,12 +128,60 @@ var appWitch = {
                 console.log(textStatus);
                 console.log(error);
             });
+    },
+
+    decreaseQuantity: function (e) {
+        e.preventDefault();
+
+        let product = $(this).next('.witch-cart-quantity');
+        let productId = product.data('id');
+        let quantityData = $(product);
+        let quantityValue = parseInt(quantityData.text());
+        let productPriceData = product.data('price');
+
+        // On décrémente de un la valeur et si elle passe à 0 on alerte l'utilisateur
+        quantityValue -= 1;
+        quantityData.text(quantityValue)
+
+        // On supprime la ligne du panier en front
+        if (0 === quantityValue) {
+            let confirmDelete = confirm("Voulez-vous supprimer l'article de votre panier ?")
+            if (confirmDelete === true) {
+                product.closest('.article-cartline').remove()
+            }
+        }
+
+        var dataToSend = {
+            'id': productId,
+            'quantity': quantityValue
+        }
+
+        $.ajax(
+            {
+                url: Routing.generate('witch_cart_update'),
+                method: "POST",
+                dataType: "json",
+                data: JSON.stringify(dataToSend),
+            }).done(function (response) {
+                console.log(response)
+                
+                // Maj de la pastille
+                appWitch.updatePastille();
+
+
+            }).fail(function (jqXHR, textStatus, error) {
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(error);
+            });
+
+        console.log(product);
+        console.log(productId);
+        console.log(quantityData);
+        console.log(quantityValue);
+        console.log(productPriceData);
     }
-
-
 }
 
-// App Loading
-document.addEventListener(
-    'DOMContentLoaded',
-    appWitch.initWitch)
+// AppWitch Loading
+document.addEventListener('DOMContentLoaded', appWitch.initWitch)

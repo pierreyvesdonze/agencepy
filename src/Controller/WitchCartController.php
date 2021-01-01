@@ -43,7 +43,7 @@ class WitchCartController extends AbstractController
 			$witchProductId = $request->getContent();
 
 			// On cherche le format du produit
-			
+
 			/**@var WitchFormat $newWitchProduct */
 			$newWitchProduct = $witchFormatRepository->findOneBy([
 				'id' => $witchProductId
@@ -106,10 +106,8 @@ class WitchCartController extends AbstractController
 	/**
 	 * @Route("/witch/cart", name="witch_cart")
 	 */
-	public function witchCart(
-		Request $request,
-		ArticleRepository $articleRepository
-	): Response {
+	public function witchCart(): Response
+	{
 		if (null !== $this->getUser()) {
 			$user = $this->getUser();
 		} else {
@@ -146,5 +144,47 @@ class WitchCartController extends AbstractController
 	): JsonResponse {
 
 		return new JsonResponse('oki');
+	}
+
+	/**
+	 * @Route("/witch/cart/update", name="witch_cart_update", methods={"GET","POST"}, options={"expose"=true})
+	 */
+	public function witchShopUpdateCart(
+		Request $request,
+		ArticleRepository $articleRepository
+	): JsonResponse {
+
+		if ($request->isMethod('POST')) {
+			$data = json_decode($request->getContent(), true);
+			$idFromAjax = $data['id'];
+			$quantityFromAjax = $data['quantity'];
+
+			/**@Article $articleToUpdate */
+			$articleToUpdate = $articleRepository->findOneBy([
+				'id' => $idFromAjax
+			]);
+
+			if (0 === $quantityFromAjax) {
+
+				$this->em->remove($articleToUpdate);
+			}
+
+			$articleToUpdate->setQuantity($quantityFromAjax);
+			$this->em->flush();
+		}
+
+		return new JsonResponse('oki');
+	}
+
+	/**
+	 * @Route("/witch/article/delete", name="witch_article_delete", methods={"GET","POST"})
+	 */
+	public function removeArticle(Article $article)
+	{
+
+		$this->em->remove($article);
+		$this->em->flush();
+
+		return new JsonResponse('oki');;
 	}
 }
