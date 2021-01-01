@@ -26,7 +26,8 @@ var appWitch = {
 
         $('.witch-format-select').on('change', appWitch.updateStock);
         $('.buy-witch').on('click', appWitch.buyWitchProduct);
-        $('.minus-plus-red').on('click', appWitch.decreaseQuantity);
+        $('.minus-plus-green').on('click', appWitch.increaseCartQuantity);
+        $('.minus-plus-red').on('click', appWitch.decreaseCartQuantity);
 
 
         // MAIN TITLE WITCH ANIMATION
@@ -130,30 +131,24 @@ var appWitch = {
             });
     },
 
-    decreaseQuantity: function (e) {
+    increaseCartQuantity: function (e) {
+        console.log(e);
         e.preventDefault();
 
-        let product = $(this).next('.witch-cart-quantity');
+        let product = $(this).prev('.witch-cart-quantity');
         let productId = product.data('id');
         let quantityData = $(product);
         let quantityValue = parseInt(quantityData.text());
         let productPriceData = product.data('price');
 
-        // On décrémente de un la valeur et si elle passe à 0 on alerte l'utilisateur
-        quantityValue -= 1;
+        // On met à jour la valeur 
+        quantityValue += 1;
         quantityData.text(quantityValue)
-
-        // On supprime la ligne du panier en front
-        if (0 === quantityValue) {
-            let confirmDelete = confirm("Voulez-vous supprimer l'article de votre panier ?")
-            if (confirmDelete === true) {
-                product.closest('.article-cartline').remove()
-            }
-        }
 
         var dataToSend = {
             'id': productId,
-            'quantity': quantityValue
+            'quantity': quantityValue,
+            'type' : 'increase'
         }
 
         $.ajax(
@@ -174,12 +169,55 @@ var appWitch = {
                 console.log(textStatus);
                 console.log(error);
             });
+    },
 
-        console.log(product);
-        console.log(productId);
-        console.log(quantityData);
-        console.log(quantityValue);
-        console.log(productPriceData);
+    decreaseCartQuantity: function (e) {
+        console.log(e);
+        e.preventDefault();
+
+        let product = $(this).next('.witch-cart-quantity');
+        let productId = product.data('id');
+        let quantityData = $(product);
+        let quantityValue = parseInt(quantityData.text());
+        let productPriceData = product.data('price');
+
+        // On décrémente de un la valeur et si elle passe à 0 on alerte l'utilisateur
+        quantityValue -= 1;
+
+        // On supprime la ligne du panier en front
+        if (0 === quantityValue) {
+            let confirmDelete = confirm("Voulez-vous supprimer l'article de votre panier ?")
+            if (confirmDelete === true) {
+                product.closest('.article-cartline').remove()
+            }
+        } else {
+            quantityData.text(quantityValue)
+        }
+
+        var dataToSend = {
+            'id': productId,
+            'quantity': quantityValue,
+            'type' : 'decrease'
+        }
+
+        $.ajax(
+            {
+                url: Routing.generate('witch_cart_update'),
+                method: "POST",
+                dataType: "json",
+                data: JSON.stringify(dataToSend),
+            }).done(function (response) {
+                console.log(response)
+                
+                // Maj de la pastille
+                appWitch.updatePastille();
+
+
+            }).fail(function (jqXHR, textStatus, error) {
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(error);
+            });
     }
 }
 
