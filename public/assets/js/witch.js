@@ -25,6 +25,7 @@ var appWitch = {
        * *****************************
        */
 
+        $('.witch-shop-nav').on('click', appWitch.LeftPanel);
         $('.witch-format-select').on('change', appWitch.updateStock);
         $('.buy-witch').on('click', appWitch.buyWitchProduct);
         $('.minus-plus-green').on('click', appWitch.increaseCartQuantity);
@@ -69,6 +70,13 @@ var appWitch = {
    * F U N C T I O N S
    * *****************************
    */
+
+    LeftPanel: function (params) {
+
+        console.log('anim')
+
+    },
+
 
     updateStock: function (initSelectedStock) {
 
@@ -154,8 +162,8 @@ var appWitch = {
             'id': productId,
             'quantity': quantityValue,
             'type': 'increase',
-            'currentTotal' : currentTotalPrice,
-            'productPrice' : productPrice
+            'currentTotal': currentTotalPrice,
+            'productPrice': productPrice
         }
 
 
@@ -203,7 +211,7 @@ var appWitch = {
             if (confirmDelete != false) {
                 product.closest('.article-cartline').remove()
                 console.log(currentTotalPrice)
-                
+
                 if ($('.witch-pastille-quantity').text(0)) {
                     console.log('pouet')
                     window.location.reload()
@@ -218,16 +226,16 @@ var appWitch = {
         }
 
         quantityData.text(quantityValue)
-       
+
         // On calcule le nouveau total
         var newTotalCart = parseInt(currentTotalPrice) - productPrice;
 
-         var dataToSend = {
+        var dataToSend = {
             'id': productId,
             'quantity': quantityValue,
             'type': 'decrease',
-            'currentTotal' : currentTotalPrice,
-            'productPrice' : productPrice
+            'currentTotal': currentTotalPrice,
+            'productPrice': productPrice
         }
 
         $.ajax(

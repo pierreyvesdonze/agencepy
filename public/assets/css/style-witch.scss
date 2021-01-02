@@ -9,40 +9,209 @@ HEADER
 .witch-header {
     height: 300px;
     position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
     text-align: center;
     background-color: var(--primary-color);
 }
 
-.witch-dropdown-button {
-    border: none;
-    cursor: pointer;
+.witch-nav{
+    width: 33.3%;
 }
 
-.witch-dropdown-content {
-    display: none;
-    position: absolute;
-    right: 0;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+#menuToggle {
+    display: block;
+    position: relative;
+    top: 30px;
+    left: 30px;
+
     z-index: 1;
+
+    -webkit-user-select: none;
+    user-select: none;
 }
 
-.witch-dropdown-content a {
-    color: var(--primary-color);
-    padding: 12px 16px;
+#menuToggle a {
     text-decoration: none;
-    display: block;
+    color: #232323;
+
+    transition: color 0.3s ease;
 }
 
-.witch-dropdown-content a:hover {
-    background-color: #f1f1f1;
+#menuToggle a:hover {
+    color: tomato;
 }
-.witch-dropdown-user:hover .witch-dropdown-content {
+
+#menuToggle input {
     display: block;
+    width: 40px;
+    height: 32px;
+    position: absolute;
+    top: -7px;
+    left: -5px;
+
+    cursor: pointer;
+
+    opacity: 0; /* hide this */
+    z-index: 2; /* and place it over the hamburger */
+
+    -webkit-touch-callout: none;
+}
+
+/*
+ * Just a quick hamburger
+ */
+#menuToggle span {
+    display: block;
+    width: 33px;
+    height: 4px;
+    margin-bottom: 5px;
+    position: relative;
+
+    background: #cdcdcd;
+    border-radius: 3px;
+
+    z-index: 1;
+
+    transform-origin: 4px 0px;
+
+    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
+        opacity 0.55s ease;
+}
+
+#menuToggle span:first-child {
+    transform-origin: 0% 0%;
+}
+
+#menuToggle span:nth-last-child(2) {
+    transform-origin: 0% 100%;
+}
+
+/* 
+ * Transform all the slices of hamburger
+ * into a crossmark.
+ */
+#menuToggle input:checked ~ span {
+    opacity: 1;
+    transform: rotate(45deg) translate(-2px, -1px);
+    background: #232323;
+}
+
+/*
+ * But let's hide the middle one.
+ */
+#menuToggle input:checked ~ span:nth-last-child(3) {
+    opacity: 0;
+    transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+/*
+ * Ohyeah and the last one should go the other direction
+ */
+#menuToggle input:checked ~ span:nth-last-child(2) {
+    transform: rotate(-45deg) translate(0, -1px);
+}
+
+/*
+ * Make this absolute positioned
+ * at the top left of the screen
+ */
+#menu {
+    position: absolute;
+    width: 230px;
+    margin: -100px 0 0 -50px;
+    padding: 50px;
+    padding-top: 125px;
+
+    background: #ededed;
+    list-style-type: none;
+    -webkit-font-smoothing: antialiased;
+    /* to stop flickering of text in safari */
+
+    transform-origin: 0% 0%;
+    transform: translate(-100%, 0);
+
+    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+}
+
+#menu li {
+    padding: 10px 0;
+    font-size: 22px;
+}
+
+/*
+ * And let's slide it in from the left
+ */
+#menuToggle input:checked ~ ul {
+    transform: none;
+}
+
+/*
+C A R T   &    Q U A N T I T Y
+*/
+
+.witch-cart-header-container {
+    position: absolute;
+    right: 2%;
+    z-index: 3;
+}
+
+.user-witch-cart-quantity {
+    z-index: 6;
+    position: fixed;
+    right: 1%;
+    background-color: red;
+    color: var(--secondary-color);
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    text-align: center;
+}
+
+.user-witch-cart-quantity::after {
+    top: -4px;
+    right: 4px;
+}
+
+// .witch-dropdown-button {
+//     border: none;
+//     cursor: pointer;
+// }
+
+// .witch-dropdown-content {
+//     display: none;
+//     position: absolute;
+//     right: 0;
+//     background-color: #f9f9f9;
+//     min-width: 160px;
+//     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+//     z-index: 1;
+// }
+
+// .witch-dropdown-content a {
+//     color: var(--primary-color);
+//     padding: 12px 16px;
+//     text-decoration: none;
+//     display: block;
+// }
+
+// .witch-dropdown-content a:hover {
+//     background-color: #f1f1f1;
+// }
+// .witch-dropdown-user:hover .witch-dropdown-content {
+//     display: block;
+// }
+
+.invisible-separator-header {
+    height: 70px;
 }
 
 /*
@@ -107,34 +276,6 @@ A N I M A T I O N    T I T L E
         width: 14px;
         height: 14px;
     }
-}
-
-/*
-C A R T   &    Q U A N T I T Y
-*/
-
-.witch-cart-header-container {
-    position: absolute;
-    right: 25px;
-    z-index: 3;
-}
-
-.user-witch-cart-quantity {
-    z-index: 6;
-    position: relative;
-    top: -6px;
-    right: -20px;
-    background-color: red;
-    color: var(--secondary-color);
-    border-radius: 50%;
-    width: 22px;
-    height: 22px;
-    text-align: center;
-}
-
-.user-witch-cart-quantity::after {
-    top: -4px;
-    right: 4px;
 }
 
 /**
@@ -328,6 +469,11 @@ SHOP SEARCH BAR / NAV
 ***********************************
 */
 
+.witch-search {
+    position: fixed;
+    left: 50%;
+}
+
 .witch-shop-nav {
     justify-content: space-between;
     padding: 2em;
@@ -363,7 +509,6 @@ USER / EDIT
 }
 
 .witch-user-div.edit {
-
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -376,7 +521,6 @@ USER / EDIT
 .table-user {
     margin: auto;
 }
-
 
 /**
 //////////////////////////////////////
@@ -393,7 +537,7 @@ S H O P
 }
 
 .witch-product-title {
-    letter-spacing: .8em;
+    letter-spacing: 0.8em;
 }
 
 .left-witch-product,
@@ -425,14 +569,12 @@ S H O P
     }
 }
 
-
 .right-witch-product.pink-selector {
     background: linear-gradient(90deg, rgba(101, 189, 171, 0) 0%, #cf1f3ca3 100%);
 }
-.right-witch-product.yellow-selector{
+.right-witch-product.yellow-selector {
     background: linear-gradient(90deg, rgba(101, 189, 171, 0) 0%, #dab736 100%);
 }
-
 
 .witch-buy-form {
     flex-direction: column;

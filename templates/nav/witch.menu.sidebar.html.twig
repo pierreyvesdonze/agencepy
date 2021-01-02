@@ -1,48 +1,64 @@
-<nav class="witch-shop-nav flex">
-    <div class="search">
-        {{ render(controller('App\\Controller\\SearchController::searchBarAction')) }}
-    </div>
-    <div class="witch-title-nav flex">
-        <a href="{{ path('witch_home') }}">
-            <h1>W I T CH</h1>
-        </a>
-    </div>
-    <div class="right-nav-menu-witch">
-        <div class="witch-dropdown-user">
-            <button class="ti-user witch-dropdown-button {% if app.user %}logged-in{% endif %}"></button>
-            <div class="witch-dropdown-content">
-                {% if app.user %}
-                <a href="{{ path('user_profile') }}">Mon compte</a>
-                <a href="#">Mes commandes</a>
-                <a href="{{ path('app_logout') }}"
-                    onclick="return confirm('Souhaitez-vous vous déconnecter ?')">Déconnexion</a>
-                {% else %}
-                <a href="{{ path('app_login') }}" class="no-color-link">Connexion</span>
-                </a>
-                {% endif %}
-            </div>
-        </div>
-        <div class="witch-cart-header-container">
-            <a href="{{ path('witch_cart') }}" class="ti-shopping-cart no-color-link">
+<nav role="navigation" class="witch-nav">
+    <div id="menuToggle">
+        <input type="checkbox" />
+
+        <span></span>
+        <span></span>
+        <span></span>
+
+        <ul id="menu">
+            <a href="{{ path('witch_home') }}">
+                <li>Accueil</li>
             </a>
-        </div>
-        {% if app.user and app.user is defined and app.user is not null %}
-{# 
-        {% set newArticle = app.user.cart.getArticles %}
-        {% set quantity = [] %}
-        {% for key, article in newArticle %}
+            <a href="{{ path('witch_shop') }}">
+                <li>
+                    Boutique
+                </li>
+            </a>
 
-        {% set quantity = [article.quantity] %}
-
-        {% endfor %}
-        {% dump(newArticle) %} 
-        {% dump(quantity) %}  #}
-
-
-        <div class="user-witch-cart-quantity" data-quantity="{{ app.user.cart.getArticles|length }}">
-            <span class="witch-pastille-quantity"></span>
-        </div>
-        {% endif %}
+            {% if app.user %}
+            <a href="{{ path('user_profile') }}">
+                <li>
+                    Mon compte
+                </li>
+            </a>
+            <a href="#">
+                <li>
+                    Mes commandes
+                </li>
+            </a>
+            <a href="{{ path('app_logout') }}"
+                onclick="return confirm('Souhaitez-vous vous déconnecter ?')">
+                <li>
+                    Déconnexion
+                </li>
+            </a>
+            {% else %}
+            <a href="{{ path('app_login') }}" class="no-color-link">
+                <li>
+                    Connexion
+                </li>
+            </a>
+            {% endif %}
+         
+            <a href="https://erikterwan.com/" target="_blank">
+                <li>Show me more</li>
+            </a>
+        </ul>
     </div>
-
 </nav>
+<div class="witch-search">
+    {{ render(controller('App\\Controller\\SearchController::searchBarAction')) }}
+</div>
+
+<div class="witch-cart-header-container">
+    <a href="{{ path('witch_cart') }}" class="ti-shopping-cart no-color-link">
+    </a>
+</div>
+
+<div class="user-witch-cart-quantity" data-quantity="{{ app.user.cart.getArticles|length }}">
+  
+    <span class="witch-pastille-quantity"></span>
+</div>
+
+<div class="invisible-separator-header"></div>
