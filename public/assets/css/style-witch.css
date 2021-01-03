@@ -454,8 +454,9 @@ C A R T   &    Q U A N T I T Y
 
 .user-witch-cart-quantity {
   z-index: 6;
-  position: fixed;
+  position: absolute;
   right: 1%;
+  top: 1%;
   background-color: red;
   color: var(--secondary-color);
   border-radius: 50%;
@@ -803,7 +804,7 @@ SHOP SEARCH BAR / NAV
 ***********************************
 */
 .witch-search {
-  position: fixed;
+  position: absolute;
   left: 50%;
 }
 
@@ -873,6 +874,12 @@ USER / EDIT
 S H O P
 //////////////////////////////////////
 */
+.container-witch-shop {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 .witch-title-nav a {
   color: var(--primary-color) !important;
 }
@@ -891,7 +898,7 @@ S H O P
 .right-witch-product {
   width: 50%;
   position: relative;
-  border-radius: 0 13px 12px 0;
+  border-radius: 0 13px 13px 0;
 }
 
 .left-witch-product {
@@ -928,7 +935,8 @@ S H O P
   }
 }
 
-.right-witch-product.pink-selector {
+.right-witch-product.pink-selector,
+.product-shop.pink-selector {
   background: -webkit-gradient(linear, left top, right top, from(rgba(101, 189, 171, 0)), to(#cf1f3ca3));
   background: linear-gradient(90deg, rgba(101, 189, 171, 0) 0%, #cf1f3ca3 100%);
 }
@@ -936,6 +944,74 @@ S H O P
 .right-witch-product.yellow-selector {
   background: -webkit-gradient(linear, left top, right top, from(rgba(101, 189, 171, 0)), to(#dab736));
   background: linear-gradient(90deg, rgba(101, 189, 171, 0) 0%, #dab736 100%);
+}
+
+.product-shop.pink-selector {
+  width: 50%;
+  position: relative;
+  border-radius: 0 13px 13px 0;
+  right: 0%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-top: 1px solid var(--primary-color);
+  border-right: 1px solid var(--primary-color);
+  border-bottom: 1px solid var(--primary-color);
+  margin-right: 50px;
+  padding: 2em;
+  -webkit-box-shadow: inset -5px 0px 6px -4px #010202;
+          box-shadow: inset -5px 0px 6px -4px #010202;
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+  .product-shop.pink-selector {
+    right: -40px;
+  }
+}
+
+@media (min-width: 300px) and (max-width: 576px) {
+  .product-shop.pink-selector {
+    right: 40px;
+  }
+}
+
+.product-shop.yellow-selector {
+  width: 50%;
+  position: relative;
+  border-radius: 13px 0 0 13px;
+  background: -webkit-gradient(linear, left top, right top, from(#dbb83a), to(rgba(219, 184, 58, 0)));
+  background: linear-gradient(90deg, #dbb83a 0%, rgba(219, 184, 58, 0) 100%);
+  left: 6%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-top: 1px solid var(--primary-color);
+  border-left: 1px solid var(--primary-color);
+  border-bottom: 1px solid var(--primary-color);
+  margin-right: 50px;
+  padding: 2em;
+  -webkit-box-shadow: inset 5px 0px 4px -2px #010202;
+          box-shadow: inset 5px 0px 4px -2px #010202;
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+  .product-shop.yellow-selector {
+    left: 30px;
+  }
+}
+
+@media (min-width: 300px) and (max-width: 576px) {
+  .product-shop.yellow-selector {
+    left: 30px;
+  }
 }
 
 .witch-buy-form {

@@ -6,7 +6,37 @@
 
 <!--***************************NAV****************************-->
 {% include "nav/witch.menu.sidebar.html.twig" %}
+{% for product in witchProducts %}
 
 
+<div class="container-witch-shop flex">
+    {# <div class="left-witch-product-shop">
+        <img src="{{ asset('assets/images/' ~ product.productImgPath ~ '.png') }}" alt="{{ product.name }}"
+            class="witch-bottle" />
+    </div> #}
 
+    <div class="product-shop {{ product.classSelector }} flex el">
+        <h2 class="witch-product-title">{{ product.witchCategory }}</h2>
+        <hr class="hr">
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti quisquam modi nam voluptatibus deserunt
+            distinctio inventore iure voluptatem recusandae itaque dignissimos quia amet dolore eius eveniet, possimus
+            illo consectetur velit!
+        </p>
+        <br>
+        <div class="buy-witch-product">
+            <a href="{{ path('witch_shop_product', {'id':product.id } ) }}">
+                <p>
+                    <span class="bg-witch-buy"></span>
+                    <span class="base-witch-buy"></span>
+                    <span class="text-witch-buy">{{ 'product.watch'|trans }}</span>
+                </p>
+            </a>
+        </div>
+    </div>
+</div>
+
+<br>
+
+{% endfor %}
 {% endblock %}

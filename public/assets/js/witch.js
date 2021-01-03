@@ -44,7 +44,27 @@ var appWitch = {
             });
         });
 
-        // PRODUCT SHOP WITCH ANIMATION
+        //SHOP ANIMATION
+        $(document).ready(function () {
+
+            anime({
+                targets: '.container-witch-shop .product-shop.pink-selector',
+                translateX: ['0%', '60%'],
+                direction: 'alternate',
+                loop: false,
+                easing: 'spring(1, 80, 10, 0)'
+            });
+
+            anime({
+                targets: '.container-witch-shop .product-shop.yellow-selector',
+                translateX: ['70%', '0%'],
+                direction: 'alternate',
+                loop: false,
+                easing: 'spring(1, 80, 10, 0)'
+            });
+        });
+        
+        // PRODUCT WITCH ANIMATION
         $(document).ready(function () {
 
             anime({
