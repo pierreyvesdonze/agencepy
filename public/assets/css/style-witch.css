@@ -4,8 +4,8 @@ COLORS
 ***********************************
 */
 :root {
-  --primary-color: #000000;
-  --secondary-color: #ffffff;
+  --primary-color: #222222;
+  --secondary-color: #f1eaea;
   --title-color: #002140;
   --font-color-white: #cecece;
   --font-color-dark: #3b3b3b;
@@ -22,6 +22,14 @@ GENERAL
 */
 *:focus {
   outline: none;
+}
+
+*::-moz-selection {
+  text-shadow: 1px 1px 0 #4094f3;
+}
+
+*::selection {
+  text-shadow: 1px 1px 0 #4094f3;
 }
 
 html,
@@ -324,7 +332,7 @@ HEADER
 
 #menuToggle a {
   text-decoration: none;
-  color: #232323;
+  color: var(--secondary-color);
   -webkit-transition: color 0.3s ease;
   transition: color 0.3s ease;
 }
@@ -357,7 +365,7 @@ HEADER
   height: 4px;
   margin-bottom: 5px;
   position: relative;
-  background: #cdcdcd;
+  background: var(--primary-color);
   border-radius: 3px;
   z-index: 1;
   -webkit-transform-origin: 4px 0px;
@@ -386,7 +394,7 @@ HEADER
   opacity: 1;
   -webkit-transform: rotate(45deg) translate(-2px, -1px);
           transform: rotate(45deg) translate(-2px, -1px);
-  background: #232323;
+  background: var(--secondary-color);
 }
 
 /*
@@ -416,7 +424,7 @@ HEADER
   margin: -100px 0 0 -50px;
   padding: 50px;
   padding-top: 125px;
-  background: #ededed;
+  background: var(--primary-color);
   list-style-type: none;
   -webkit-font-smoothing: antialiased;
   /* to stop flickering of text in safari */
@@ -678,6 +686,10 @@ PARFUM RESUME
   }
 }
 
+.justify-txt-img {
+  text-align: justify;
+}
+
 .witch-bottle {
   width: 160px;
 }
@@ -692,6 +704,18 @@ PARFUM RESUME
   .witch-bottle {
     display: none;
   }
+}
+
+.witch-bottle-small.pink-selector {
+  width: 50px;
+  float: left;
+  padding-right: 1.5em;
+}
+
+.witch-bottle-small.yellow-selector {
+  width: 50px;
+  float: right;
+  padding-left: 1.5em;
 }
 
 .em-witch {
@@ -950,7 +974,7 @@ S H O P
   width: 50%;
   position: relative;
   border-radius: 0 13px 13px 0;
-  right: 0%;
+  right: -6%;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -958,10 +982,12 @@ S H O P
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  border-top: 1px solid var(--primary-color);
-  border-right: 1px solid var(--primary-color);
-  border-bottom: 1px solid var(--primary-color);
-  margin-right: 50px;
+  border-left: 0 !important;
+  border-right: none !important;
+  border-width: 1px;
+  -o-border-image: linear-gradient(to left, var(--witch-pink), rgba(0, 0, 0, 0)) 1 100%;
+     border-image: -webkit-gradient(linear, right top, left top, from(var(--witch-pink)), to(rgba(0, 0, 0, 0))) 1 100%;
+     border-image: linear-gradient(to left, var(--witch-pink), rgba(0, 0, 0, 0)) 1 100%;
   padding: 2em;
   -webkit-box-shadow: inset -5px 0px 6px -4px #010202;
           box-shadow: inset -5px 0px 6px -4px #010202;
@@ -993,10 +1019,12 @@ S H O P
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  border-top: 1px solid var(--primary-color);
-  border-left: 1px solid var(--primary-color);
-  border-bottom: 1px solid var(--primary-color);
-  margin-right: 50px;
+  border-left: none !important;
+  border-right: none !important;
+  border-width: 1px;
+  -o-border-image: linear-gradient(to right, var(--witch-yellow), rgba(0, 0, 0, 0)) 1 100%;
+     border-image: -webkit-gradient(linear, left top, right top, from(var(--witch-yellow)), to(rgba(0, 0, 0, 0))) 1 100%;
+     border-image: linear-gradient(to right, var(--witch-yellow), rgba(0, 0, 0, 0)) 1 100%;
   padding: 2em;
   -webkit-box-shadow: inset 5px 0px 4px -2px #010202;
           box-shadow: inset 5px 0px 4px -2px #010202;

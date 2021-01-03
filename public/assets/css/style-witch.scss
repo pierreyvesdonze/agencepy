@@ -41,7 +41,7 @@ HEADER
 
 #menuToggle a {
     text-decoration: none;
-    color: #232323;
+    color: var(--secondary-color);
 
     transition: color 0.3s ease;
 }
@@ -75,7 +75,7 @@ HEADER
     height: 4px;
     margin-bottom: 5px;
     position: relative;
-    background: #cdcdcd;
+    background: var(--primary-color);
     border-radius: 3px;
     z-index: 1;
 
@@ -100,7 +100,7 @@ HEADER
 #menuToggle input:checked ~ span {
     opacity: 1;
     transform: rotate(45deg) translate(-2px, -1px);
-    background: #232323;
+    background: var(--secondary-color);
 }
 
 /*
@@ -128,15 +128,12 @@ HEADER
     margin: -100px 0 0 -50px;
     padding: 50px;
     padding-top: 125px;
-
-    background: #ededed;
+    background: var(--primary-color);
     list-style-type: none;
     -webkit-font-smoothing: antialiased;
     /* to stop flickering of text in safari */
-
     transform-origin: 0% 0%;
     transform: translate(-100%, 0);
-
     transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
 }
 
@@ -371,6 +368,10 @@ PARFUM RESUME
     }
 }
 
+.justify-txt-img {
+    text-align: justify;
+}
+
 .witch-bottle {
     width: 160px;
     @include sm {
@@ -379,6 +380,18 @@ PARFUM RESUME
     @include xs {
         display: none;
     }
+}
+
+.witch-bottle-small.pink-selector {
+    width: 50px;
+    float: left;
+    padding-right: 1.5em;
+}
+
+.witch-bottle-small.yellow-selector {
+    width: 50px;
+    float: right;
+    padding-left: 1.5em;
 }
 
 .em-witch {
@@ -576,24 +589,25 @@ S H O P
 .product-shop.pink-selector {
     background: linear-gradient(90deg, rgba(101, 189, 171, 0) 0%, #cf1f3ca3 100%);
 }
-.right-witch-product.yellow-selector
-{
+.right-witch-product.yellow-selector {
     background: linear-gradient(90deg, rgba(101, 189, 171, 0) 0%, #dab736 100%);
 }
-
-   
 
 .product-shop.pink-selector {
     width: 50%;
     position: relative;
     border-radius: 0 13px 13px 0;
-    right: 0%;
+    right: -6%;
     flex-direction: column;
     justify-content: center;
-    border-top: 1px solid var(--primary-color);
-    border-right: 1px solid var(--primary-color);
-    border-bottom: 1px solid var(--primary-color);
-    margin-right: 50px;
+    // border-top: 1px solid var(--primary-color);
+    // border-right: 1px solid var(--primary-color);
+    // border-bottom: 1px solid var(--primary-color);
+    border-left: 0 !important;
+    border-right: none !important;
+    border-width: 1px;
+    // border-style: solid;
+    border-image: linear-gradient(to left, var(--witch-pink), rgba(0, 0, 0, 0)) 1 100%;
     padding: 2em;
     box-shadow: inset -5px 0px 6px -4px #010202;
     @include sm {
@@ -608,14 +622,18 @@ S H O P
     width: 50%;
     position: relative;
     border-radius: 13px 0 0 13px;
-    background: linear-gradient(90deg, rgba(219,184,58,1) 0%, rgba(219,184,58,0) 100%);
+    background: linear-gradient(90deg, rgba(219, 184, 58, 1) 0%, rgba(219, 184, 58, 0) 100%);
     left: 6%;
     flex-direction: column;
     justify-content: center;
-    border-top: 1px solid var(--primary-color);
-    border-left: 1px solid var(--primary-color);
-    border-bottom: 1px solid var(--primary-color);
-    margin-right: 50px;
+    // border-top: 1px solid var(--primary-color);
+    // border-left: 1px solid var(--primary-color);
+    // border-bottom: 1px solid var(--primary-color);
+    border-left: none !important;
+    border-right: none !important;
+    border-width: 1px;
+    // border-style: solid;
+    border-image: linear-gradient(to right, var(--witch-yellow), rgba(0, 0, 0, 0)) 1 100%;
     padding: 2em;
     box-shadow: inset 5px 0px 4px -2px #010202;
     @include sm {

@@ -4,8 +4,8 @@ COLORS
 ***********************************
 */
 :root {
-  --primary-color: #000000;
-  --secondary-color: #ffffff;
+  --primary-color: #222222;
+  --secondary-color: #f1eaea;
   --title-color: #002140;
   --font-color-white: #cecece;
   --font-color-dark: #3b3b3b;
@@ -23,6 +23,10 @@ GENERAL
 
 *:focus {
   outline: none;
+}
+
+*::selection {
+  text-shadow: 1px 1px 0 #4094f3;
 }
 
 html,
