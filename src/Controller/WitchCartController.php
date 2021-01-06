@@ -201,14 +201,25 @@ class WitchCartController extends AbstractController
 	}
 
 	/**
-	 * @Route("/witch/article/delete", name="witch_article_delete", methods={"GET","POST"})
+	 * @Route("/witch/article/remove/", name="article_remove_from_cart", methods={"GET","POST"}, requirements={"id"="\d+"}, options={"expose"=true})
 	 */
-	public function removeArticle(Article $article)
+	public function removeArticle(
+		Request $request,
+		ArticleRepository $articleRepository
+		)
 	{
+		if ($request->isMethod('POST')) {
 
-		$this->em->remove($article);
-		$this->em->flush();
+			$articleId = $request->getContent();
+			$article = $articleRepository->findOneBy([
+				'id' => $articleId
+			]);
 
+			$this->em->remove($article);
+			$this->em->flush();
+			$message = $this->translator->trans('cart.cancel');
+		}
+			
 		return new JsonResponse('oki');;
 	}
 }

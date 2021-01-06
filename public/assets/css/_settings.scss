@@ -183,6 +183,8 @@ li {
 }
 
 .active {
+  z-index: 250;
+  position: relative !important;
   flex-wrap: wrap;
   justify-content: center;
   height: auto;

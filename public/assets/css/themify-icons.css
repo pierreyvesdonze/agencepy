@@ -40,6 +40,11 @@
 	color: red;
 }
 
+.remove-article {
+	color: red;
+	cursor: pointer;
+}
+
 .icon-custom {
 	-webkit-transition: .3s ease-in-out;
 	transition: .3s ease-in-out;

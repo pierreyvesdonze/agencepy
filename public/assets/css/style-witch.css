@@ -199,6 +199,8 @@ li {
 }
 
 .active {
+  z-index: 250;
+  position: relative !important;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   -webkit-box-pack: center;
