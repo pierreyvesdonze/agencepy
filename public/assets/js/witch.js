@@ -31,6 +31,7 @@ var appWitch = {
         $('.minus-plus-green').on('click', appWitch.increaseCartQuantity);
         $('.minus-plus-red').on('click', appWitch.decreaseCartQuantity);
         $('.remove-article').on('click', appWitch.removeArticleFromCart);
+        $('#witch_order_save').on('keyup', appWitch.checkCardNumber)
 
 
         // MAIN TITLE WITCH ANIMATION
@@ -328,6 +329,15 @@ var appWitch = {
                 console.log(textStatus);
                 console.log(error);
             });
+    },
+
+    checkCardNumber: function (params) {
+        input = $('.fakeCardNumber').val();
+        console.log(input)
+        console.log(typeof(input))
+        if ('integer' !== typeof(params.currentTarget.value)) {
+            alert('Le numéro de carte bleue est invalide')
+        }
     }
 }
 

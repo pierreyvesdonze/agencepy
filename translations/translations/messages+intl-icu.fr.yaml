@@ -9,6 +9,9 @@ cart:
   confirm: Valider le panier
   continue: Continuer mes achats
   cancel: L'article a bien été retiré du panier !
+
+order:
+  invalid_card: Ce numéro de carte est invalide
   
 stock:
   has_stock: Stock

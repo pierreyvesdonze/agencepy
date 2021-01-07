@@ -10,7 +10,7 @@ COLORS
   --font-color-white: #cecece;
   --font-color-dark: #3b3b3b;
   --main-span-color: #e7b203;
-  --link-color: #1EAEDB;
+  --link-color: #1eaedb;
   --witch-pink: rgb(238, 42, 75);
   --witch-yellow: #c5ac48;
 }
@@ -222,7 +222,7 @@ FLASH MESSAGES / CUSTOM ALERT
 ***********************************
 */
 .flash-container {
-  top: 120px;
+  top: 4%;
   z-index: 2;
   position: fixed;
   display: -webkit-box;
@@ -239,8 +239,10 @@ FLASH MESSAGES / CUSTOM ALERT
 }
 
 .alert {
-  -webkit-box-shadow: 8px 8px 7px -2px rgba(0, 0, 0, 0.75);
-  box-shadow: 8px 8px 7px -2px rgba(0, 0, 0, 0.75);
+  height: auto;
+  width: 500px;
+  -webkit-box-shadow: 8px 8px 7px -2px rgba(0, 0, 0, 0.911);
+  box-shadow: 8px 8px 7px -2px rgba(0, 0, 0, 0.938);
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
@@ -251,7 +253,7 @@ FLASH MESSAGES / CUSTOM ALERT
   text-align: center;
   opacity: 0.8;
   font-size: 1.3em;
-  padding: 7%;
+  padding: 0.2em;
   border-radius: 9px;
 }
 
@@ -262,12 +264,17 @@ FLASH MESSAGES / CUSTOM ALERT
 }
 
 .close {
+  position: absolute;
+  right: 385px;
+  top: -10px;
+  z-index: 8;
   color: red !important;
   text-shadow: 0 1px 0 #000 !important;
   opacity: 1;
   background: none;
   border: none;
-  font-size: 2em;
+  font-size: 3.5em;
+  font-weight: 100;
 }
 
 .close:focus {

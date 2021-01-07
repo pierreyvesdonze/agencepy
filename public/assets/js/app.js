@@ -15,13 +15,15 @@ var app = {
 
     //ALERT MODAL
     app.close = $('.close').on('click', app.closeAlertModal);
+    app.flashContainer = $('.flash-container')
     app.modal = $('.alert-success');
     app.modalError = $('.alert-error');
     setTimeout(function () {
+      app.flashContainer.remove()
       app.modal.remove();
       app.modalError.remove();
       app.close.remove();
-    }, 6000);
+    }, 3000);
 
 
     /*
@@ -121,8 +123,10 @@ var app = {
   },
 
   closeAlertModal: function () {
+    $('.flash-container').remove();
     app.modal.remove();
-    app.close.remove();
+		app.modalError.remove();
+		app.close.remove();
   },
 
   /**

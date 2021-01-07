@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mon panier
+{% block title %}Récapitulatif de commande
 {% endblock %}
 
 {% block body %}
@@ -25,7 +25,7 @@
 
 <section class="scrollable-auto">
     <div class="witch-user-div">
-        <h4>Mon panier</h4>
+        <h4>Récapitulatif de commande</h4>
         <hr class="hr">
         <table class="u-full-width">
             <thead>
@@ -85,21 +85,16 @@
             </tfoot>
         </table>
 
-        {# <div class="buy-witch-product">
-            <a href="{{ path('witch_shop_product', {'id':product.id } ) }}">
-                <a href="#" class="submit-witch-cart">
+        <div class="buy-witch-product">
+            {# <a href="{{ path('witch_shop_product', {'id':product.id } ) }}"> #}
+                <a href="#">
                     <p>
                         <span class="bg-witch-buy"></span>
-                        <span class="base-witch-buy submit-witch-cart"></span>
-                        <span class="text-witch-buy">
-                        </span>
+                        <span class="base-witch-buy"></span>
+                        <span class="text-witch-buy">{{ 'cart.confirm'|trans }}</span>
                     </p>
                 </a>
-        </div> #}
-        {{ form_start(form) }}
-        {{ form_row(form.save) }}
-        {{ form_end(form) }}
-
+        </div>
         <div class="buy-witch-product">
             <a href="{{ path('witch_shop') }}">
                 <p>

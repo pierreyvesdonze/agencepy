@@ -25,9 +25,24 @@ class Order
     private $cart;
 
     /**
+     * @ORM\Column(type="string", length=20)
+     */
+    private $fake_card_number;
+
+    /**
      * @ORM\Column(type="boolean")
      */
     private $isPayed;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $fakeDateExpiration;
+
+    /**
+     * @ORM\Column(type="smallint")
+     */
+    private $fakeSecurityCode;
 
     public function getId(): ?int
     {
@@ -37,6 +52,18 @@ class Order
     public function getCart(): ?Cart
     {
         return $this->cart;
+    }
+
+    public function getFakeCardNumber(): ?string
+    {
+        return $this->fake_card_number;
+    }
+
+    public function setFakeCardNumber(string $fake_card_number): self
+    {
+        $this->fake_card_number = $fake_card_number;
+
+        return $this;
     }
 
     public function setCart(Cart $cart): self
@@ -54,6 +81,30 @@ class Order
     public function setIsPayed(bool $isPayed): self
     {
         $this->isPayed = $isPayed;
+
+        return $this;
+    }
+
+    public function getFakeDateExpiration(): ?\DateTimeInterface
+    {
+        return $this->fakeDateExpiration;
+    }
+
+    public function setFakeDateExpiration(\DateTimeInterface $fakeDateExpiration): self
+    {
+        $this->fakeDateExpiration = $fakeDateExpiration;
+
+        return $this;
+    }
+
+    public function getFakeSecurityCode(): ?int
+    {
+        return $this->fakeSecurityCode;
+    }
+
+    public function setFakeSecurityCode(int $fakeSecurityCode): self
+    {
+        $this->fakeSecurityCode = $fakeSecurityCode;
 
         return $this;
     }

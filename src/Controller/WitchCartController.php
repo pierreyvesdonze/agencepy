@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Entity\Cart;
+use App\Form\Type\WitchSubmitCartType as TypeWitchSubmitCartType;
+use App\Form\WitchSubmitCartType;
 use App\Repository\ArticleRepository;
 use App\Repository\WitchFormatRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,7 +15,6 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Serializer\Encoder\JsonEncode;
 
 class WitchCartController extends AbstractController
 {
@@ -107,7 +108,7 @@ class WitchCartController extends AbstractController
 	/**
 	 * @Route("/witch/cart", name="witch_cart")
 	 */
-	public function witchCart(): Response
+	public function witchCart(Request $request): Response
 	{
 		if (null !== $this->getUser()) {
 			$user = $this->getUser();
@@ -134,9 +135,20 @@ class WitchCartController extends AbstractController
 
 		$totalPrice =  array_sum($arr);
 
+		$form = $this->createForm(TypeWitchSubmitCartType::class);
+		$form->handleRequest($request);
+
+		if ($form->isSubmitted() && $form->isValid()) {
+			$cart->setIsValid(true);
+			$this->em->flush();
+
+			return $this->redirectToRoute('witch_new_order');
+		}
+
 		return $this->render('witch/cart.witch.html.twig', [
 			'cart' => $cart,
-			'totalPrice' => $totalPrice
+			'totalPrice' => $totalPrice,
+			'form' =>$form->createView()
 		]);
 	}
 
