@@ -46,15 +46,15 @@ class UserController extends AbstractController
 
             $user->setPassword($encodedPassword);
 
-            $cart = new Cart;
-            $cart->setIsValid(false);
-            $user->setCart($cart);
+            // $cart = new Cart;
+            // $cart->setIsValid(false);
+            // $user->setCart($cart);
 
             $role = $roleRepository->findOneByRoleString('ROLE_USER');
             $user->setRole($role);
             
             $this->em->persist($user);
-            $this->em->persist($cart);
+            // $this->em->persist($cart);
             $this->em->flush();
 
             $this->addFlash('success', 'Vous êtes enregistré. Vous pouvez désormais vous connecter.');

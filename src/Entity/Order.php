@@ -53,6 +53,13 @@ class Order
     {
         return $this->cart;
     }
+    
+    public function setCart(Cart $cart): self
+    {
+        $this->cart = $cart;
+
+        return $this;
+    }
 
     public function getFakeCardNumber(): ?string
     {
@@ -62,13 +69,6 @@ class Order
     public function setFakeCardNumber(string $fake_card_number): self
     {
         $this->fake_card_number = $fake_card_number;
-
-        return $this;
-    }
-
-    public function setCart(Cart $cart): self
-    {
-        $this->cart = $cart;
 
         return $this;
     }
