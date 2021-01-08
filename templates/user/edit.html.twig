@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit User
+{% endblock %}
+
+{% block body %}
+<!--***************************NAV****************************-->
+{% include "nav/witch.menu.sidebar.html.twig" %}
+
+	<div class="witch-user-div edit">
+		<hr class="hr">
+		<h2>Éditer</h2>
+		<div class="my-form-control">
+			{{ form_start(form) }}
+			{{ form_widget(form) }}
+			<div class="">
+				<button class="button">{{ button_label|default('Enregistrer') }}</button>
+			</div>
+			{{ form_end(form) }}
+		</div>
+	</div>
+	<hr class="hr">
+{% endblock %}

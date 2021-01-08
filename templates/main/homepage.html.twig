@@ -1,6 +1,9 @@
 {% extends "base.html.twig" %}
 {% block body %}
 
+<!--***************************ROUTE****************************-->
+<input type="hidden" data-route="witch-home" class="hidden-route">
+
 <header class="header">
     <div class="flex-header">
         <div class="left">
@@ -39,7 +42,7 @@
         <br>
         <br>
 
-        <div id="collapseOne" class="team-container collapse-team flex">
+        <div id="collapseOne" class="team-container collapse flex">
             <div class="flex-team">
                 <img src="{{ asset('assets/images/boss.png') }}" alt="" class="team-img">
                 <p class="text-team">
@@ -79,7 +82,7 @@
             Nous proposons une solution internet, une identité visuelle qui correspondent à votre image et un panel d'outils adaptés à vos besoins !
             Mais surtout nous proposons des produits...
         </p>
-        <a href="#surMesureContainer" class="surMesure ti-arrow-down icon-custom"></a>
+        <a href="#surMesureContainer" class="surMesure ti-hand-point-down icon-custom"></a>
 
         <div id="surMesureContainer" class="collapse-mesure flex">
             <h2 class="surMesureTitle">Sur mesure</h2>
@@ -93,13 +96,13 @@
 </section>
 
 <section class="white-background">
-    <div class="container">
+    <div class="">
         <h2 class="subtitle">Nos réalisations</h2>
         <hr class="hr">
         <div class="flexbox">
             <div class="item">
-                <img src="https://unsplash.it/600/400?random" />
-                <p class="title">1st item</p>
+                <img src="{{ 'assets/images/witch-thumb.jpg' }}" />
+                <p class="title"><a href="{{ path('witch_home') }}" target="_blank">Witch</a></p>
             </div>
             <div class="item">
                 <img src="https://unsplash.it/600/600?random" />
@@ -145,7 +148,7 @@
     <div class="container">
         <h2 class="subtitle">Nous contacter</h2>
         <hr class="hr-white">
-        {{ form(form) }}
+        {{ form(form, {'attr': {'class':'main-contact-form' }}) }}
     </div>
 </section>
 {% endblock  %}

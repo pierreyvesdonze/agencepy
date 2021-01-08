@@ -9,18 +9,21 @@ var app = {
      * L I S T E N E R S
      * *****************************
      */
-    $('.collapsible').on('click', app.collapsible);
+
+    $('.collapsible').click(app.collapsible);
     $('.surMesure').on('click', app.surMesure);
 
     //ALERT MODAL
     app.close = $('.close').on('click', app.closeAlertModal);
+    app.flashContainer = $('.flash-container')
     app.modal = $('.alert-success');
     app.modalError = $('.alert-error');
     setTimeout(function () {
+      app.flashContainer.remove()
       app.modal.remove();
       app.modalError.remove();
       app.close.remove();
-    }, 6000);
+    }, 3000);
 
 
     /*
@@ -69,19 +72,40 @@ var app = {
   },
 
   /**
-   * *****************************
-   * F U N C T I O N S
-   * *****************************
-   */
+  * *****************************
+  * F U N C T I O N S
+  * *****************************
+  */
 
-  collapsible: function () {
+  collapsible: function (e) {
 
-    $('#collapseOne').toggleClass('active-team').toggleClass('collapse-team');
+    // On va chercher par le biais de input hidden les routes correspondantes, pour ne pas avoir à redéfinir le comportement de collapsible()
+    let target = $('.hidden-route').data('route');
 
-    anime({
-      targets: '.flex-team',
-      rotate: '1turn'
-    });
+    switch (target) {
+      case target = "witch-home":
+        $('#collapseOne').toggleClass('active').toggleClass('collapse');
+        console.log('home');
+
+        anime({
+          targets: '.flex-team',
+          rotate: '1turn'
+        });
+
+        break;
+      case target = "product-route":
+
+        var stockQuantity = $('.witch-format-select').find(':selected').data("stock");
+
+        // On vérifie qu'il y a du stock
+        if (stockQuantity > 0) {
+          $('#custom-modal-alert').toggleClass('active').toggleClass('collapse');
+          setTimeout(function () {
+            $('#custom-modal-alert').toggleClass('collapse').toggleClass('active');
+          }, 3000);
+        }
+        break;
+    }
   },
 
   surMesure: function () {
@@ -99,10 +123,37 @@ var app = {
   },
 
   closeAlertModal: function () {
+    $('.flash-container').remove();
     app.modal.remove();
-    app.close.remove();
+		app.modalError.remove();
+		app.close.remove();
   },
 
+  /**
+   *SEARCH
+   */
+  search: function (e) {
+    e.preventDefault();
+    let userInput = $('.search-input').val();
+    console.log('input : ' + userInput);
+    $.ajax(
+      {
+        url: Routing.generate('searchApi'),
+        method: "POST",
+        dataType: "json",
+        data: JSON.stringify(userInput),
+      }).done(function (response) {
+        if (null !== response) {
+          console.log('ok : ' + JSON.stringify(response));
+        } else {
+          console.log('Problème');
+        }
+      }).fail(function (jqXHR, textStatus, error) {
+        console.log(jqXHR);
+        console.log(textStatus);
+        console.log(error);
+      });
+  },
 }
 
 // App Loading

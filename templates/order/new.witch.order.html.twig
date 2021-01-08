@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Validation de commande
+{% endblock %}
+
+{% block body %}
+<!--***************************NAV****************************-->
+{% include "nav/witch.menu.sidebar.html.twig" %}
+
+
+<section class="scrollable-auto">
+    <div class="witch-user-div">
+        <h4>Validation de la commande</h4>
+        {{ form_start(form) }}
+
+        {{ form_errors(form) }}
+
+        <hr class="hr">
+
+        {% apply spaceless %}
+        {{ form_row(form.fakeCardNumber) }}
+        {{ form_row(form.fakeDateExpiration) }}
+        {{ form_row(form.fakeSecurityCode) }}
+        {{ form_row(form.save) }}
+        {% endapply %}
+        {{ form_end(form) }}
+    </div>
+</section>
+
+{% endblock %}

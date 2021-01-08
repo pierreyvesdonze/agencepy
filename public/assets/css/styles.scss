@@ -6,6 +6,7 @@ HEADER
 //////////////////////////////////////
 */
 
+
 .header {
     background-color: var(--primary-color);
     height: 120px;
@@ -49,6 +50,28 @@ HEADER
     padding-top: 1em;
 }
 
+/*
+***********************************
+LOGIN / REGISTER
+***********************************
+*/
+
+.login-div {
+    width: 70%;
+    margin: 10% auto;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+}
+
+.table-user {
+    margin: auto;
+}
+
+
 /**
 //////////////////////////////////////
 SECTION white-background
@@ -84,25 +107,6 @@ TEAM SECTION
 //////////////////////////////////////
 */
 
-.collapse-team {
-    flex-wrap: wrap;
-    height: 0;
-    opacity: 0;
-    visibility: hidden;
-    justify-content: space-between;
-}
-
-.active-team {
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 2em;
-    height: auto;
-    opacity: 1;
-    transition: ease-in-out 0.3s;
-    &:focus {
-        outline: none;
-    }
-}
 
 .flex-team {
     display: flex;
@@ -215,6 +219,14 @@ FORM
 //////////////////////////////////////
 */
 
+.main-contact-form div div label {
+    text-align: left;
+}
+
 form label{
     color: var(--span-color);
+}
+
+#contact_form_Envoyer {
+    color: var(--link-color);
 }

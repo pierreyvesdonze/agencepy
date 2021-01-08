@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -41,7 +41,7 @@ class ContactFormType extends AbstractType
                 'required' => true
             ])
             ->add('type', ChoiceType::class, [
-                'label' => 'Vous êtes : ',
+                'label' => '* Vous êtes : ',
                 'attr' => [
                     'class' => 'u-full-width'
                 ],

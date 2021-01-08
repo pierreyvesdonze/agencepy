@@ -1,0 +1,18 @@
+login:
+  cart_need_login: Vous n'êtes pas connecté actuellement ! Merci de vous authentifier pour ajouter des articles au panier.
+
+product:
+  watch: Voir le produit
+
+cart:
+  added: Votre article a bien été ajouté au panier !
+  confirm: Valider le panier
+  continue: Continuer mes achats
+  cancel: L'article a bien été retiré du panier !
+
+order:
+  invalid_card: Ce numéro de carte est invalide
+  
+stock:
+  has_stock: Stock
+  unavailable: Désolé cet article n'est plus disponible en stock

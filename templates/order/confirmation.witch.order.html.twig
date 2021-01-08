@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commande validée
+{% endblock %}
+
+{% block body %}
+<!--***************************NAV****************************-->
+{% include "nav/witch.menu.sidebar.html.twig" %}
+
+<section class="scrollable-auto">
+    <div class="witch-user-div">
+        <h4>Merci de votre achat !</h4>
+        <hr class="hr">
+        <table class="u-full-width">
+            <thead>
+                <tr>
+                    <th>Article</th>
+                    <th>Format</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for article in cart.getArticles %}
+                <tr class="article-cartline">
+                    <td>
+                        {{ article.name }}
+                    </td>
+                    <td>
+                        {{ article.articleSize }} ml
+                    </td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+            <tfoot>
+        </table>
+        <h5>Retrouvez l'historique de vos commandes ci-dessous </h5>
+
+        <div class="recap-after-buy">
+            <a href="{{ path('witch_shop') }}">
+                <span class="ti-archive"></span>
+            </a>
+        </div>
+    </div>
+</section>
+
+
+
+</div>
+</section>
+{% endblock %}

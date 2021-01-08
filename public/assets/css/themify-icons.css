@@ -24,6 +24,27 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.minus-plus-green, .minus-plus-red {
+	font-size: 1em;
+	font-weight: bold;
+	margin-left: 1em;
+	margin-right: 1em;
+	transition: ease-in-out .3s;
+}
+
+.minus-plus-green:hover {
+	color: green;
+}
+
+.minus-plus-red:hover {
+	color: red;
+}
+
+.remove-article {
+	color: red;
+	cursor: pointer;
+}
+
 .icon-custom {
 	-webkit-transition: .3s ease-in-out;
 	transition: .3s ease-in-out;
