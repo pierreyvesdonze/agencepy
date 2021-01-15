@@ -76,9 +76,15 @@ class User implements UserInterface
      */
     private $carts;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=PostOrder::class, mappedBy="userId")
+     */
+    private $postOrders;
+
     public function __construct()
     {
         $this->carts = new ArrayCollection();
+        $this->postOrders = new ArrayCollection();
     }
 
 
@@ -272,6 +278,33 @@ class User implements UserInterface
             if ($cart->getUser() === $this) {
                 $cart->setUser(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PostOrder[]
+     */
+    public function getPostOrders(): Collection
+    {
+        return $this->postOrders;
+    }
+
+    public function addPostOrder(PostOrder $postOrder): self
+    {
+        if (!$this->postOrders->contains($postOrder)) {
+            $this->postOrders[] = $postOrder;
+            $postOrder->addUserId($this);
+        }
+
+        return $this;
+    }
+
+    public function removePostOrder(PostOrder $postOrder): self
+    {
+        if ($this->postOrders->removeElement($postOrder)) {
+            $postOrder->removeUserId($this);
         }
 
         return $this;

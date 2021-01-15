@@ -19,32 +19,15 @@ class PostOrderRepository extends ServiceEntityRepository
         parent::__construct($registry, PostOrder::class);
     }
 
-    // /**
-    //  * @return PostOrder[] Returns an array of PostOrder objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findByUser($user)
     {
         return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
+            ->andWhere('p.user = :val')
+            ->setParameter('val', $user)
             ->orderBy('p.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
-            ->getResult()
+            ->getArrayResult()
         ;
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?PostOrder
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

@@ -151,7 +151,6 @@ class WitchCartController extends AbstractController
 			$arr[$key] = $article->getArticlePrice() * $article->getQuantity();
 		}
 
-
 		$totalPrice =  array_sum($arr);
 
 		$form = $this->createForm(TypeWitchSubmitCartType::class);

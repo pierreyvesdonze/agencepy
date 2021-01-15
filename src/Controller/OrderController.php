@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Order;
-use App\Entity\OrderBackup;
 use App\Entity\PostOrder;
 use App\Form\Type\WitchOrderType;
 use App\Repository\ArticleRepository;
@@ -47,6 +46,8 @@ class OrderController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // Vérif de la validité du moyen de paiement
             $fakeNumber = $form->get('fakeCardNumber')->getData();
             $fakeDate = $form->get('fakeDateExpiration')->getData();
             $fakeSecurityCode = $form->get('fakeSecurityCode')->getData();
@@ -62,6 +63,7 @@ class OrderController extends AbstractController
                 $newOrder->setIsPayed(true);
                 $newOrder->setFakeDateExpiration($fakeDate);
                 $newOrder->setFakeSecurityCode($fakeSecurityCode);
+                // $newOrder->setCreatedAt(new \DateTime('now'));
             }
 
             $this->em->persist($newOrder);
@@ -93,25 +95,23 @@ class OrderController extends AbstractController
         // On crée un postOrder pour avoir des archives de la commande puis on désactive le panier
         $userCart = $cartRepository->findCurrentCart(false);
         $tmpArray = [];
-        $newOrderBackup = new OrderBackup;
 
         foreach ($userCart->getArticles() as $key => $article) {
             $tmpArray[$key]['article'] = $article;
             $tmpArray[$key]['name'] = $article->getName();
-            $tmpArray[$key]['format'] = $article->getWitchFormatId();
+            $tmpArray[$key]['size'] = $article->getArticleSize();
             $tmpArray[$key]['quantity'] = $article->getQuantity();
             $tmpArray[$key]['price'] = $article->getArticlePrice();
-            $tmpArray[$key]['user'] = $user;
-            $tmpArray[$key]['backupOrder'] = $newOrderBackup;
+            $tmpArray[$key]['user'] = $user->getId();
         }
 
         foreach ($tmpArray as $key => $value) {
+            /**@var PostOrder $newPostOrder */
             $newPostOrder = new PostOrder;
             $newPostOrder->setProductName($value['name']);
-            $newPostOrder->setProductFormat($value['format']);
+            $newPostOrder->setProductFormat($value['size']);
             $newPostOrder->setProductPrice($value['price']);
             $newPostOrder->setUser($value['user']);
-            $newPostOrder->setOrderBackup($value['backupOrder']);
             $this->em->persist($newPostOrder);
         }
 
@@ -145,11 +145,11 @@ class OrderController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
 
-        
+        $postOrders = $postOrderRepository->findByUser($user);
 
 
         return $this->render('order/archive.witch.order.html.twig', [
-    
+            'postOrders' => $postOrders
         ]);
     }
 }

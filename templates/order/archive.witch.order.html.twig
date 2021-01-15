@@ -11,25 +11,26 @@
     <div class="witch-user-div">
         <h4>Historique de vos commandes</h4>
         <hr class="hr">
-        <table>
+        <table class="u-full-width">
             <thead>
                 <tr>
                     <th>Article</th>
                     <th>Quantité</th>
                     <th>Prix</th>
+                    <th>Commandé le</th>
                 </tr>
             <tbody>
-                
+                {% for postOrder in postOrders %}
+                <tr>
+                    <td>{{ postOrder.productName }}</td>
+                    <td>{{ postOrder.productFormat }} ml</td>
+                    <td>{{ postOrder.productPrice }} €</td>
+                    <td>{{ postOrder.createdAt|date("d/m/Y", "Europe/Paris") }} </td>
+                </tr>
+                {% endfor %}
             </tbody>
             </thead>
         </table>
-
-
-        <div class="recap-after-buy">
-            <a href="{{ path('witch_shop') }}">
-                <span class="ti-archive"></span>
-            </a>
-        </div>
     </div>
 </section>
 

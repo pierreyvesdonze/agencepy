@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PostOrderRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -38,9 +40,21 @@ class PostOrder
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity=OrderBackup::class, inversedBy="postOrder", cascade={"persist", "remove"})
+     * @ORM\ManyToMany(targetEntity=WitchProduct::class, mappedBy="postOrders")
      */
-    private $orderBackup;
+    private $witchProducts;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
+    public function __construct()
+    {
+        $this->userId = new ArrayCollection();
+        $this->witchProducts = new ArrayCollection();
+        $this->createdAt = new \DateTime;
+    }
 
     public function getId(): ?int
     {
@@ -95,14 +109,41 @@ class PostOrder
         return $this;
     }
 
-    public function getOrderBackup(): ?OrderBackup
+    /**
+     * @return Collection|WitchProduct[]
+     */
+    public function getWitchProducts(): Collection
     {
-        return $this->orderBackup;
+        return $this->witchProducts;
     }
 
-    public function setOrderBackup(?OrderBackup $orderBackup): self
+    public function addWitchProduct(WitchProduct $witchProduct): self
     {
-        $this->orderBackup = $orderBackup;
+        if (!$this->witchProducts->contains($witchProduct)) {
+            $this->witchProducts[] = $witchProduct;
+            $witchProduct->addPostOrder($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWitchProduct(WitchProduct $witchProduct): self
+    {
+        if ($this->witchProducts->removeElement($witchProduct)) {
+            $witchProduct->removePostOrder($this);
+        }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }

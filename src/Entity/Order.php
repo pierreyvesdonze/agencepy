@@ -41,11 +41,11 @@ class Order
      * @ORM\Column(type="smallint")
      */
     private $fakeSecurityCode;
-
-    /**
-     * @ORM\OneToOne(targetEntity=OrderBackup::class, cascade={"persist", "remove"})
-     */
-    private $orderBackup;
+    
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime;
+    }
 
     public function getId(): ?int
     {
@@ -108,18 +108,6 @@ class Order
     public function setFakeSecurityCode(int $fakeSecurityCode): self
     {
         $this->fakeSecurityCode = $fakeSecurityCode;
-
-        return $this;
-    }
-
-    public function getOrderBackup(): ?OrderBackup
-    {
-        return $this->orderBackup;
-    }
-
-    public function setOrderBackup(?OrderBackup $orderBackup): self
-    {
-        $this->orderBackup = $orderBackup;
 
         return $this;
     }

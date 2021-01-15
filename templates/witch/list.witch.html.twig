@@ -1,10 +1,22 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
+<!--***************************NAV****************************-->
+{% include "nav/witch.menu.sidebar.html.twig" %}
 <main>
-  {% for product in products %}
-    {{ product.name }}
-  {% endfor %}
+  <section class="scrollable-auto">
+    <div class="witch-user-div">
+      <h4>Résultats de recherche</h4>
+      <hr class="hr">
 
+      {% for product in products %}
+      <a href="{{ path('witch_shop_product', {'id':product.id } ) }}">
+        <h5>{{ product.name }}</h5>
+        <div class="small-img">
+          <img src="{{ product.imgPath }}" </div>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
 </main>
 {% endblock %}

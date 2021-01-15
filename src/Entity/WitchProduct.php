@@ -55,10 +55,16 @@ class WitchProduct
      */
     private $articles;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=PostOrder::class, inversedBy="witchProducts")
+     */
+    private $postOrders;
+
     public function __construct()
     {
         $this->witchFormats = new ArrayCollection();
         $this->articles = new ArrayCollection();
+        $this->postOrders = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -194,6 +200,30 @@ class WitchProduct
                 $article->setName(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PostOrder[]
+     */
+    public function getPostOrders(): Collection
+    {
+        return $this->postOrders;
+    }
+
+    public function addPostOrder(PostOrder $postOrder): self
+    {
+        if (!$this->postOrders->contains($postOrder)) {
+            $this->postOrders[] = $postOrder;
+        }
+
+        return $this;
+    }
+
+    public function removePostOrder(PostOrder $postOrder): self
+    {
+        $this->postOrders->removeElement($postOrder);
 
         return $this;
     }
