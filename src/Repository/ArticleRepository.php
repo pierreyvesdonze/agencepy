@@ -60,4 +60,15 @@ class ArticleRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    public function deleteAllFromCart($article)
+    {
+
+        return $this->createQueryBuilder('a')
+            ->delete('App\Entity\Article', 'a')
+            ->where('a.id = :val')
+            ->setParameter(':val', $article)
+            ->getQuery()
+            ->execute();
+    }
 }

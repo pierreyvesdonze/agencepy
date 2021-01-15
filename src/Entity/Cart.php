@@ -25,14 +25,16 @@ class Cart
     private $isValid;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, inversedBy="cart", cascade={"persist", "remove"})
-     */
-    private $user;
-
-    /**
      * @ORM\OneToMany(targetEntity=Article::class, mappedBy="cart", cascade={"persist", "remove"}, fetch="EAGER")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $articles;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="carts")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
 
     public function __construct()
     {
@@ -57,18 +59,6 @@ class Cart
     public function setIsValid(bool $isValid): self
     {
         $this->isValid = $isValid;
-
-        return $this;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
 
         return $this;
     }
@@ -99,6 +89,18 @@ class Cart
                 $article->setCart(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

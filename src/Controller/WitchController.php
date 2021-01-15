@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Cart;
 use App\Entity\WitchProduct;
+use App\Repository\CartRepository;
 use App\Repository\WitchProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -57,13 +59,23 @@ class WitchController extends AbstractController
     public function witchShopProduct(
         WitchProductRepository $witchProductRepository,
         WitchProduct $witchProduct,
-        Request $request
+        Request $request,
+        CartRepository $cartRepository
     ) {
         $product = $witchProductRepository->findOneBy([
             'id' => $witchProduct->getId()
         ]);
 
         $user = $this->getUser();
+
+        $userCart = $cartRepository->findCurrentCart(false);
+        if (null === $userCart) {
+            $userCart = new Cart;
+            $userCart->setUser($user);
+            $userCart->setIsValid(false);
+            $this->em->persist($userCart);
+            $this->em->flush();
+        }
 
         if (null === $user) {
             $customMessage = $this->translator->trans('login.cart_need_login');

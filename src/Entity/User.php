@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -70,9 +72,15 @@ class User implements UserInterface
     private $town;
 
     /**
-     * @ORM\OneToOne(targetEntity=Cart::class, mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity=Cart::class, mappedBy="user")
      */
-    private $cart;
+    private $carts;
+
+    public function __construct()
+    {
+        $this->carts = new ArrayCollection();
+    }
+
 
     public function __toString()
     {
@@ -239,24 +247,32 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getCart(): ?Cart
+    /**
+     * @return Collection|Cart[]
+     */
+    public function getCarts(): Collection
     {
-        return $this->cart;
+        return $this->carts;
     }
 
-    public function setCart(?Cart $cart): self
+    public function addCart(Cart $cart): self
     {
-        // unset the owning side of the relation if necessary
-        if ($cart === null && $this->cart !== null) {
-            $this->cart->setUser(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($cart !== null && $cart->getUser() !== $this) {
+        if (!$this->carts->contains($cart)) {
+            $this->carts[] = $cart;
             $cart->setUser($this);
         }
 
-        $this->cart = $cart;
+        return $this;
+    }
+
+    public function removeCart(Cart $cart): self
+    {
+        if ($this->carts->removeElement($cart)) {
+            // set the owning side to null (unless already changed)
+            if ($cart->getUser() === $this) {
+                $cart->setUser(null);
+            }
+        }
 
         return $this;
     }

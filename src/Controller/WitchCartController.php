@@ -7,6 +7,7 @@ use App\Entity\Cart;
 use App\Form\Type\WitchSubmitCartType as TypeWitchSubmitCartType;
 use App\Form\WitchSubmitCartType;
 use App\Repository\ArticleRepository;
+use App\Repository\CartRepository;
 use App\Repository\WitchFormatRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -34,13 +35,28 @@ class WitchCartController extends AbstractController
 	public function witchShopBuy(
 		WitchFormatRepository $witchFormatRepository,
 		Request $request,
-		ArticleRepository $articleRepository
+		ArticleRepository $articleRepository,
+		CartRepository $cartRepository
 
 	): JsonResponse {
 
 		if ($request->isMethod('POST')) {
 			$user = $this->getUser();
-			$userCart = $user->getCart();
+			if (null == $user) {
+
+				return $this->redirectToRoute('app_login');
+			}
+
+			// Si l'utilisateur n'a pas ou plus de panier on lui en crée un
+			if (null == $user->getCarts()) {
+				$userCart = new Cart;
+				$userCart->setUser($user);
+				$userCart->setIsValid(false);
+				$this->em->persist($userCart);
+				$this->em->flush();
+			} else {
+				$userCart = $cartRepository->findCurrentCart(false);
+			}
 
 			$witchProductId = $request->getContent();
 
@@ -76,7 +92,7 @@ class WitchCartController extends AbstractController
 					$this->em->flush();
 
 					// On fait un test sur la création d'un nouvel Article;
-					$message = ('Nouvel article créé');
+					$message = ('Nouvel article ajouté');
 				}
 			} else {
 				$message = $this->translator->trans('stock.unavailable');
@@ -88,11 +104,11 @@ class WitchCartController extends AbstractController
 	/**
 	 * @Route("/witch/cart/pastille", name="witch_cart_pastille", methods={"GET","POST"}, options={"expose"=true})
 	 */
-	public function updateCartPastille()
-	{
+	public function updateCartPastille(
+		CartRepository $cartRepository
+	) {
 		$user     = $this->getUser();
-		$cartId   = $user->getCart()->getId();
-		$cart     = $this->getDoctrine()->getRepository(Cart::class)->find($cartId);
+		$cart     = $cartRepository->findCurrentCart(false);
 		$articles = $cart->getArticles();
 
 		$totalArticlesArray = [];
@@ -108,8 +124,10 @@ class WitchCartController extends AbstractController
 	/**
 	 * @Route("/witch/cart", name="witch_cart")
 	 */
-	public function witchCart(Request $request): Response
-	{
+	public function witchCart(
+		Request $request,
+		CartRepository $cartRepository
+	): Response {
 		if (null !== $this->getUser()) {
 			$user = $this->getUser();
 		} else {
@@ -117,7 +135,7 @@ class WitchCartController extends AbstractController
 		}
 
 		/**@var Cart $cart */
-		$cart = $user->getCart();
+		$cart = $cartRepository->findCurrentCart(false);
 
 		// On calcule le montant total pour garder la logique métier
 		$articles = $cart->getArticles();
@@ -133,22 +151,20 @@ class WitchCartController extends AbstractController
 			$arr[$key] = $article->getArticlePrice() * $article->getQuantity();
 		}
 
+
 		$totalPrice =  array_sum($arr);
 
 		$form = $this->createForm(TypeWitchSubmitCartType::class);
 		$form->handleRequest($request);
 
 		if ($form->isSubmitted() && $form->isValid()) {
-			$cart->setIsValid(true);
-			$this->em->flush();
-
 			return $this->redirectToRoute('witch_new_order');
 		}
 
 		return $this->render('witch/cart.witch.html.twig', [
 			'cart' => $cart,
 			'totalPrice' => $totalPrice,
-			'form' =>$form->createView()
+			'form' => $form->createView()
 		]);
 	}
 
@@ -218,8 +234,7 @@ class WitchCartController extends AbstractController
 	public function removeArticle(
 		Request $request,
 		ArticleRepository $articleRepository
-		)
-	{
+	) {
 		if ($request->isMethod('POST')) {
 
 			$articleId = $request->getContent();
@@ -231,7 +246,7 @@ class WitchCartController extends AbstractController
 			$this->em->flush();
 			$message = $this->translator->trans('cart.cancel');
 		}
-			
+
 		return new JsonResponse('oki');;
 	}
 }

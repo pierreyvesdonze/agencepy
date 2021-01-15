@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Repository\OrderRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -19,8 +18,7 @@ class Order
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity=Cart::class, cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="string", length=20)
      */
     private $cart;
 
@@ -43,6 +41,11 @@ class Order
      * @ORM\Column(type="smallint")
      */
     private $fakeSecurityCode;
+
+    /**
+     * @ORM\OneToOne(targetEntity=OrderBackup::class, cascade={"persist", "remove"})
+     */
+    private $orderBackup;
 
     public function getId(): ?int
     {
@@ -105,6 +108,18 @@ class Order
     public function setFakeSecurityCode(int $fakeSecurityCode): self
     {
         $this->fakeSecurityCode = $fakeSecurityCode;
+
+        return $this;
+    }
+
+    public function getOrderBackup(): ?OrderBackup
+    {
+        return $this->orderBackup;
+    }
+
+    public function setOrderBackup(?OrderBackup $orderBackup): self
+    {
+        $this->orderBackup = $orderBackup;
 
         return $this;
     }

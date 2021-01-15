@@ -131,7 +131,7 @@ var appWitch = {
                 dataType: "json",
                 data: JSON.stringify(selectedFormatId),
             }).done(function (response) {
-                if ($.type(response) === "string" && response != 'Nouvel article créé') {
+                if ($.type(response) === "string" && response != 'Nouvel article ajouté') {
                     alert(response)
                 } else {
                     console.log('Ajouté au panier');

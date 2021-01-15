@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Commande validée
+{% block title %}Historique de commandes
 {% endblock %}
 
 {% block body %}
@@ -9,9 +9,21 @@
 
 <section class="scrollable-auto">
     <div class="witch-user-div">
-        <h4>Merci de votre achat !</h4>
+        <h4>Historique de vos commandes</h4>
         <hr class="hr">
-        <h5>Retrouvez l'historique de vos commandes ci-dessous </h5>       
+        <table>
+            <thead>
+                <tr>
+                    <th>Article</th>
+                    <th>Quantité</th>
+                    <th>Prix</th>
+                </tr>
+            <tbody>
+                
+            </tbody>
+            </thead>
+        </table>
+
 
         <div class="recap-after-buy">
             <a href="{{ path('witch_shop') }}">

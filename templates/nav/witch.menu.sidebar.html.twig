@@ -39,10 +39,6 @@
                 </li>
             </a>
             {% endif %}
-
-            <a href="https://erikterwan.com/" target="_blank">
-                <li>Show me more</li>
-            </a>
         </ul>
     </div>
 </nav>
@@ -54,10 +50,20 @@
     <a href="{{ path('witch_cart') }}" class="ti-shopping-cart no-color-link">
     </a>
 </div>
+{% if app.user.carts is defined  %}
+    
+{% set articleQuantity = 0 %}
+{% for cart in app.user.carts %}
+{% for quantity in cart.articles %}
+{% set articleQuantity = quantity|length %}
+{% endfor %}
+{% endfor %}
 
-{% if app.user %}
+{% endif %}
 
-<div class="user-witch-cart-quantity" data-quantity="{{ app.user.cart.getArticles|length }}">  
+{% if app.user and app.user.carts != null and articleQuantity > 0 %}
+
+<div class="user-witch-cart-quantity" data-quantity="{{ articleQuantity}}">
     <span class="witch-pastille-quantity"></span>
 </div>
 {% endif %}
