@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Repository\OrderRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -19,8 +18,7 @@ class Order
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity=Cart::class, cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="string", length=20)
      */
     private $cart;
 
@@ -43,6 +41,11 @@ class Order
      * @ORM\Column(type="smallint")
      */
     private $fakeSecurityCode;
+    
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime;
+    }
 
     public function getId(): ?int
     {

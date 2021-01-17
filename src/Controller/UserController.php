@@ -46,15 +46,15 @@ class UserController extends AbstractController
 
             $user->setPassword($encodedPassword);
 
-            // $cart = new Cart;
-            // $cart->setIsValid(false);
-            // $user->setCart($cart);
+            $cart = new Cart;
+            $cart->setIsValid(false);
+            $user->addCart($cart);
 
             $role = $roleRepository->findOneByRoleString('ROLE_USER');
             $user->setRole($role);
             
             $this->em->persist($user);
-            // $this->em->persist($cart);
+            $this->em->persist($cart);
             $this->em->flush();
 
             $this->addFlash('success', 'Vous êtes enregistré. Vous pouvez désormais vous connecter.');
@@ -122,7 +122,7 @@ class UserController extends AbstractController
         if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
 
             $this->em->remove($user);
-            $this->em-- > flush();
+            $this->em->flush();
         }
 
         $this->addFlash('success', 'Votre compte a bien été supprimé');

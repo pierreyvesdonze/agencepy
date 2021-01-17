@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Historique de commandes
+{% endblock %}
+
+{% block body %}
+<!--***************************NAV****************************-->
+{% include "nav/witch.menu.sidebar.html.twig" %}
+
+<section class="scrollable-auto">
+    <div class="witch-user-div">
+        <h4>Historique de vos commandes</h4>
+        <hr class="hr">
+        <table class="u-full-width">
+            <thead>
+                <tr>
+                    <th>Article</th>
+                    <th>Quantité</th>
+                    <th>Prix</th>
+                    <th>Commandé le</th>
+                </tr>
+            <tbody>
+                {% for postOrder in postOrders %}
+                <tr>
+                    <td>{{ postOrder.productName }}</td>
+                    <td>{{ postOrder.productFormat }} ml</td>
+                    <td>{{ postOrder.productPrice }} €</td>
+                    <td>{{ postOrder.createdAt|date("d/m/Y", "Europe/Paris") }} </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            </thead>
+        </table>
+    </div>
+</section>
+
+
+
+</div>
+</section>
+{% endblock %}

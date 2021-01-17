@@ -4,8 +4,6 @@ $(document).ready(function () {
     appWitch.updateStock(initSelectedStock);
 
     appWitch.updatePastille()
-
-
 })
 
 var appWitch = {
@@ -31,7 +29,8 @@ var appWitch = {
         $('.minus-plus-green').on('click', appWitch.increaseCartQuantity);
         $('.minus-plus-red').on('click', appWitch.decreaseCartQuantity);
         $('.remove-article').on('click', appWitch.removeArticleFromCart);
-        $('#witch_order_save').on('keyup', appWitch.checkCardNumber)
+        $('#witch_order_save').on('keyup', appWitch.checkCardNumber);
+        $('.add-to-cart').on('click', appWitch.updatePastille)
 
 
         // MAIN TITLE WITCH ANIMATION
@@ -131,7 +130,7 @@ var appWitch = {
                 dataType: "json",
                 data: JSON.stringify(selectedFormatId),
             }).done(function (response) {
-                if ($.type(response) === "string" && response != 'Nouvel article créé') {
+                if ($.type(response) === "string" && response != 'Nouvel article ajouté') {
                     alert(response)
                 } else {
                     console.log('Ajouté au panier');
