@@ -107,18 +107,25 @@ class WitchCartController extends AbstractController
 	public function updateCartPastille(
 		CartRepository $cartRepository
 	) {
-		$user     = $this->getUser();
+		$user = $this->getUser();
+		if (null == $user) {
+
+			return $this->redirectToRoute('app_login');
+		}
+
 		$cart     = $cartRepository->findCurrentCart(false);
 		$articles = $cart->getArticles();
 
-		$totalArticlesArray = [];
-		foreach ($articles as $key => $value) {
-			$totalArticlesArray[] = $value->getQuantity();
+		if (null !== $articles) {
+
+			$totalArticlesArray = [];
+			foreach ($articles as $key => $value) {
+				$totalArticlesArray[] = $value->getQuantity();
+			}
+			
+			$message = (int)array_sum($totalArticlesArray);			
 		}
-
-		$message = (int)array_sum($totalArticlesArray);
-
-		return new JsonResponse($message);
+			return new JsonResponse($message);
 	}
 
 	/**
@@ -168,15 +175,18 @@ class WitchCartController extends AbstractController
 	}
 
 	/**
-	 * @Route("/witch/shop/stock", name="witch_shop_stock", methods={"GET","POST"}, options={"expose"=true})
+	 * @Route("/witch/shop/stock", name="witch_shop_stock", methods={"GET","POST"})
 	 */
 	public function witchShopStock(
 		WitchFormatRepository $witchFormatRepository,
-		Request $request
+		Request $request,
+		$userCart
 
-	): JsonResponse {
+	) {
 
-		return new JsonResponse('oki');
+		return $this->forward('App\Controller\WitchCartController::witchShopStock', [
+			'userCart' => $userCart
+		]);
 	}
 
 	/**

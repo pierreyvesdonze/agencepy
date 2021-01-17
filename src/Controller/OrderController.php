@@ -31,8 +31,7 @@ class OrderController extends AbstractController
      */
     public function newOrder(
         CartRepository $cartRepository,
-        Request $request,
-        ArticleRepository $articleRepository
+        Request $request
     ) {
         $user = $this->getUser();
 
@@ -107,6 +106,9 @@ class OrderController extends AbstractController
 
         foreach ($tmpArray as $key => $value) {
             /**@var PostOrder $newPostOrder */
+
+            // Gestion des stocks
+            dd($value);
             $newPostOrder = new PostOrder;
             $newPostOrder->setProductName($value['name']);
             $newPostOrder->setProductFormat($value['size']);
@@ -116,9 +118,7 @@ class OrderController extends AbstractController
         }
 
         //$userCart->setIsValid(true);
-
         $this->em->flush();
-
 
         // On réinitialise le panier
         foreach ($userCart->getArticles() as $article) {
@@ -133,13 +133,12 @@ class OrderController extends AbstractController
         ]);
     }
 
-       /**
+    /**
      * @Route("/witch/order/archive", name="witch_archive_order", methods={"GET","POST"})
      */
     public function witchArchiveOrder(
         PostOrderRepository $postOrderRepository
-    )
-    {
+    ) {
         $user = $this->getUser();
         if (null === $user) {
             return $this->redirectToRoute('app_login');
