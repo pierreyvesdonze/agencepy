@@ -145,20 +145,28 @@ class WitchCartController extends AbstractController
 		$cart = $cartRepository->findCurrentCart(false);
 
 		// On calcule le montant total pour garder la logique métier
-		$articles = $cart->getArticles();
-		$arr = [];
-		foreach ($articles as $key => $article) {
+		if (null !== $cart) {
+			$articles = $cart->getArticles();
 
-			if ($article->getQuantity() === 0) {
-				$this->em->remove($article);
-				$this->em->flush();
+			$arr = [];
+			$message = null;
+			foreach ($articles as $key => $article) {
+				
+				if ($article->getQuantity() === 0) {
+					$this->em->remove($article);
+					$this->em->flush();
+				}
+				
+				/**@var Article $article */
+				$arr[$key] = $article->getArticlePrice() * $article->getQuantity();
 			}
-
-			/**@var Article $article */
-			$arr[$key] = $article->getArticlePrice() * $article->getQuantity();
+			$totalPrice =  array_sum($arr);
+		} else {
+			// return $this->redirectToRoute('witch_shop');
+			$message = "Votre panier est vide";
+			$totalPrice = 0;
 		}
 
-		$totalPrice =  array_sum($arr);
 
 		$form = $this->createForm(TypeWitchSubmitCartType::class);
 		$form->handleRequest($request);
@@ -170,7 +178,8 @@ class WitchCartController extends AbstractController
 		return $this->render('witch/cart.witch.html.twig', [
 			'cart' => $cart,
 			'totalPrice' => $totalPrice,
-			'form' => $form->createView()
+			'form' => $form->createView(),
+			'message' => $message
 		]);
 	}
 

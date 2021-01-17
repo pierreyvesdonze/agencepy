@@ -6,20 +6,23 @@
 {% block body %}
 <!--***************************NAV****************************-->
 {% include "nav/witch.menu.sidebar.html.twig" %}
+{# 
+{% if message is not null and article is defined and article is not null %}
+    {% set cartArray = false %}
+    {% for article in cart.getArticles %}
+        {% if article.quantity == 0 %}
+            {% set cartArray = false %}
+        {% else %}
+            {% set cartArray = true %}
+        {% endif %}
+    {% endfor %}
+{% endif %} #}
 
-{% set cartArray = false %}
-
-{% for article in cart.getArticles %}
-{% if article is defined and article.quantity == 0 %}
-{% set cartArray = false %}
-{% else %}
-{% set cartArray = true %}
-{% endif %}
-{% endfor %}
-
-{% if cartArray == false %}
+{% if message == true %}
+{% dump(message) %}
 <div class="center-element">
-    <h3>Votre panier est vide</h3>
+    <h3>{{ message }}</h3>
+    {# <h3>Votre panier est vide</h3> #}
 </div>
 {% else %}
 
