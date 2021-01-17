@@ -144,6 +144,7 @@ var appWitch = {
     },
 
     updatePastille: function () {
+        console.log('update pastille')
         $.ajax(
             {
                 url: Routing.generate('witch_cart_pastille'),
@@ -152,6 +153,8 @@ var appWitch = {
                 data: 'rien',
             }).done(function (response) {
                 appWitch.cartPastille.text(response)
+                console.log(response)
+                document.location.reload;
             }).fail(function (jqXHR, textStatus, error) {
                 console.log(jqXHR);
                 console.log(textStatus);
