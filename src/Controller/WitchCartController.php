@@ -122,10 +122,11 @@ class WitchCartController extends AbstractController
 			foreach ($articles as $key => $value) {
 				$totalArticlesArray[] = $value->getQuantity();
 			}
-			
-			$message = (int)array_sum($totalArticlesArray);			
+
+			$message = (int)array_sum($totalArticlesArray);
+		
 		}
-			return new JsonResponse($message);
+		return new JsonResponse($message);
 	}
 
 	/**
@@ -151,12 +152,12 @@ class WitchCartController extends AbstractController
 			$arr = [];
 			$message = null;
 			foreach ($articles as $key => $article) {
-				
+
 				if ($article->getQuantity() === 0) {
 					$this->em->remove($article);
 					$this->em->flush();
 				}
-				
+
 				/**@var Article $article */
 				$arr[$key] = $article->getArticlePrice() * $article->getQuantity();
 			}

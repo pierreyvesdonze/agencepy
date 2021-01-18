@@ -153,8 +153,8 @@ var appWitch = {
                 data: 'rien',
             }).done(function (response) {
                 appWitch.cartPastille.text(response)
-                console.log(response)
                 document.location.reload;
+                console.log(response)
             }).fail(function (jqXHR, textStatus, error) {
                 console.log(jqXHR);
                 console.log(textStatus);
