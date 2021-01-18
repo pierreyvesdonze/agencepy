@@ -68,20 +68,20 @@ class WitchController extends AbstractController
 
         $user = $this->getUser();
 
-        $userCart = $cartRepository->findCurrentCart(false);
-        if (null === $userCart) {
-            $userCart = new Cart;
-            $userCart->setUser($user);
-            $userCart->setIsValid(false);
-            $this->em->persist($userCart);
-            $this->em->flush();
-        }
+        if (null !== $user) {
 
-        if (null === $user) {
-            $customMessage = $this->translator->trans('login.cart_need_login');
-            return $this->redirectToRoute('app_login');
+            $userCart = $cartRepository->findCurrentCart(false);
+            if (null === $userCart) {
+                $userCart = new Cart;
+                $userCart->setUser($user);
+                $userCart->setIsValid(false);
+                $this->em->persist($userCart);
+                $this->em->flush();
+            } else {
+                $customMessage = $this->translator->trans('cart.added');
+            }
         } else {
-            $customMessage = $this->translator->trans('cart.added');
+            $customMessage = $this->translator->trans('login.cart_need_login');
         }
 
         return $this->render('witch/product.witch.html.twig', [
