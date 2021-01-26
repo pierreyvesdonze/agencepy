@@ -39,7 +39,7 @@ class OrderController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
 
-        $userCart = $cartRepository->findCurrentCart(false);
+        $userCart = $cartRepository->findCurrentCart(false, $user->getId());
         $newOrder = new Order;
         $form = $this->createForm(WitchOrderType::class, $newOrder);
         $form->handleRequest($request);
@@ -92,7 +92,7 @@ class OrderController extends AbstractController
         }
 
         // On crée un postOrder pour avoir des archives de la commande puis on désactive le panier
-        $userCart = $cartRepository->findCurrentCart(false);
+        $userCart = $cartRepository->findCurrentCart(false, $user->getId());
         $tmpArray = [];
 
         foreach ($userCart->getArticles() as $key => $article) {

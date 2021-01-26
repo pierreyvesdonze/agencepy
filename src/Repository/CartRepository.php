@@ -19,11 +19,13 @@ class CartRepository extends ServiceEntityRepository
         parent::__construct($registry, Cart::class);
     }
 
-    public function findCurrentCart($value): ?Cart
+    public function findCurrentCart($bool, $user): ?Cart
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('c.isValid = :val')
-            ->setParameter('val', $value)
+            ->having('c.user = :valUserId')
+            ->andWhere('c.isValid = :valBool')
+            ->setParameter('valBool', $bool)
+            ->setParameter('valUserId', $user)
             ->getQuery()
             ->getOneOrNullResult()
         ;
