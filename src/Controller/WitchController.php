@@ -70,8 +70,9 @@ class WitchController extends AbstractController
 
         if (null !== $user) {
 
-            $userCart = $cartRepository->findCurrentCart(false);
+            $userCart = $cartRepository->findCurrentCart(false, $user->getId());
             if (null === $userCart) {
+                $customMessage = null;
                 $userCart = new Cart;
                 $userCart->setUser($user);
                 $userCart->setIsValid(false);

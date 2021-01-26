@@ -1,12 +1,15 @@
+
+
 // Mise à jour des status stock & panier au chargement
 $(document).ready(function () {
     let initSelectedStock = $('.witch-format-select :selected').data('stock');
     appWitch.updateStock(initSelectedStock);
 
-    appWitch.updatePastille()
+    //appWitch.updatePastille()
 })
 
 var appWitch = {
+    
 
     initWitch: function () {
 
@@ -98,7 +101,6 @@ var appWitch = {
 
     },
 
-
     updateStock: function (initSelectedStock) {
 
         var stockQuantity = $(this).find(':selected').data("stock");
@@ -153,7 +155,7 @@ var appWitch = {
                 data: 'rien',
             }).done(function (response) {
                 appWitch.cartPastille.text(response)
-                document.location.reload;
+                // document.location.reload;
                 console.log(response)
             }).fail(function (jqXHR, textStatus, error) {
                 console.log(jqXHR);
@@ -231,15 +233,16 @@ var appWitch = {
                 product.closest('.article-cartline').remove()
 
                 if ($('.witch-pastille-quantity').text(0)) {
+                    console.log('zero')
                     window.location.reload()
                 }
 
             } else {
                 return false;
             }
-        } else if (quantityValue === 0) {
-            $('.total-articles-price').val(productPrice)
-            product.closest('.article-cartline').remove()
+            // } else if (quantityValue === 0) {
+            //     $('.total-articles-price').val(productPrice)
+            //     product.closest('.article-cartline').remove()
         }
 
         quantityData.text(quantityValue)
@@ -287,58 +290,58 @@ var appWitch = {
         let currentTotalPrice = $('.total-articles-price').val();
         let priceToSubstract = articlePrice * articleQuantity;
 
+
         // On demande confirmation pour la suppression de l'article et on met à jour les éléments du panier
         let confirmDelete = confirm("Voulez-vous supprimer l'article de votre panier ?")
-            if (confirmDelete != false) {
-                product.closest('.article-cartline').remove()
+        if (confirmDelete != false) {
 
-                if ($('.witch-pastille-quantity').text(0)) {
-                    window.location.reload()
-                }
-
-            } else {
-                return false;
+            var dataToSend = {
+                'id': productId,
+                'currentTotal': currentTotalPrice,
+                'productPrice': articlePrice
             }
-        
-        // On calcule le nouveau total
-        let newTotalPrice = currentTotalPrice - priceToSubstract;
 
-         var dataToSend = {
-             'id': productId,
-             'quantity': 0,
-             'type': 'decrease',
-             'currentTotal': currentTotalPrice,
-             'productPrice': articlePrice
-         }
+            console.log(dataToSend)
 
-         $.ajax(
-            {
-                url: Routing.generate('witch_cart_update'),
-                method: "POST",
-                dataType: "json",
-                data: JSON.stringify(dataToSend),
-            }).done(function (response) {
-                console.log(response)
+            $.ajax(
+                {
+                    url: Routing.generate('article_remove_from_cart'),
+                    method: "POST",
+                    dataType: "json",
+                    data: JSON.stringify(dataToSend),
+                }).done(function (response) {
+                    console.log(response)
 
-                // Maj de la pastille
-                appWitch.updatePastille();
+                    product.closest('.article-cartline').remove();
 
-                // Maj du total du panier
-                $('.total-articles-price').val(newTotalPrice)
+                    // On calcule le nouveau total
+                    let newTotalPrice = currentTotalPrice - priceToSubstract;
 
-            }).fail(function (jqXHR, textStatus, error) {
-                console.log(jqXHR);
-                console.log(textStatus);
-                console.log(error);
-            });
+                    // Maj de la pastille
+                    //appWitch.updatePastille();
+
+                    // Maj du total du panier
+                    currentTotalPrice = newTotalPrice;
+
+                    // window.location.reload()
+
+                }).fail(function (jqXHR, textStatus, error) {
+                    console.log(jqXHR);
+                    console.log(textStatus);
+                    console.log(error);
+                });
+
+        } else {
+            return false;
+        }
     },
 
     checkCardNumber: function (params) {
         input = $('.fakeCardNumber').val();
         console.log(input)
-        console.log(typeof(input))
-        if ('integer' !== typeof(params.currentTarget.value)) {
-            alert('Le numéro de carte bleue est invalide')
+        console.log(typeof (input))
+        if ('integer' !== typeof (params.currentTarget.value)) {
+            alert('Numéro(s) invalide(s)')
         }
     }
 }

@@ -55,7 +55,7 @@ class WitchCartController extends AbstractController
 				$this->em->persist($userCart);
 				$this->em->flush();
 			} else {
-				$userCart = $cartRepository->findCurrentCart(false);
+				$userCart = $cartRepository->findCurrentCart(false, $user->getId());
 			}
 
 			$witchProductId = $request->getContent();
@@ -113,7 +113,7 @@ class WitchCartController extends AbstractController
 			return $this->redirectToRoute('app_login');
 		}
 
-		$cart     = $cartRepository->findCurrentCart(false);
+		$cart     = $cartRepository->findCurrentCart(false, $user->getId());
 		$articles = $cart->getArticles();
 
 		if (null !== $articles) {
@@ -143,7 +143,7 @@ class WitchCartController extends AbstractController
 		}
 
 		/**@var Cart $cart */
-		$cart = $cartRepository->findCurrentCart(false);
+		$cart = $cartRepository->findCurrentCart(false, $user->getId());
 
 		// On calcule le montant total pour garder la logique métier
 		if (null !== $cart) {
@@ -244,7 +244,7 @@ class WitchCartController extends AbstractController
 		}
 
 
-		return new JsonResponse('oki');
+		return new JsonResponse($response);
 	}
 
 	/**
@@ -256,16 +256,29 @@ class WitchCartController extends AbstractController
 	) {
 		if ($request->isMethod('POST')) {
 
-			$articleId = $request->getContent();
-			$article = $articleRepository->findOneBy([
-				'id' => $articleId
+			$data             = json_decode($request->getContent(), true);
+			// $data             = $request->getContent();
+			$idFromAjax       = $data['id'];
+			$productPrice     = $data['productPrice'];
+			$currentTotal     = $data['currentTotal'];
+
+			/**@Article $articleToRemove */
+			$articleToRemove = $articleRepository->findOneBy([
+				'id' => $idFromAjax
 			]);
 
-			$this->em->remove($article);
+			$newTotal = $currentTotal - $productPrice;
+	
+			$this->em->remove($articleToRemove);
 			$this->em->flush();
 			$message = $this->translator->trans('cart.cancel');
+
+			$response = json_encode([
+				'currentTotal' => $currentTotal,
+				'newTotal' => $newTotal
+			]);
 		}
 
-		return new JsonResponse('oki');;
+		return new JsonResponse($articleToRemove);
 	}
 }
