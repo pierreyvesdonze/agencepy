@@ -78,7 +78,7 @@ a {
 }
 
 .no-color-link {
-  color: inherit !important;
+  // color: inherit !important;
   &:hover {
     color: var(--link-color);
   }

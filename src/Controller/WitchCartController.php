@@ -248,7 +248,7 @@ class WitchCartController extends AbstractController
 	}
 
 	/**
-	 * @Route("/witch/article/remove/", name="article_remove_from_cart", methods={"GET","POST"}, requirements={"id"="\d+"}, options={"expose"=true})
+	 * @Route("/witch/article/remove", name="article_remove_from_cart", methods={"GET","POST"}, requirements={"id"="\d+"}, options={"expose"=true})
 	 */
 	public function removeArticle(
 		Request $request,
@@ -277,6 +277,7 @@ class WitchCartController extends AbstractController
 				'currentTotal' => $currentTotal,
 				'newTotal' => $newTotal
 			]);
+	
 		}
 
 		return new JsonResponse($articleToRemove);

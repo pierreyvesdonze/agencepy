@@ -85,10 +85,6 @@ a {
   text-decoration: none;
 }
 
-.no-color-link {
-  color: inherit !important;
-}
-
 .no-color-link:hover {
   color: var(--link-color);
 }
