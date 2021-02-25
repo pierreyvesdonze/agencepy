@@ -106,6 +106,17 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
             return new RedirectResponse($targetPath);
         }
 
+        if (null !== $request->getSession()->get('uri')) {
+            $uri = $request->getSession()->get('uri');
+            $str = strlen($uri);
+            $id = $str -1;
+            $idProduct = $uri[$id];
+
+            return new RedirectResponse($this->urlGenerator->generate('witch_shop_product', [
+                'id' => $idProduct
+            ]));
+        }
+
         return new RedirectResponse($this->urlGenerator->generate('witch_home'));
 
     }

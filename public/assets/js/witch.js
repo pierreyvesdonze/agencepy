@@ -5,7 +5,7 @@ $(document).ready(function () {
     let initSelectedStock = $('.witch-format-select :selected').data('stock');
     appWitch.updateStock(initSelectedStock);
 
-    //appWitch.updatePastille()
+    appWitch.updatePastille()
 })
 
 var appWitch = {
@@ -98,7 +98,6 @@ var appWitch = {
     LeftPanel: function (params) {
 
         console.log('anim')
-
     },
 
     updateStock: function (initSelectedStock) {
@@ -281,6 +280,8 @@ var appWitch = {
     },
 
     removeArticleFromCart: function (e) {
+
+        e.preventDefault();
 
         let productId = e.target.dataset.articleid;
         var articleLineToRemove = e.currentTarget.parentElement.parentElement;

@@ -108,7 +108,6 @@ class OrderController extends AbstractController
             /**@var PostOrder $newPostOrder */
 
             // Gestion des stocks
-            dd($value);
             $newPostOrder = new PostOrder;
             $newPostOrder->setProductName($value['name']);
             $newPostOrder->setProductFormat($value['size']);

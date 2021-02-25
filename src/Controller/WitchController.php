@@ -66,6 +66,8 @@ class WitchController extends AbstractController
             'id' => $witchProduct->getId()
         ]);
 
+        
+
         $user = $this->getUser();
 
         if (null !== $user) {
@@ -82,6 +84,8 @@ class WitchController extends AbstractController
                 $customMessage = $this->translator->trans('cart.added');
             }
         } else {
+            $session = $request->getSession();
+            $session->set('uri', $request->getUri());
             $customMessage = $this->translator->trans('login.cart_need_login');
         }
 
@@ -91,3 +95,4 @@ class WitchController extends AbstractController
         ]);
     }
 }
+;
